@@ -301,6 +301,7 @@
                 <version>2.19.1</version>
                 <configuration>
                     <systemPropertyVariables>
+                        <!-- Set API auth token here to activate unit tests for API actions that require authorization -->
                         <authToken/>
                     </systemPropertyVariables>
                     <properties>
