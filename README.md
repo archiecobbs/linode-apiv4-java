@@ -2,7 +2,7 @@
 
 This is a Java library for using Linode's version 4 API.
 
-**Current status:** incomplete and only lightly tested.
+**Current status:** partially complete; not fully tested.
 
 There are two sub-modules.
 
