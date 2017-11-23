@@ -114,12 +114,13 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd>org.springframework.beans.factory.DisposableBean, org.springframework.http.client.ClientHttpRequestFactory</dd>
+<dd>org.springframework.beans.factory.DisposableBean, org.springframework.beans.factory.InitializingBean, org.springframework.http.client.ClientHttpRequestFactory</dd>
 </dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">LinodeApiHttpRequestFactory</span>
-extends org.springframework.http.client.HttpComponentsClientHttpRequestFactory</pre>
+extends org.springframework.http.client.HttpComponentsClientHttpRequestFactory
+implements org.springframework.beans.factory.InitializingBean, org.springframework.beans.factory.DisposableBean</pre>
 <div class="block">Extends Spring's <code>HttpComponentsClientHttpRequestFactory</code> to set connection and read timeouts,
  setup authorization, etc.</div>
 </li>
@@ -142,7 +143,15 @@ extends org.springframework.http.client.HttpComponentsClientHttpRequestFactory</
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static int</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#DEFAULT_TIMEOUT">DEFAULT_TIMEOUT</a></span></code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#DEFAULT_MAX_SIMULTANEOUS_REQUESTS">DEFAULT_MAX_SIMULTANEOUS_REQUESTS</a></span></code>
+<div class="block">Default maximum number of simultaneous connections (16).</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#DEFAULT_TIMEOUT">DEFAULT_TIMEOUT</a></span></code>
+<div class="block">Default request timeout in milliseconds (30000).</div>
+</td>
 </tr>
 </table>
 </li>
@@ -177,49 +186,49 @@ extends org.springframework.http.client.HttpComponentsClientHttpRequestFactory</
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#afterPropertiesSet--">afterPropertiesSet</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#configureConnectionManager-org.apache.http.impl.conn.PoolingHttpClientConnectionManager-">configureConnectionManager</a></span>(<a href="https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/impl/conn/PoolingHttpClientConnectionManager.html?is-external=true" title="class or interface in org.apache.http.impl.conn">PoolingHttpClientConnectionManager</a>&nbsp;manager)</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>protected <a href="https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/impl/client/HttpClientBuilder.html?is-external=true" title="class or interface in org.apache.http.impl.client">HttpClientBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#configureHttpClient-org.apache.http.impl.client.HttpClientBuilder-">configureHttpClient</a></span>(<a href="https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/impl/client/HttpClientBuilder.html?is-external=true" title="class or interface in org.apache.http.impl.client">HttpClientBuilder</a>&nbsp;builder)</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>protected <a href="https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/client/methods/HttpUriRequest.html?is-external=true" title="class or interface in org.apache.http.client.methods">HttpUriRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#createHttpUriRequest-org.springframework.http.HttpMethod-java.net.URI-">createHttpUriRequest</a></span>(org.springframework.http.HttpMethod&nbsp;httpMethod,
                     <a href="http://docs.oracle.com/javase/8/docs/api/java/net/URI.html?is-external=true" title="class or interface in java.net">URI</a>&nbsp;uri)</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#destroy--">destroy</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#setAuthorizationToken-java.lang.String-">setAuthorizationToken</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;token)</code>
 <div class="block">Configure a fixed authorization token.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#setAuthorizationTokenSupplier-java.util.function.Supplier-">setAuthorizationTokenSupplier</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function">Supplier</a>&lt;<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;tokenSupplier)</code>
 <div class="block">Configure where authorization tokens come from.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#setMaxSimultaneousRequests-int-">setMaxSimultaneousRequests</a></span>(int&nbsp;maxSimultaneousRequests)</code>
 <div class="block">Configure the maximum number of simultaneous requests.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#setTimeout-int-">setTimeout</a></span>(int&nbsp;timeout)</code>
 <div class="block">Set timeout.</div>
 </td>
-</tr>
-<tr id="i7" class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#setupHttpClient--">setupHttpClient</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#shutdown--">shutdown</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -227,7 +236,7 @@ extends org.springframework.http.client.HttpComponentsClientHttpRequestFactory</
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;org.springframework.http.client.HttpComponentsClientHttpRequestFactory</h3>
-<code>createHttpContext, createRequest, createRequestConfig, destroy, getHttpClient, mergeRequestConfig, postProcessHttpRequest, setBufferRequestBody, setConnectionRequestTimeout, setConnectTimeout, setHttpClient, setReadTimeout</code></li>
+<code>createHttpContext, createRequest, createRequestConfig, getHttpClient, mergeRequestConfig, postProcessHttpRequest, setBufferRequestBody, setConnectionRequestTimeout, setConnectTimeout, setHttpClient, setReadTimeout</code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -253,13 +262,28 @@ extends org.springframework.http.client.HttpComponentsClientHttpRequestFactory</
 <a name="DEFAULT_TIMEOUT">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>DEFAULT_TIMEOUT</h4>
 <pre>public static final&nbsp;int DEFAULT_TIMEOUT</pre>
+<div class="block">Default request timeout in milliseconds (30000).</div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../constant-values.html#org.dellroad.linode.apiv4.spring.LinodeApiHttpRequestFactory.DEFAULT_TIMEOUT">Constant Field Values</a></dd>
+</dl>
+</li>
+</ul>
+<a name="DEFAULT_MAX_SIMULTANEOUS_REQUESTS">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>DEFAULT_MAX_SIMULTANEOUS_REQUESTS</h4>
+<pre>public static final&nbsp;int DEFAULT_MAX_SIMULTANEOUS_REQUESTS</pre>
+<div class="block">Default maximum number of simultaneous connections (16).</div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../constant-values.html#org.dellroad.linode.apiv4.spring.LinodeApiHttpRequestFactory.DEFAULT_MAX_SIMULTANEOUS_REQUESTS">Constant Field Values</a></dd>
 </dl>
 </li>
 </ul>
@@ -344,28 +368,39 @@ extends org.springframework.http.client.HttpComponentsClientHttpRequestFactory</
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>token</code> - authorization token</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code> - if <code>token</code> is null</dd>
+<dd><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code> - if <code>token</code> is null or empty</dd>
 </dl>
 </li>
 </ul>
-<a name="setupHttpClient--">
+<a name="afterPropertiesSet--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>setupHttpClient</h4>
-<pre><a href="http://docs.oracle.com/javase/8/docs/api/javax/annotation/PostConstruct.html?is-external=true" title="class or interface in javax.annotation">@PostConstruct</a>
-public&nbsp;void&nbsp;setupHttpClient()</pre>
+<h4>afterPropertiesSet</h4>
+<pre>public&nbsp;void&nbsp;afterPropertiesSet()
+                        throws <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</a></pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>afterPropertiesSet</code>&nbsp;in interface&nbsp;<code>org.springframework.beans.factory.InitializingBean</code></dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</a></code></dd>
+</dl>
 </li>
 </ul>
-<a name="shutdown--">
+<a name="destroy--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>shutdown</h4>
-<pre><a href="http://docs.oracle.com/javase/8/docs/api/javax/annotation/PreDestroy.html?is-external=true" title="class or interface in javax.annotation">@PreDestroy</a>
-public&nbsp;void&nbsp;shutdown()</pre>
+<h4>destroy</h4>
+<pre>public&nbsp;void&nbsp;destroy()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>destroy</code>&nbsp;in interface&nbsp;<code>org.springframework.beans.factory.DisposableBean</code></dd>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code>destroy</code>&nbsp;in class&nbsp;<code>org.springframework.http.client.HttpComponentsClientHttpRequestFactory</code></dd>
+</dl>
 </li>
 </ul>
 <a name="configureConnectionManager-org.apache.http.impl.conn.PoolingHttpClientConnectionManager-">

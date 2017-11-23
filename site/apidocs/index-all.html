@@ -76,10 +76,16 @@
 <dl>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Type.AddOns.html#AddOns--">AddOns()</a></span> - Constructor for class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Type.AddOns.html" title="class in org.dellroad.linode.apiv4.model">Type.AddOns</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#afterSetup--">afterSetup()</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#afterPropertiesSet--">afterPropertiesSet()</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiHttpRequestFactory</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#afterPropertiesSet--">afterPropertiesSet()</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Linode.Alerts.html#Alerts--">Alerts()</a></span> - Constructor for class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Linode.Alerts.html" title="class in org.dellroad.linode.apiv4.model">Linode.Alerts</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#allocateIP-int-org.dellroad.linode.apiv4.model.IP.Type-">allocateIP(int, IP.Type)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Allocate a new IPv4 address.</div>
+</dd>
 <dt><a href="org/dellroad/linode/apiv4/model/Architecture.html" title="enum in org.dellroad.linode.apiv4.model"><span class="typeNameLink">Architecture</span></a> - Enum in <a href="org/dellroad/linode/apiv4/model/package-summary.html">org.dellroad.linode.apiv4.model</a></dt>
 <dd>
 <div class="block">Linode Linux distribution architectures.</div>
@@ -88,12 +94,6 @@
 <dd>
 <div class="block">Attach a volume to a Linode.</div>
 </dd>
-<dt><a href="org/dellroad/linode/apiv4/spring/AuthorizationRequestInterceptor.html" title="class in org.dellroad.linode.apiv4.spring"><span class="typeNameLink">AuthorizationRequestInterceptor</span></a> - Class in <a href="org/dellroad/linode/apiv4/spring/package-summary.html">org.dellroad.linode.apiv4.spring</a></dt>
-<dd>
-<div class="block">Adds the <code>Bearer</code> authorization token required by the Linode API to HTTP requests.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/AuthorizationRequestInterceptor.html#AuthorizationRequestInterceptor-java.util.function.Supplier-">AuthorizationRequestInterceptor(Supplier&lt;String&gt;)</a></span> - Constructor for class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/AuthorizationRequestInterceptor.html" title="class in org.dellroad.linode.apiv4.spring">AuthorizationRequestInterceptor</a></dt>
-<dd>&nbsp;</dd>
 </dl>
 <a name="I:B">
 <!--   -->
@@ -130,7 +130,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/Constants.html#BASE_URI">BASE_URI</a></span> - Static variable in class org.dellroad.linode.apiv4.<a href="org/dellroad/linode/apiv4/Constants.html" title="class in org.dellroad.linode.apiv4">Constants</a></dt>
 <dd>
-<div class="block">Base URI for API requests.</div>
+<div class="block">Base URI for APIv4 requests.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#boot-int-int-">boot(int, int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
@@ -246,8 +246,14 @@
 <dl>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Stats.Data.html#Data--">Data()</a></span> - Constructor for class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Stats.Data.html" title="class in org.dellroad.linode.apiv4.model">Stats.Data</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#DEFAULT_MAX_SIMULTANEOUS_REQUESTS">DEFAULT_MAX_SIMULTANEOUS_REQUESTS</a></span> - Static variable in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiHttpRequestFactory</a></dt>
+<dd>
+<div class="block">Default maximum number of simultaneous connections (16).</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#DEFAULT_TIMEOUT">DEFAULT_TIMEOUT</a></span> - Static variable in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiHttpRequestFactory</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Default request timeout in milliseconds (30000).</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#delete-java.lang.String-java.lang.Object...-">delete(String, Object...)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
 <div class="block">DELETE a resource.</div>
@@ -276,6 +282,8 @@
 <dd>
 <div class="block">Delete a specific volume.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#destroy--">destroy()</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiHttpRequestFactory</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/dellroad/linode/apiv4/model/Device.html" title="class in org.dellroad.linode.apiv4.model"><span class="typeNameLink">Device</span></a> - Class in <a href="org/dellroad/linode/apiv4/model/package-summary.html">org.dellroad.linode.apiv4.model</a></dt>
 <dd>
 <div class="block"><a href="org/dellroad/linode/apiv4/model/Config.html" title="class in org.dellroad.linode.apiv4.model"><code>Config</code></a> device.</div>
@@ -322,11 +330,15 @@
 </a>
 <h2 class="title">E</h2>
 <dl>
-<dt><a href="org/dellroad/linode/apiv4/model/Error.html" title="class in org.dellroad.linode.apiv4.model"><span class="typeNameLink">Error</span></a> - Class in <a href="org/dellroad/linode/apiv4/model/package-summary.html">org.dellroad.linode.apiv4.model</a></dt>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Errors.Error.html#Error--">Error()</a></span> - Constructor for class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Errors.Error.html" title="class in org.dellroad.linode.apiv4.model">Errors.Error</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/dellroad/linode/apiv4/model/Errors.html" title="class in org.dellroad.linode.apiv4.model"><span class="typeNameLink">Errors</span></a> - Class in <a href="org/dellroad/linode/apiv4/model/package-summary.html">org.dellroad.linode.apiv4.model</a></dt>
 <dd>
-<div class="block">Linode API error.</div>
+<div class="block">Linode API error payload.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Error.html#Error--">Error()</a></span> - Constructor for class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Error.html" title="class in org.dellroad.linode.apiv4.model">Error</a></dt>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Errors.html#Errors--">Errors()</a></span> - Constructor for class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Errors.html" title="class in org.dellroad.linode.apiv4.model">Errors</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/dellroad/linode/apiv4/model/Errors.Error.html" title="class in org.dellroad.linode.apiv4.model"><span class="typeNameLink">Errors.Error</span></a> - Class in <a href="org/dellroad/linode/apiv4/model/package-summary.html">org.dellroad.linode.apiv4.model</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <a name="I:F">
@@ -337,10 +349,6 @@
 <dt><a href="org/dellroad/linode/apiv4/model/Filesystem.html" title="enum in org.dellroad.linode.apiv4.model"><span class="typeNameLink">Filesystem</span></a> - Enum in <a href="org/dellroad/linode/apiv4/model/package-summary.html">org.dellroad.linode.apiv4.model</a></dt>
 <dd>
 <div class="block"><a href="org/dellroad/linode/apiv4/model/Disk.html" title="class in org.dellroad.linode.apiv4.model"><code>Disk</code></a> or <a href="org/dellroad/linode/apiv4/model/Image.html" title="class in org.dellroad.linode.apiv4.model"><code>Image</code></a> filesystem.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/Constants.html#FIRST_PAGE">FIRST_PAGE</a></span> - Static variable in class org.dellroad.linode.apiv4.<a href="org/dellroad/linode/apiv4/Constants.html" title="class in org.dellroad.linode.apiv4">Constants</a></dt>
-<dd>
-<div class="block">The first page number (1) in paginated responses.</div>
 </dd>
 </dl>
 <a name="I:G">
@@ -360,6 +368,102 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Linode.html#getAlerts--">getAlerts()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Linode.html" title="class in org.dellroad.linode.apiv4.model">Linode</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAll-java.lang.Class-java.lang.String-java.lang.Object...-">getAll(Class&lt;P&gt;, String, Object...)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all instances of the specified type, by querying for and aggreating however many pages there are.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAll-java.lang.Class-org.springframework.core.task.AsyncTaskExecutor-java.lang.String-java.lang.Object...-">getAll(Class&lt;P&gt;, AsyncTaskExecutor, String, Object...)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all instances of the specified type, by querying for and aggreating however many pages there are.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllDistributions-org.springframework.core.task.AsyncTaskExecutor-">getAllDistributions(AsyncTaskExecutor)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all Linux distributions.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllDistributions--">getAllDistributions()</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all Linux distributions.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllImages-org.springframework.core.task.AsyncTaskExecutor-">getAllImages(AsyncTaskExecutor)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all images.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllImages--">getAllImages()</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all images.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllKernels-org.springframework.core.task.AsyncTaskExecutor-">getAllKernels(AsyncTaskExecutor)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all kernels.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllKernels--">getAllKernels()</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all kernels.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllLinodeConfigs-org.springframework.core.task.AsyncTaskExecutor-int-">getAllLinodeConfigs(AsyncTaskExecutor, int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all configs associated with a Linode instance.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllLinodeConfigs-int-">getAllLinodeConfigs(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all configs associated with a Linode instance.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllLinodeDisks-org.springframework.core.task.AsyncTaskExecutor-int-">getAllLinodeDisks(AsyncTaskExecutor, int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all disks associated with a Linode instance.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllLinodeDisks-int-">getAllLinodeDisks(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all disks associated with a Linode instance.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllLinodes-org.springframework.core.task.AsyncTaskExecutor-">getAllLinodes(AsyncTaskExecutor)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all Linode instances.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllLinodes--">getAllLinodes()</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all Linode instances.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllLinodeVolumes-org.springframework.core.task.AsyncTaskExecutor-int-">getAllLinodeVolumes(AsyncTaskExecutor, int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all volumes attached to a Linode instance.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllLinodeVolumes-int-">getAllLinodeVolumes(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all volumes attached to a Linode instance.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllRegions-org.springframework.core.task.AsyncTaskExecutor-">getAllRegions(AsyncTaskExecutor)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all Linode regions.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllRegions--">getAllRegions()</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all Linode regions.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllStackScripts-org.springframework.core.task.AsyncTaskExecutor-">getAllStackScripts(AsyncTaskExecutor)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all StackScripts.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllStackScripts--">getAllStackScripts()</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all StackScripts.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllTypes-org.springframework.core.task.AsyncTaskExecutor-">getAllTypes(AsyncTaskExecutor)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all Linode types.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllTypes--">getAllTypes()</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all Linode types.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllVolumes-org.springframework.core.task.AsyncTaskExecutor-">getAllVolumes(AsyncTaskExecutor)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all volumes.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllVolumes--">getAllVolumes()</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>
+<div class="block">Get all volumes.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Distribution.html#getArchitecture--">getArchitecture()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Distribution.html" title="class in org.dellroad.linode.apiv4.model">Distribution</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Backup.html#getAvailability--">getAvailability()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Backup.html" title="class in org.dellroad.linode.apiv4.model">Backup</a></dt>
@@ -369,6 +473,8 @@
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Linode.html#getBackups--">getBackups()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Linode.html" title="class in org.dellroad.linode.apiv4.model">Linode</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Type.AddOns.html#getBackups--">getBackups()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Type.AddOns.html" title="class in org.dellroad.linode.apiv4.model">Type.AddOns</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getBaseURI--">getBaseURI()</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Config.html#getComments--">getComments()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Config.html" title="class in org.dellroad.linode.apiv4.model">Config</a></dt>
 <dd>&nbsp;</dd>
@@ -440,23 +546,29 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Backup.html#getDisks--">getDisks()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Backup.html" title="class in org.dellroad.linode.apiv4.model">Backup</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Linode.html#getDistribution--">getDistribution()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Linode.html" title="class in org.dellroad.linode.apiv4.model">Linode</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getDistribution-int-">getDistribution(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
 <div class="block">Get a specific Linux distribution.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/StackScript.html#getDistributions--">getDistributions()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/StackScript.html" title="class in org.dellroad.linode.apiv4.model">StackScript</a></dt>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Linode.html#getDistributionId--">getDistributionId()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Linode.html" title="class in org.dellroad.linode.apiv4.model">Linode</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/StackScript.html#getDistributionIds--">getDistributionIds()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/StackScript.html" title="class in org.dellroad.linode.apiv4.model">StackScript</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getDistributions-int-">getDistributions(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
-<div class="block">Get Linux distributions.</div>
+<div class="block">Get one page of Linux distributions.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Paginated.html#getElementType--">getElementType()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Paginated.html" title="class in org.dellroad.linode.apiv4.model">Paginated</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Errors.html#getErrors--">getErrors()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Errors.html" title="class in org.dellroad.linode.apiv4.model">Errors</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiException.html#getErrors--">getErrors()</a></span> - Method in exception org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiException.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiException</a></dt>
+<dd>
+<div class="block">Get the <a href="org/dellroad/linode/apiv4/model/Errors.html" title="class in org.dellroad.linode.apiv4.model"><code>Errors</code></a> returned from the API, if any.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/UserDefinedField.html#getExample--">getExample()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/UserDefinedField.html" title="class in org.dellroad.linode.apiv4.model">UserDefinedField</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Error.html#getField--">getField()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Error.html" title="class in org.dellroad.linode.apiv4.model">Error</a></dt>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Errors.Error.html#getField--">getField()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Errors.Error.html" title="class in org.dellroad.linode.apiv4.model">Errors.Error</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Disk.html#getFilesystem--">getFilesystem()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Disk.html" title="class in org.dellroad.linode.apiv4.model">Disk</a></dt>
 <dd>&nbsp;</dd>
@@ -494,7 +606,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getImages-int-">getImages(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
-<div class="block">Get images.</div>
+<div class="block">Get one page of images.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Stats.Data.Net.html#getIn--">getIn()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Stats.Data.Net.html" title="class in org.dellroad.linode.apiv4.model">Stats.Data.Net</a></dt>
 <dd>&nbsp;</dd>
@@ -512,13 +624,9 @@
 <dd>
 <div class="block">Get info about a specific IPv4 address.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getIPs-int-">getIPs(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getIPInfo-int-">getIPInfo(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
 <div class="block">Get IP info.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getIPs-int-org.dellroad.linode.apiv4.model.IP.Type-">getIPs(int, IP.Type)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
-<dd>
-<div class="block">Allocate a new IPv4 address.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/IPInfo.html#getIPv4--">getIPv4()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/IPInfo.html" title="class in org.dellroad.linode.apiv4.model">IPInfo</a></dt>
 <dd>&nbsp;</dd>
@@ -528,17 +636,17 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Linode.html#getIpv6--">getIpv6()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Linode.html" title="class in org.dellroad.linode.apiv4.model">Linode</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Config.html#getKernel--">getKernel()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Config.html" title="class in org.dellroad.linode.apiv4.model">Config</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getKernel-int-">getKernel(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
 <div class="block">Get a specific kernel.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Config.html#getKernelId--">getKernelId()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Config.html" title="class in org.dellroad.linode.apiv4.model">Config</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/request/CreateConfigRequest.html#getKernelId--">getKernelId()</a></span> - Method in class org.dellroad.linode.apiv4.model.request.<a href="org/dellroad/linode/apiv4/model/request/CreateConfigRequest.html" title="class in org.dellroad.linode.apiv4.model.request">CreateConfigRequest</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getKernels-int-">getKernels(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
-<div class="block">Get kernels.</div>
+<div class="block">Get one page of kernels.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Distribution.html#getLabel--">getLabel()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Distribution.html" title="class in org.dellroad.linode.apiv4.model">Distribution</a></dt>
 <dd>&nbsp;</dd>
@@ -576,7 +684,7 @@
 </dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getLinodeConfigs-int-int-">getLinodeConfigs(int, int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
-<div class="block">Get the configurations associated with a Linode instance.</div>
+<div class="block">Get one page of the configurations associated with a Linode instance.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getLinodeDisk-int-int-">getLinodeDisk(int, int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
@@ -584,7 +692,7 @@
 </dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getLinodeDisks-int-int-">getLinodeDisks(int, int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
-<div class="block">Get the disks associated with a Linode instance.</div>
+<div class="block">Get one page of the disks associated with a Linode instance.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/IPv4.html#getLinodeId--">getLinodeId()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/IPv4.html" title="class in org.dellroad.linode.apiv4.model">IPv4</a></dt>
 <dd>&nbsp;</dd>
@@ -596,11 +704,11 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getLinodes-int-">getLinodes(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
-<div class="block">Get Linode instances.</div>
+<div class="block">Get one page of Linode instances.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getLinodeVolumes-int-int-">getLinodeVolumes(int, int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
-<div class="block">Get the volumes attached to a Linode instance.</div>
+<div class="block">Get one page of the volumes attached to a Linode instance.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Specs.html#getMemory--">getMemory()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Specs.html" title="class in org.dellroad.linode.apiv4.model">Specs</a></dt>
 <dd>&nbsp;</dd>
@@ -626,7 +734,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Paginated.html#getPages--">getPages()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Paginated.html" title="class in org.dellroad.linode.apiv4.model">Paginated</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getPaginated-java.lang.Class-int-java.lang.String-java.lang.Object...-">getPaginated(Class&lt;R&gt;, int, String, Object...)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getPaginated-java.lang.Class-int-java.lang.String-java.lang.Object...-">getPaginated(Class&lt;P&gt;, int, String, Object...)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
 <div class="block">Query a paginated resource via GET.</div>
 </dd>
@@ -650,32 +758,34 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/IP.html#getRdns--">getRdns()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/IP.html" title="class in org.dellroad.linode.apiv4.model">IP</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Error.html#getReason--">getReason()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Error.html" title="class in org.dellroad.linode.apiv4.model">Error</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Backup.html#getRegion--">getRegion()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Backup.html" title="class in org.dellroad.linode.apiv4.model">Backup</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/IPv4.html#getRegion--">getRegion()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/IPv4.html" title="class in org.dellroad.linode.apiv4.model">IPv4</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/IPv6Pool.html#getRegion--">getRegion()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/IPv6Pool.html" title="class in org.dellroad.linode.apiv4.model">IPv6Pool</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Linode.html#getRegion--">getRegion()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Linode.html" title="class in org.dellroad.linode.apiv4.model">Linode</a></dt>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Errors.Error.html#getReason--">getReason()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Errors.Error.html" title="class in org.dellroad.linode.apiv4.model">Errors.Error</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/request/CreateVolumeRequest.html#getRegion--">getRegion()</a></span> - Method in class org.dellroad.linode.apiv4.model.request.<a href="org/dellroad/linode/apiv4/model/request/CreateVolumeRequest.html" title="class in org.dellroad.linode.apiv4.model.request">CreateVolumeRequest</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Volume.html#getRegion--">getRegion()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Volume.html" title="class in org.dellroad.linode.apiv4.model">Volume</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getRegion-java.lang.String-">getRegion(String)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
 <div class="block">Get a Linode region.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Backup.html#getRegionId--">getRegionId()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Backup.html" title="class in org.dellroad.linode.apiv4.model">Backup</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/IPv4.html#getRegionId--">getRegionId()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/IPv4.html" title="class in org.dellroad.linode.apiv4.model">IPv4</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/IPv6Pool.html#getRegionId--">getRegionId()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/IPv6Pool.html" title="class in org.dellroad.linode.apiv4.model">IPv6Pool</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Linode.html#getRegionId--">getRegionId()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Linode.html" title="class in org.dellroad.linode.apiv4.model">Linode</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/request/CloneLinodeRequest.html#getRegionId--">getRegionId()</a></span> - Method in class org.dellroad.linode.apiv4.model.request.<a href="org/dellroad/linode/apiv4/model/request/CloneLinodeRequest.html" title="class in org.dellroad.linode.apiv4.model.request">CloneLinodeRequest</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/request/CreateLinodeRequest.html#getRegionId--">getRegionId()</a></span> - Method in class org.dellroad.linode.apiv4.model.request.<a href="org/dellroad/linode/apiv4/model/request/CreateLinodeRequest.html" title="class in org.dellroad.linode.apiv4.model.request">CreateLinodeRequest</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Volume.html#getRegionId--">getRegionId()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Volume.html" title="class in org.dellroad.linode.apiv4.model">Volume</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getRegions-int-">getRegions(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
-<div class="block">Get Linode regions.</div>
+<div class="block">Get one page of Linode regions.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getRestTemplate--">getRestTemplate()</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Paginated.html#getResults--">getResults()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Paginated.html" title="class in org.dellroad.linode.apiv4.model">Paginated</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/StackScript.html#getRevNote--">getRevNote()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/StackScript.html" title="class in org.dellroad.linode.apiv4.model">StackScript</a></dt>
@@ -728,11 +838,11 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getStackScript-int-">getStackScript(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
-<div class="block">Get a specific stack script.</div>
+<div class="block">Get a specific StackScript.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getStackScripts-int-">getStackScripts(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
-<div class="block">Get stack scripts.</div>
+<div class="block">Get one page of StackScripts.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getStats-int-">getStats(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
@@ -780,7 +890,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getTypes-int-">getTypes(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
-<div class="block">Get Linode types.</div>
+<div class="block">Get one page of Linode types.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Backup.html#getUpdated--">getUpdated()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Backup.html" title="class in org.dellroad.linode.apiv4.model">Backup</a></dt>
 <dd>&nbsp;</dd>
@@ -824,7 +934,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getVolumes-int-">getVolumes(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
-<div class="block">Get volumes.</div>
+<div class="block">Get one page of volumes.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/BackupInfo.html#getWeekly--">getWeekly()</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/BackupInfo.html" title="class in org.dellroad.linode.apiv4.model">BackupInfo</a></dt>
 <dd>&nbsp;</dd>
@@ -1100,10 +1210,6 @@
 </a>
 <h2 class="title">P</h2>
 <dl>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/Constants.html#PAGE_SIZE">PAGE_SIZE</a></span> - Static variable in class org.dellroad.linode.apiv4.<a href="org/dellroad/linode/apiv4/Constants.html" title="class in org.dellroad.linode.apiv4">Constants</a></dt>
-<dd>
-<div class="block">The maximimum number of results per page (25) in paginated responses.</div>
-</dd>
 <dt><a href="org/dellroad/linode/apiv4/model/Paginated.html" title="class in org.dellroad.linode.apiv4.model"><span class="typeNameLink">Paginated</span></a>&lt;<a href="org/dellroad/linode/apiv4/model/Paginated.html" title="type parameter in Paginated">T</a>&gt; - Class in <a href="org/dellroad/linode/apiv4/model/package-summary.html">org.dellroad.linode.apiv4.model</a></dt>
 <dd>
 <div class="block">Linode API paginated response.</div>
@@ -1145,8 +1251,6 @@
 <div class="block">POST to a resource expecting response.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Type.Price.html#Price--">Price()</a></span> - Constructor for class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Type.Price.html" title="class in org.dellroad.linode.apiv4.model">Type.Price</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/AuthorizationRequestInterceptor.html#process-org.apache.http.HttpRequest-org.apache.http.protocol.HttpContext-">process(HttpRequest, HttpContext)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/AuthorizationRequestInterceptor.html" title="class in org.dellroad.linode.apiv4.spring">AuthorizationRequestInterceptor</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#put-java.lang.Object-java.lang.String-java.lang.Object...-">put(Object, String, Object...)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
@@ -1324,9 +1428,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Backup.html#setDisks-org.dellroad.linode.apiv4.model.Disk:A-">setDisks(Disk[])</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Backup.html" title="class in org.dellroad.linode.apiv4.model">Backup</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Linode.html#setDistribution-org.dellroad.linode.apiv4.model.Distribution-">setDistribution(Distribution)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Linode.html" title="class in org.dellroad.linode.apiv4.model">Linode</a></dt>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Linode.html#setDistributionId-java.lang.String-">setDistributionId(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Linode.html" title="class in org.dellroad.linode.apiv4.model">Linode</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/StackScript.html#setDistributions-java.lang.String:A-">setDistributions(String[])</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/StackScript.html" title="class in org.dellroad.linode.apiv4.model">StackScript</a></dt>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/StackScript.html#setDistributionIds-java.lang.String:A-">setDistributionIds(String[])</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/StackScript.html" title="class in org.dellroad.linode.apiv4.model">StackScript</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Config.Helpers.html#setDistro-boolean-">setDistro(boolean)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Config.Helpers.html" title="class in org.dellroad.linode.apiv4.model">Config.Helpers</a></dt>
 <dd>&nbsp;</dd>
@@ -1334,9 +1438,13 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Linode.Backups.html#setEnabled-boolean-">setEnabled(boolean)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Linode.Backups.html" title="class in org.dellroad.linode.apiv4.model">Linode.Backups</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Errors.html#setErrors-org.dellroad.linode.apiv4.model.Errors.Error:A-">setErrors(Errors.Error[])</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Errors.html" title="class in org.dellroad.linode.apiv4.model">Errors</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiException.html#setErrors-org.dellroad.linode.apiv4.model.Errors-">setErrors(Errors)</a></span> - Method in exception org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiException.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiException</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/UserDefinedField.html#setExample-java.lang.String-">setExample(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/UserDefinedField.html" title="class in org.dellroad.linode.apiv4.model">UserDefinedField</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Error.html#setField-java.lang.String-">setField(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Error.html" title="class in org.dellroad.linode.apiv4.model">Error</a></dt>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Errors.Error.html#setField-java.lang.String-">setField(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Errors.Error.html" title="class in org.dellroad.linode.apiv4.model">Errors.Error</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Disk.html#setFilesystem-org.dellroad.linode.apiv4.model.Filesystem-">setFilesystem(Filesystem)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Disk.html" title="class in org.dellroad.linode.apiv4.model">Disk</a></dt>
 <dd>&nbsp;</dd>
@@ -1388,7 +1496,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Linode.html#setIpv6-java.lang.String-">setIpv6(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Linode.html" title="class in org.dellroad.linode.apiv4.model">Linode</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Config.html#setKernel-java.lang.String-">setKernel(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Config.html" title="class in org.dellroad.linode.apiv4.model">Config</a></dt>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Config.html#setKernelId-java.lang.String-">setKernelId(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Config.html" title="class in org.dellroad.linode.apiv4.model">Config</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/request/CreateConfigRequest.html#setKernelId-java.lang.String-">setKernelId(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.request.<a href="org/dellroad/linode/apiv4/model/request/CreateConfigRequest.html" title="class in org.dellroad.linode.apiv4.model.request">CreateConfigRequest</a></dt>
 <dd>&nbsp;</dd>
@@ -1482,23 +1590,23 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/request/CreateDiskRequest.html#setReadOnly-boolean-">setReadOnly(boolean)</a></span> - Method in class org.dellroad.linode.apiv4.model.request.<a href="org/dellroad/linode/apiv4/model/request/CreateDiskRequest.html" title="class in org.dellroad.linode.apiv4.model.request">CreateDiskRequest</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Error.html#setReason-java.lang.String-">setReason(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Error.html" title="class in org.dellroad.linode.apiv4.model">Error</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Backup.html#setRegion-java.lang.String-">setRegion(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Backup.html" title="class in org.dellroad.linode.apiv4.model">Backup</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/IPv4.html#setRegion-java.lang.String-">setRegion(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/IPv4.html" title="class in org.dellroad.linode.apiv4.model">IPv4</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/IPv6Pool.html#setRegion-java.lang.String-">setRegion(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/IPv6Pool.html" title="class in org.dellroad.linode.apiv4.model">IPv6Pool</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Linode.html#setRegion-java.lang.String-">setRegion(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Linode.html" title="class in org.dellroad.linode.apiv4.model">Linode</a></dt>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Errors.Error.html#setReason-java.lang.String-">setReason(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Errors.Error.html" title="class in org.dellroad.linode.apiv4.model">Errors.Error</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/request/CreateVolumeRequest.html#setRegion-java.lang.String-">setRegion(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.request.<a href="org/dellroad/linode/apiv4/model/request/CreateVolumeRequest.html" title="class in org.dellroad.linode.apiv4.model.request">CreateVolumeRequest</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Volume.html#setRegion-java.lang.String-">setRegion(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Volume.html" title="class in org.dellroad.linode.apiv4.model">Volume</a></dt>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Backup.html#setRegionId-java.lang.String-">setRegionId(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Backup.html" title="class in org.dellroad.linode.apiv4.model">Backup</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/IPv4.html#setRegionId-java.lang.String-">setRegionId(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/IPv4.html" title="class in org.dellroad.linode.apiv4.model">IPv4</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/IPv6Pool.html#setRegionId-java.lang.String-">setRegionId(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/IPv6Pool.html" title="class in org.dellroad.linode.apiv4.model">IPv6Pool</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Linode.html#setRegionId-java.lang.String-">setRegionId(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Linode.html" title="class in org.dellroad.linode.apiv4.model">Linode</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/request/CloneLinodeRequest.html#setRegionId-java.lang.String-">setRegionId(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.request.<a href="org/dellroad/linode/apiv4/model/request/CloneLinodeRequest.html" title="class in org.dellroad.linode.apiv4.model.request">CloneLinodeRequest</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/request/CreateLinodeRequest.html#setRegionId-java.lang.String-">setRegionId(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.request.<a href="org/dellroad/linode/apiv4/model/request/CreateLinodeRequest.html" title="class in org.dellroad.linode.apiv4.model.request">CreateLinodeRequest</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Volume.html#setRegionId-java.lang.String-">setRegionId(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Volume.html" title="class in org.dellroad.linode.apiv4.model">Volume</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#setRestTemplate-org.springframework.web.client.RestTemplate-">setRestTemplate(RestTemplate)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>&nbsp;</dd>
@@ -1610,8 +1718,6 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Config.Helpers.html#setUpdateDbDisabled-boolean-">setUpdateDbDisabled(boolean)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Config.Helpers.html" title="class in org.dellroad.linode.apiv4.model">Config.Helpers</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#setupHttpClient--">setupHttpClient()</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiHttpRequestFactory</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/StackScript.html#setUserDefinedFields-org.dellroad.linode.apiv4.model.UserDefinedField:A-">setUserDefinedFields(UserDefinedField[])</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/StackScript.html" title="class in org.dellroad.linode.apiv4.model">StackScript</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/StackScript.html#setUserGravatarId-java.lang.String-">setUserGravatarId(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/StackScript.html" title="class in org.dellroad.linode.apiv4.model">StackScript</a></dt>
@@ -1637,8 +1743,6 @@
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Schedule.html#setWindow-java.lang.String-">setWindow(String)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Schedule.html" title="class in org.dellroad.linode.apiv4.model">Schedule</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Kernel.html#setXen-boolean-">setXen(boolean)</a></span> - Method in class org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Kernel.html" title="class in org.dellroad.linode.apiv4.model">Kernel</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html#shutdown--">shutdown()</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiHttpRequestFactory</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#shutdownLinode-int-">shutdownLinode(int)</a></span> - Method in class org.dellroad.linode.apiv4.spring.<a href="org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring">LinodeApiRequestSender</a></dt>
 <dd>
@@ -1687,9 +1791,13 @@
 <h2 class="title">T</h2>
 <dl>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/Constants.html#TIMESTAMP_FORMAT">TIMESTAMP_FORMAT</a></span> - Static variable in class org.dellroad.linode.apiv4.<a href="org/dellroad/linode/apiv4/Constants.html" title="class in org.dellroad.linode.apiv4">Constants</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Format used for JSON timestamp values.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/Constants.html#TIMESTAMP_TIMEZONE">TIMESTAMP_TIMEZONE</a></span> - Static variable in class org.dellroad.linode.apiv4.<a href="org/dellroad/linode/apiv4/Constants.html" title="class in org.dellroad.linode.apiv4">Constants</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Implicit timezone used for JSON timestamp values.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Architecture.html#toString--">toString()</a></span> - Method in enum org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Architecture.html" title="enum in org.dellroad.linode.apiv4.model">Architecture</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/dellroad/linode/apiv4/model/Backup.Availability.html#toString--">toString()</a></span> - Method in enum org.dellroad.linode.apiv4.model.<a href="org/dellroad/linode/apiv4/model/Backup.Availability.html" title="enum in org.dellroad.linode.apiv4.model">Backup.Availability</a></dt>

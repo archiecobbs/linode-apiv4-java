@@ -83,12 +83,6 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><a href="#org.dellroad.linode.apiv4.model">org.dellroad.linode.apiv4.model</a></td>
-<td class="colLast">
-<div class="block">Linode v4 API resources.</div>
-</td>
-</tr>
-<tr class="rowColor">
 <td class="colFirst"><a href="#org.dellroad.linode.apiv4.spring">org.dellroad.linode.apiv4.spring</a></td>
 <td class="colLast">
 <div class="block">Linode v4 API Spring integration.</div>
@@ -99,37 +93,6 @@
 </li>
 <li class="blockList">
 <ul class="blockList">
-<li class="blockList"><a name="org.dellroad.linode.apiv4.model">
-<!--   -->
-</a>
-<h3>Uses of <a href="../../../../../../org/dellroad/linode/apiv4/model/Distribution.html" title="class in org.dellroad.linode.apiv4.model">Distribution</a> in <a href="../../../../../../org/dellroad/linode/apiv4/model/package-summary.html">org.dellroad.linode.apiv4.model</a></h3>
-<table class="useSummary" border="0" cellpadding="3" cellspacing="0" summary="Use table, listing methods, and an explanation">
-<caption><span>Methods in <a href="../../../../../../org/dellroad/linode/apiv4/model/package-summary.html">org.dellroad.linode.apiv4.model</a> that return <a href="../../../../../../org/dellroad/linode/apiv4/model/Distribution.html" title="class in org.dellroad.linode.apiv4.model">Distribution</a></span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colFirst" scope="col">Modifier and Type</th>
-<th class="colLast" scope="col">Method and Description</th>
-</tr>
-<tbody>
-<tr class="altColor">
-<td class="colFirst"><code><a href="../../../../../../org/dellroad/linode/apiv4/model/Distribution.html" title="class in org.dellroad.linode.apiv4.model">Distribution</a></code></td>
-<td class="colLast"><span class="typeNameLabel">Linode.</span><code><span class="memberNameLink"><a href="../../../../../../org/dellroad/linode/apiv4/model/Linode.html#getDistribution--">getDistribution</a></span>()</code>&nbsp;</td>
-</tr>
-</tbody>
-</table>
-<table class="useSummary" border="0" cellpadding="3" cellspacing="0" summary="Use table, listing methods, and an explanation">
-<caption><span>Methods in <a href="../../../../../../org/dellroad/linode/apiv4/model/package-summary.html">org.dellroad.linode.apiv4.model</a> with parameters of type <a href="../../../../../../org/dellroad/linode/apiv4/model/Distribution.html" title="class in org.dellroad.linode.apiv4.model">Distribution</a></span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colFirst" scope="col">Modifier and Type</th>
-<th class="colLast" scope="col">Method and Description</th>
-</tr>
-<tbody>
-<tr class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><span class="typeNameLabel">Linode.</span><code><span class="memberNameLink"><a href="../../../../../../org/dellroad/linode/apiv4/model/Linode.html#setDistribution-org.dellroad.linode.apiv4.model.Distribution-">setDistribution</a></span>(<a href="../../../../../../org/dellroad/linode/apiv4/model/Distribution.html" title="class in org.dellroad.linode.apiv4.model">Distribution</a>&nbsp;distribution)</code>&nbsp;</td>
-</tr>
-</tbody>
-</table>
-</li>
 <li class="blockList"><a name="org.dellroad.linode.apiv4.spring">
 <!--   -->
 </a>
@@ -145,6 +108,27 @@
 <td class="colFirst"><code><a href="../../../../../../org/dellroad/linode/apiv4/model/Distribution.html" title="class in org.dellroad.linode.apiv4.model">Distribution</a></code></td>
 <td class="colLast"><span class="typeNameLabel">LinodeApiRequestSender.</span><code><span class="memberNameLink"><a href="../../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getDistribution-int-">getDistribution</a></span>(int&nbsp;distId)</code>
 <div class="block">Get a specific Linux distribution.</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="useSummary" border="0" cellpadding="3" cellspacing="0" summary="Use table, listing methods, and an explanation">
+<caption><span>Methods in <a href="../../../../../../org/dellroad/linode/apiv4/spring/package-summary.html">org.dellroad.linode.apiv4.spring</a> that return types with arguments of type <a href="../../../../../../org/dellroad/linode/apiv4/model/Distribution.html" title="class in org.dellroad.linode.apiv4.model">Distribution</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../../org/dellroad/linode/apiv4/model/Distribution.html" title="class in org.dellroad.linode.apiv4.model">Distribution</a>&gt;</code></td>
+<td class="colLast"><span class="typeNameLabel">LinodeApiRequestSender.</span><code><span class="memberNameLink"><a href="../../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllDistributions--">getAllDistributions</a></span>()</code>
+<div class="block">Get all Linux distributions.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../../org/dellroad/linode/apiv4/model/Distribution.html" title="class in org.dellroad.linode.apiv4.model">Distribution</a>&gt;</code></td>
+<td class="colLast"><span class="typeNameLabel">LinodeApiRequestSender.</span><code><span class="memberNameLink"><a href="../../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAllDistributions-org.springframework.core.task.AsyncTaskExecutor-">getAllDistributions</a></span>(org.springframework.core.task.AsyncTaskExecutor&nbsp;executor)</code>
+<div class="block">Get all Linux distributions.</div>
 </td>
 </tr>
 </tbody>
