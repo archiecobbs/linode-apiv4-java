@@ -5,11 +5,14 @@
 
 package org.dellroad.linode.apiv4.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Linode instance specs.
  *
  * @see <a href="https://developers.linode.com/v4/reference/linode">Linodes</a>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Specs {
 
     private int disk;

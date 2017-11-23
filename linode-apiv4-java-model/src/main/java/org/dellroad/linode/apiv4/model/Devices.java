@@ -5,9 +5,12 @@
 
 package org.dellroad.linode.apiv4.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * {@link Config} devices.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Devices {
 
     private Device sda;

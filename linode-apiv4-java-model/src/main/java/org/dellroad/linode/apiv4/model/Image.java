@@ -7,6 +7,7 @@ package org.dellroad.linode.apiv4.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -19,6 +20,7 @@ import org.dellroad.linode.apiv4.Constants;
  *
  * @see <a href="https://developers.linode.com/v4/reference/images">Images</a>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Image extends AbstractIntIdLabeled {
 
     private String description;

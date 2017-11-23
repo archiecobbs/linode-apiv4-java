@@ -7,6 +7,8 @@ package org.dellroad.linode.apiv4.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.util.Date;
@@ -18,11 +20,12 @@ import org.dellroad.linode.apiv4.Constants;
  *
  * @see <a href="https://developers.linode.com/v4/reference/linode#backups">Backups</a>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Backup extends AbstractIntIdLabeled {
 
     private String status;
     private String type;
-    private String region;
+    private String regionId;
     private Date created;
     private Date updated;
     private Date finished;
@@ -46,11 +49,12 @@ public class Backup extends AbstractIntIdLabeled {
         this.type = type;
     }
 
-    public String getRegion() {
-        return this.region;
+    @JsonProperty("region")
+    public String getRegionId() {
+        return this.regionId;
     }
-    public void setRegion(final String region) {
-        this.region = region;
+    public void setRegionId(final String regionId) {
+        this.regionId = regionId;
     }
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.TIMESTAMP_FORMAT, timezone = Constants.TIMESTAMP_TIMEZONE)

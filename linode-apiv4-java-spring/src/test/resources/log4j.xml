@@ -18,10 +18,6 @@
         <level value="debug"/>
     </logger>
 
-    <logger name="org.springframework">
-        <level value="trace"/>
-    </logger>
-
     <root>
         <priority value="info"/>
         <appender-ref ref="console"/>

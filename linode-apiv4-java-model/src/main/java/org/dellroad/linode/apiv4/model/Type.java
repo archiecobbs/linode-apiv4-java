@@ -6,6 +6,7 @@
 package org.dellroad.linode.apiv4.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  *
  * @see <a href="https://developers.linode.com/v4/reference/linode#types">Types</a>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Type extends Specs {
 
     private String id;
@@ -69,6 +71,7 @@ public class Type extends Specs {
 
 // AddOns
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class AddOns {
 
         private Backups backups;
@@ -82,6 +85,7 @@ public class Type extends Specs {
 
     // Backups
 
+        @JsonIgnoreProperties(ignoreUnknown = true)
         public static class Backups {
 
             private Price price;
@@ -122,6 +126,7 @@ public class Type extends Specs {
     /**
      * {@link Type} price.
      */
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Price {
 
         private float hourly;

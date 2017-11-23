@@ -6,6 +6,7 @@
 package org.dellroad.linode.apiv4.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
@@ -17,12 +18,13 @@ import org.dellroad.linode.apiv4.Constants;
  *
  * @see <a href="https://developers.linode.com/v4/reference/linode#stackscripts">StackScripts</a>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StackScript extends AbstractIntIdLabeled {
 
     private String username;
     private String userGravatarId;
     private String description;
-    private String[] distributions;
+    private String[] distributionIds;
     private int deploymentsTotal;
     private int deploymentsActive;
     private boolean publicx;
@@ -54,11 +56,12 @@ public class StackScript extends AbstractIntIdLabeled {
         this.description = description;
     }
 
-    public String[] getDistributions() {
-        return this.distributions;
+    @JsonProperty("distributions")
+    public String[] getDistributionIds() {
+        return this.distributionIds;
     }
-    public void setDistributions(final String[] distributions) {
-        this.distributions = distributions;
+    public void setDistributionIds(final String[] distributionIds) {
+        this.distributionIds = distributionIds;
     }
 
     @JsonProperty("deployments_total")

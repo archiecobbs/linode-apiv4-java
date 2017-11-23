@@ -5,11 +5,14 @@
 
 package org.dellroad.linode.apiv4.model.request;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * Used to imagize disks.
  *
  * @see org.dellroad.linode.apiv4.spring.LinodeApiRequestSender
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ImagizeDiskRequest {
 
     private String label;

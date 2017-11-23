@@ -7,6 +7,7 @@ package org.dellroad.linode.apiv4.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -19,13 +20,14 @@ import org.dellroad.linode.apiv4.Constants;
  *
  * @see <a href="https://developers.linode.com/v4/reference/linode">Linodes</a>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Linode extends AbstractIntIdLabeled {
 
     private Alerts alerts;
     private Backups backups;
     private Date created;
-    private String region;
-    private Distribution distribution;
+    private String regionId;
+    private String distributionId;
     private String group;
     private String[] ipv4;
     private String ipv6;
@@ -57,18 +59,20 @@ public class Linode extends AbstractIntIdLabeled {
         this.created = created;
     }
 
-    public String getRegion() {
-        return this.region;
+    @JsonProperty("region")
+    public String getRegionId() {
+        return this.regionId;
     }
-    public void setRegion(final String region) {
-        this.region = region;
+    public void setRegionId(final String regionId) {
+        this.regionId = regionId;
     }
 
-    public Distribution getDistribution() {
-        return this.distribution;
+    @JsonProperty("distribution")
+    public String getDistributionId() {
+        return this.distributionId;
     }
-    public void setDistribution(final Distribution distribution) {
-        this.distribution = distribution;
+    public void setDistributionId(final String distributionId) {
+        this.distributionId = distributionId;
     }
 
     public String getGroup() {
@@ -160,6 +164,7 @@ public class Linode extends AbstractIntIdLabeled {
     /**
      * {@link Linode} alert thresholds.
      */
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Alerts {
 
         private int cpu;
@@ -231,6 +236,7 @@ public class Linode extends AbstractIntIdLabeled {
     /**
      * {@link Linode} backup config.
      */
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Backups {
 
         private boolean enabled;
@@ -272,6 +278,7 @@ public class Linode extends AbstractIntIdLabeled {
         /**
          * {@link Linode.Backups} schedule.
          */
+        @JsonIgnoreProperties(ignoreUnknown = true)
         public static class Schedule {
 
             private String day;

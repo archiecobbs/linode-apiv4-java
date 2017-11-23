@@ -5,9 +5,12 @@
 
 package org.dellroad.linode.apiv4.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Paginated {@link Image} list.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Images extends Paginated<Image> {
 
     public Images() {

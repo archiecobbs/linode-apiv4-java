@@ -6,6 +6,7 @@
 package org.dellroad.linode.apiv4.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Date;
 
@@ -16,6 +17,7 @@ import org.dellroad.linode.apiv4.Constants;
  *
  * @see <a href="https://developers.linode.com/v4/reference/linode#disks">Disks</a>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Disk extends AbstractIntIdLabeled {
 
     private DiskStatus status;

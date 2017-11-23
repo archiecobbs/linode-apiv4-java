@@ -5,11 +5,14 @@
 
 package org.dellroad.linode.apiv4.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Linode IP address info.
  *
  * @see <a href="https://developers.linode.com/v4/reference/linode#ips">IPs</a>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class IPInfo {
 
     private IPv4Info ipv4;

@@ -5,9 +5,12 @@
 
 package org.dellroad.linode.apiv4.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Paginated {@link Kernel} list.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Kernels extends Paginated<Kernel> {
 
     public Kernels() {

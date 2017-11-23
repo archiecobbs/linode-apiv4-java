@@ -5,9 +5,12 @@
 
 package org.dellroad.linode.apiv4.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * {@link StackScript} user-defined field.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDefinedField {
 
     private String label;

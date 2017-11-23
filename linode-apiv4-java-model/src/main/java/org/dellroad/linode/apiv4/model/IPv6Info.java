@@ -5,6 +5,7 @@
 
 package org.dellroad.linode.apiv4.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @see <a href="https://developers.linode.com/v6/reference/linode#ips">IPs</a>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class IPv6Info {
 
     private IPv6[] addresses;

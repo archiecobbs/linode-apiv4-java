@@ -7,6 +7,7 @@ package org.dellroad.linode.apiv4.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -19,6 +20,7 @@ import org.dellroad.linode.apiv4.Constants;
  *
  * @see <a href="https://developers.linode.com/v4/reference/linode#configs">Configs</a>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Config extends AbstractIntIdLabeled {
 
     private String comments;
@@ -26,7 +28,7 @@ public class Config extends AbstractIntIdLabeled {
     private Devices devices;
     private Helpers helpers;
     private Integer initrd;
-    private String kernel;
+    private String kernelId;
     private Integer memoryLimit;
     private String rootDevice;
     private RunLevel runLevel;
@@ -69,11 +71,12 @@ public class Config extends AbstractIntIdLabeled {
         this.initrd = initrd;
     }
 
-    public String getKernel() {
-        return this.kernel;
+    @JsonProperty("kernel")
+    public String getKernelId() {
+        return this.kernelId;
     }
-    public void setKernel(final String kernel) {
-        this.kernel = kernel;
+    public void setKernelId(final String kernelId) {
+        this.kernelId = kernelId;
     }
 
     @JsonProperty("memory_limit")
@@ -120,6 +123,7 @@ public class Config extends AbstractIntIdLabeled {
     /**
      * {@link Config} helpers.
      */
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Helpers {
 
         private boolean updateDbDisabled;

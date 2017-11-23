@@ -6,6 +6,7 @@
 package org.dellroad.linode.apiv4.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
@@ -17,6 +18,7 @@ import org.dellroad.linode.apiv4.Constants;
  *
  * @see <a href="https://developers.linode.com/v4/reference/linode#distributions">Distributions</a>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Distribution extends AbstractStringId {
 
     private Date updated;

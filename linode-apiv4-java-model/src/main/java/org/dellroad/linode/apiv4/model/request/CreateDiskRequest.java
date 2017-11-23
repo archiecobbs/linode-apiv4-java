@@ -5,6 +5,7 @@
 
 package org.dellroad.linode.apiv4.model.request;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.dellroad.linode.apiv4.model.Filesystem;
@@ -14,6 +15,7 @@ import org.dellroad.linode.apiv4.model.Filesystem;
  *
  * @see org.dellroad.linode.apiv4.spring.LinodeApiRequestSender
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CreateDiskRequest extends AbstractDiskRequest {
 
     private int size;

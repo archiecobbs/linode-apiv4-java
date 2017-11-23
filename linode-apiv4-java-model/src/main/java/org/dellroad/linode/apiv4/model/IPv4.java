@@ -5,6 +5,7 @@
 
 package org.dellroad.linode.apiv4.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -12,16 +13,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @see <a href="https://developers.linode.com/v4/reference/linode#ips">IPs</a>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class IPv4 extends IP {
 
-    private String region;
+    private String regionId;
     private int linodeId;
 
-    public String getRegion() {
-        return this.region;
+    @JsonProperty("region")
+    public String getRegionId() {
+        return this.regionId;
     }
-    public void setRegion(final String region) {
-        this.region = region;
+    public void setRegionId(final String regionId) {
+        this.regionId = regionId;
     }
 
     @JsonProperty("linode_id")

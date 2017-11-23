@@ -15,17 +15,17 @@
     <bean id="linodeApiMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="objectMapper">
             <bean class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean"
-              p:failOnUnknownProperties="false"/>
+              p:failOnUnknownProperties="false" p:serializationInclusion="NON_NULL"/>
         </property>
     </bean>
 
-    <!-- Spring REST template -->
-    <bean id="linodeApiRestTemplate" class="org.springframework.web.client.RestTemplate">
+    <!-- HTTP request factory that we customize -->
+    <bean id="linodeApiHttpRequestFactory" class="org.dellroad.linode.apiv4.spring.LinodeApiHttpRequestFactory"
+      p:timeout="30000"/>
 
-        <!-- Custom request factory to set 30 second connection/request timeouts -->
-        <property name="requestFactory">
-            <bean class="org.dellroad.linode.apiv4.spring.LinodeApiHttpRequestFactory" p:timeout="30000"/>
-        </property>
+    <!-- Spring REST template -->
+    <bean id="linodeApiRestTemplate" class="org.springframework.web.client.RestTemplate"
+      p:requestFactory-ref="linodeApiHttpRequestFactory">
 
         <!-- Custom error handler to extract error message from JSON payload -->
         <property name="errorHandler">

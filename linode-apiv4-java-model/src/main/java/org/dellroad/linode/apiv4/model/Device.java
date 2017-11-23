@@ -5,11 +5,13 @@
 
 package org.dellroad.linode.apiv4.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * {@link Config} device.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Device {
 
     private int diskId;

@@ -13,25 +13,18 @@ import java.net.URISyntaxException;
  */
 public final class Constants {
 
-    public static final String TIMESTAMP_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+    /**
+     * Format used for JSON timestamp values.
+     */
+    public static final String TIMESTAMP_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+
+    /**
+     * Implicit timezone used for JSON timestamp values.
+     */
     public static final String TIMESTAMP_TIMEZONE = "UTC";
 
     /**
-     * The first page number ({@value #FIRST_PAGE}) in paginated responses.
-     *
-     * @see org.dellroad.linode.apiv4.model.Paginated
-     */
-    public static final int FIRST_PAGE = 1;
-
-    /**
-     * The maximimum number of results per page ({@value #PAGE_SIZE}) in paginated responses.
-     *
-     * @see org.dellroad.linode.apiv4.model.Paginated
-     */
-    public static final int PAGE_SIZE = 25;
-
-    /**
-     * Base URI for API requests.
+     * Base URI for APIv4 requests.
      */
     public static final URI BASE_URI;
     static {

@@ -5,9 +5,12 @@
 
 package org.dellroad.linode.apiv4.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Paginated {@link Volume} list.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Volumes extends Paginated<Volume> {
 
     public Volumes() {

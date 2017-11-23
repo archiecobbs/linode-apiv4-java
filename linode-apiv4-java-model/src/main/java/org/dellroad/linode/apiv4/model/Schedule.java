@@ -5,9 +5,12 @@
 
 package org.dellroad.linode.apiv4.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Linode backup schedule info.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Schedule {
 
     private String day;

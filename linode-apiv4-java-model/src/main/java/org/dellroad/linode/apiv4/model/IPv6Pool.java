@@ -5,13 +5,17 @@
 
 package org.dellroad.linode.apiv4.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * {@link IPv6} pool.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class IPv6Pool {
 
     private String range;
-    private String region;
+    private String regionId;
 
     public String getRange() {
         return this.range;
@@ -20,10 +24,11 @@ public class IPv6Pool {
         this.range = range;
     }
 
-    public String getRegion() {
-        return this.region;
+    @JsonProperty("regionId")
+    public String getRegionId() {
+        return this.regionId;
     }
-    public void setRegion(final String region) {
-        this.region = region;
+    public void setRegionId(final String regionId) {
+        this.regionId = regionId;
     }
 }

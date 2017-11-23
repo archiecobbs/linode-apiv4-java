@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /**
  * Superclass of {@link IPv4} and {@link IPv6} containing common properties.
  */
-public class IP {
+public abstract class IP {
 
     private String address;
     private String gateway;

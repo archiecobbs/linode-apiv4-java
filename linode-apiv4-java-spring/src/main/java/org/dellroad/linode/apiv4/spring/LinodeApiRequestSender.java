@@ -11,10 +11,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.time.YearMonth;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.function.Consumer;
 import java.util.function.Function;
-
-import javax.annotation.PostConstruct;
 
 import org.apache.http.NoHttpResponseException;
 import org.dellroad.linode.apiv4.Constants;
@@ -53,13 +55,15 @@ import org.dellroad.linode.apiv4.model.request.ImagizeDiskRequest;
 import org.dellroad.linode.apiv4.model.request.RescueLinodeRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 /**
  * Sender for Linode REST APIv4 requests.
  */
-public class LinodeApiRequestSender {
+public class LinodeApiRequestSender implements InitializingBean {
 
     protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -68,18 +72,24 @@ public class LinodeApiRequestSender {
 
 // Lifecycle
 
-    @PostConstruct
-    public void afterSetup() {
+    @Override
+    public void afterPropertiesSet() throws Exception {
         if (this.restTemplate == null)
-            throw new IllegalStateException("no restTemplate configured");
+            throw new Exception("no restTemplate configured");
     }
 
 // Properties
 
+    public RestTemplate getRestTemplate() {
+        return this.restTemplate;
+    }
     public void setRestTemplate(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
+    public URI getBaseURI() {
+        return this.baseURI;
+    }
     public void setBaseURI(URI baseURI) {
         if (baseURI == null)
             throw new IllegalArgumentException("null baseURI");
@@ -89,12 +99,41 @@ public class LinodeApiRequestSender {
 // Linodes
 
     /**
-     * Get Linode instances.
+     * Get all Linode instances.
+     *
+     * <p>
+     * Pages after the first are loaded asynchronously using the given {@link AsyncTaskExecutor}, if any;
+     * if {@code executor} is null, pages are loaded synchronously and sequentially.
+     *
+     * @param executor executor for loading pages
+     * @return all Linodes
+     * @throws RestClientException if an error occurs
+     * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     */
+    public List<Linode> getAllLinodes(AsyncTaskExecutor executor) throws InterruptedException {
+        return this.getAll(Linodes.class, executor, "linode/instances");
+    }
+
+    /**
+     * Get all Linode instances.
+     *
+     * <p>
+     * Pages are loaded synchronously and sequentially.
+     *
+     * @return all Linodes
+     * @throws RestClientException if an error occurs
+     */
+    public List<Linode> getAllLinodes() {
+        return this.getAll(Linodes.class, "linode/instances");
+    }
+
+    /**
+     * Get one page of Linode instances.
      *
      * @param page page number
      * @return one page of Linodes
      * @throws RestClientException if an error occurs
-     * @throws IllegalArgumentException if {@code page} is less than {@link Constants#FIRST_PAGE}
+     * @throws IllegalArgumentException if {@code page} is less than one
      */
     public Linodes getLinodes(int page) {
         return this.getPaginated(Linodes.class, page, "linode/instances");
@@ -281,13 +320,44 @@ public class LinodeApiRequestSender {
 // Linodes: Volumes
 
     /**
-     * Get the volumes attached to a Linode instance.
+     * Get all volumes attached to a Linode instance.
+     *
+     * <p>
+     * Pages after the first are loaded asynchronously using the given {@link AsyncTaskExecutor}, if any;
+     * if {@code executor} is null, pages are loaded synchronously and sequentially.
+     *
+     * @param executor executor for loading pages
+     * @param linodeId Linode ID
+     * @return all attached volumes
+     * @throws RestClientException if an error occurs
+     * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     */
+    public List<Volume> getAllLinodeVolumes(AsyncTaskExecutor executor, int linodeId) throws InterruptedException {
+        return this.getAll(Volumes.class, executor, "linode/instances/{id}/volumes", linodeId);
+    }
+
+    /**
+     * Get all volumes attached to a Linode instance.
+     *
+     * <p>
+     * Pages are loaded synchronously and sequentially.
+     *
+     * @param linodeId Linode ID
+     * @return all attached volumes
+     * @throws RestClientException if an error occurs
+     */
+    public List<Volume> getAllLinodeVolumes(int linodeId) {
+        return this.getAll(Volumes.class, "linode/instances/{id}/volumes", linodeId);
+    }
+
+    /**
+     * Get one page of the volumes attached to a Linode instance.
      *
      * @param page page number
      * @param linodeId Linode ID
      * @return one page of volumes
      * @throws RestClientException if an error occurs
-     * @throws IllegalArgumentException if {@code page} is less than {@link Constants#FIRST_PAGE}
+     * @throws IllegalArgumentException if {@code page} is less than one
      */
     public Volumes getLinodeVolumes(int page, int linodeId) {
         return this.getPaginated(Volumes.class, page, "linode/instances/{id}/volumes", linodeId);
@@ -313,13 +383,44 @@ public class LinodeApiRequestSender {
 // Linodes: Configs
 
     /**
-     * Get the configurations associated with a Linode instance.
+     * Get all configs associated with a Linode instance.
+     *
+     * <p>
+     * Pages after the first are loaded asynchronously using the given {@link AsyncTaskExecutor}, if any;
+     * if {@code executor} is null, pages are loaded synchronously and sequentially.
+     *
+     * @param executor executor for loading pages
+     * @param linodeId Linode ID
+     * @return all associated configs
+     * @throws RestClientException if an error occurs
+     * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     */
+    public List<Config> getAllLinodeConfigs(AsyncTaskExecutor executor, int linodeId) throws InterruptedException {
+        return this.getAll(Configs.class, executor, "linode/instances/{id}/configs", linodeId);
+    }
+
+    /**
+     * Get all configs associated with a Linode instance.
+     *
+     * <p>
+     * Pages are loaded synchronously and sequentially.
+     *
+     * @param linodeId Linode ID
+     * @return all associated configs
+     * @throws RestClientException if an error occurs
+     */
+    public List<Config> getAllLinodeConfigs(int linodeId) {
+        return this.getAll(Configs.class, "linode/instances/{id}/configs", linodeId);
+    }
+
+    /**
+     * Get one page of the configurations associated with a Linode instance.
      *
      * @param page page number
      * @param linodeId Linode ID
      * @return one page of configs for instance
      * @throws RestClientException if an error occurs
-     * @throws IllegalArgumentException if {@code page} is less than {@link Constants#FIRST_PAGE}
+     * @throws IllegalArgumentException if {@code page} is less than one
      */
     public Configs getLinodeConfigs(int page, int linodeId) {
         return this.getPaginated(Configs.class, page, "linode/instances/{id}/configs", linodeId);
@@ -380,13 +481,44 @@ public class LinodeApiRequestSender {
 // Linodes: Disks
 
     /**
-     * Get the disks associated with a Linode instance.
+     * Get all disks associated with a Linode instance.
+     *
+     * <p>
+     * Pages after the first are loaded asynchronously using the given {@link AsyncTaskExecutor}, if any;
+     * if {@code executor} is null, pages are loaded synchronously and sequentially.
+     *
+     * @param executor executor for loading pages
+     * @param linodeId Linode ID
+     * @return all associated disks
+     * @throws RestClientException if an error occurs
+     * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     */
+    public List<Disk> getAllLinodeDisks(AsyncTaskExecutor executor, int linodeId) throws InterruptedException {
+        return this.getAll(Disks.class, executor, "linode/instances/{id}/disks", linodeId);
+    }
+
+    /**
+     * Get all disks associated with a Linode instance.
+     *
+     * <p>
+     * Pages are loaded synchronously and sequentially.
+     *
+     * @param linodeId Linode ID
+     * @return all associated disks
+     * @throws RestClientException if an error occurs
+     */
+    public List<Disk> getAllLinodeDisks(int linodeId) {
+        return this.getAll(Disks.class, "linode/instances/{id}/disks", linodeId);
+    }
+
+    /**
+     * Get one page of the disks associated with a Linode instance.
      *
      * @param page page number
      * @param linodeId Linode ID
      * @return linode disks info
      * @throws RestClientException if an error occurs
-     * @throws IllegalArgumentException if {@code page} is less than {@link Constants#FIRST_PAGE}
+     * @throws IllegalArgumentException if {@code page} is less than one
      */
     public Disks getLinodeDisks(int page, int linodeId) {
         return this.getPaginated(Disks.class, page, "linode/instances/{id}/disks", linodeId);
@@ -491,12 +623,41 @@ public class LinodeApiRequestSender {
 // Distributions
 
     /**
-     * Get Linux distributions.
+     * Get all Linux distributions.
+     *
+     * <p>
+     * Pages after the first are loaded asynchronously using the given {@link AsyncTaskExecutor}, if any;
+     * if {@code executor} is null, pages are loaded synchronously and sequentially.
+     *
+     * @param executor executor for loading pages
+     * @return all distributions
+     * @throws RestClientException if an error occurs
+     * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     */
+    public List<Distribution> getAllDistributions(AsyncTaskExecutor executor) throws InterruptedException {
+        return this.getAll(Distributions.class, executor, "linode/distributions");
+    }
+
+    /**
+     * Get all Linux distributions.
+     *
+     * <p>
+     * Pages are loaded synchronously and sequentially.
+     *
+     * @return all distributions
+     * @throws RestClientException if an error occurs
+     */
+    public List<Distribution> getAllDistributions() {
+        return this.getAll(Distributions.class, "linode/distributions");
+    }
+
+    /**
+     * Get one page of Linux distributions.
      *
      * @param page page number
      * @return one page of distributions
      * @throws RestClientException if an error occurs
-     * @throws IllegalArgumentException if {@code page} is less than {@link Constants#FIRST_PAGE}
+     * @throws IllegalArgumentException if {@code page} is less than one
      */
     public Distributions getDistributions(int page) {
         return this.getPaginated(Distributions.class, page, "linode/distributions");
@@ -522,7 +683,7 @@ public class LinodeApiRequestSender {
      * @return IP info for linode
      * @throws RestClientException if an error occurs
      */
-    public IPInfo getIPs(int linodeId) {
+    public IPInfo getIPInfo(int linodeId) {
         return this.get(IPInfo.class, "linode/instances/{id}/ips", linodeId);
     }
 
@@ -535,7 +696,7 @@ public class LinodeApiRequestSender {
      * @throws RestClientException if an error occurs
      * @throws IllegalArgumentException if {@code type} is null
      */
-    public IPInfo getIPs(int linodeId, IP.Type type) {
+    public IPInfo allocateIP(int linodeId, IP.Type type) {
         if (type == null)
             throw new IllegalArgumentException("null type");
         return this.postFor(IPInfo.class, this.json("type", type), "linode/instances/{id}/ips", linodeId);
@@ -585,12 +746,41 @@ public class LinodeApiRequestSender {
 // Kernels
 
     /**
-     * Get kernels.
+     * Get all kernels.
+     *
+     * <p>
+     * Pages after the first are loaded asynchronously using the given {@link AsyncTaskExecutor}, if any;
+     * if {@code executor} is null, pages are loaded synchronously and sequentially.
+     *
+     * @param executor executor for loading pages
+     * @return all kernels
+     * @throws RestClientException if an error occurs
+     * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     */
+    public List<Kernel> getAllKernels(AsyncTaskExecutor executor) throws InterruptedException {
+        return this.getAll(Kernels.class, executor, "linode/kernels");
+    }
+
+    /**
+     * Get all kernels.
+     *
+     * <p>
+     * Pages are loaded synchronously and sequentially.
+     *
+     * @return all kernels
+     * @throws RestClientException if an error occurs
+     */
+    public List<Kernel> getAllKernels() {
+        return this.getAll(Kernels.class, "linode/kernels");
+    }
+
+    /**
+     * Get one page of kernels.
      *
      * @param page page number
      * @return one page of kernel
      * @throws RestClientException if an error occurs
-     * @throws IllegalArgumentException if {@code page} is less than {@link Constants#FIRST_PAGE}
+     * @throws IllegalArgumentException if {@code page} is less than one
      */
     public Kernels getKernels(int page) {
         return this.getPaginated(Kernels.class, page, "linode/kernels");
@@ -610,22 +800,51 @@ public class LinodeApiRequestSender {
 // StackScripts
 
     /**
-     * Get stack scripts.
+     * Get all StackScripts.
+     *
+     * <p>
+     * Pages after the first are loaded asynchronously using the given {@link AsyncTaskExecutor}, if any;
+     * if {@code executor} is null, pages are loaded synchronously and sequentially.
+     *
+     * @param executor executor for loading pages
+     * @return all StackScripts
+     * @throws RestClientException if an error occurs
+     * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     */
+    public List<StackScript> getAllStackScripts(AsyncTaskExecutor executor) throws InterruptedException {
+        return this.getAll(StackScripts.class, executor, "linode/stackscripts");
+    }
+
+    /**
+     * Get all StackScripts.
+     *
+     * <p>
+     * Pages are loaded synchronously and sequentially.
+     *
+     * @return all StackScripts
+     * @throws RestClientException if an error occurs
+     */
+    public List<StackScript> getAllStackScripts() {
+        return this.getAll(StackScripts.class, "linode/stackscripts");
+    }
+
+    /**
+     * Get one page of StackScripts.
      *
      * @param page page number
-     * @return one page of stack scripts
+     * @return one page of StackScripts
      * @throws RestClientException if an error occurs
-     * @throws IllegalArgumentException if {@code page} is less than {@link Constants#FIRST_PAGE}
+     * @throws IllegalArgumentException if {@code page} is less than one
      */
     public StackScripts getStackScripts(int page) {
         return this.getPaginated(StackScripts.class, page, "linode/stackscripts");
     }
 
     /**
-     * Get a specific stack script.
+     * Get a specific StackScript.
      *
      * @param scriptId script ID
-     * @return specified stack script
+     * @return specified StackScript
      * @throws RestClientException if an error occurs
      */
     public StackScript getStackScript(int scriptId) {
@@ -664,12 +883,41 @@ public class LinodeApiRequestSender {
 // Types
 
     /**
-     * Get Linode types.
+     * Get all Linode types.
+     *
+     * <p>
+     * Pages after the first are loaded asynchronously using the given {@link AsyncTaskExecutor}, if any;
+     * if {@code executor} is null, pages are loaded synchronously and sequentially.
+     *
+     * @param executor executor for loading pages
+     * @return all types
+     * @throws RestClientException if an error occurs
+     * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     */
+    public List<Type> getAllTypes(AsyncTaskExecutor executor) throws InterruptedException {
+        return this.getAll(Types.class, executor, "linode/types");
+    }
+
+    /**
+     * Get all Linode types.
+     *
+     * <p>
+     * Pages are loaded synchronously and sequentially.
+     *
+     * @return all types
+     * @throws RestClientException if an error occurs
+     */
+    public List<Type> getAllTypes() {
+        return this.getAll(Types.class, "linode/types");
+    }
+
+    /**
+     * Get one page of Linode types.
      *
      * @param page page number
      * @return one page of instance types
      * @throws RestClientException if an error occurs
-     * @throws IllegalArgumentException if {@code page} is less than {@link Constants#FIRST_PAGE}
+     * @throws IllegalArgumentException if {@code page} is less than one
      */
     public Types getTypes(int page) {
         return this.getPaginated(Types.class, page, "linode/types");
@@ -692,12 +940,41 @@ public class LinodeApiRequestSender {
 // Volumes
 
     /**
-     * Get volumes.
+     * Get all volumes.
+     *
+     * <p>
+     * Pages after the first are loaded asynchronously using the given {@link AsyncTaskExecutor}, if any;
+     * if {@code executor} is null, pages are loaded synchronously and sequentially.
+     *
+     * @param executor executor for loading pages
+     * @return all volumes
+     * @throws RestClientException if an error occurs
+     * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     */
+    public List<Volume> getAllVolumes(AsyncTaskExecutor executor) throws InterruptedException {
+        return this.getAll(Volumes.class, executor, "linode/volumes");
+    }
+
+    /**
+     * Get all volumes.
+     *
+     * <p>
+     * Pages are loaded synchronously and sequentially.
+     *
+     * @return all volumes
+     * @throws RestClientException if an error occurs
+     */
+    public List<Volume> getAllVolumes() {
+        return this.getAll(Volumes.class, "linode/volumes");
+    }
+
+    /**
+     * Get one page of volumes.
      *
      * @param page page number
      * @return one page of volumes
      * @throws RestClientException if an error occurs
-     * @throws IllegalArgumentException if {@code page} is less than {@link Constants#FIRST_PAGE}
+     * @throws IllegalArgumentException if {@code page} is less than one
      */
     public Volumes getVolumes(int page) {
         return this.getPaginated(Volumes.class, page, "linode/volumes");
@@ -785,12 +1062,41 @@ public class LinodeApiRequestSender {
 // Regions
 
     /**
-     * Get Linode regions.
+     * Get all Linode regions.
+     *
+     * <p>
+     * Pages after the first are loaded asynchronously using the given {@link AsyncTaskExecutor}, if any;
+     * if {@code executor} is null, pages are loaded synchronously and sequentially.
+     *
+     * @param executor executor for loading pages
+     * @return all regions
+     * @throws RestClientException if an error occurs
+     * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     */
+    public List<Region> getAllRegions(AsyncTaskExecutor executor) throws InterruptedException {
+        return this.getAll(Regions.class, executor, "regions");
+    }
+
+    /**
+     * Get all Linode regions.
+     *
+     * <p>
+     * Pages are loaded synchronously and sequentially.
+     *
+     * @return all regions
+     * @throws RestClientException if an error occurs
+     */
+    public List<Region> getAllRegions() {
+        return this.getAll(Regions.class, "linode/regions");
+    }
+
+    /**
+     * Get one page of Linode regions.
      *
      * @param page page number
      * @return one page of regions
      * @throws RestClientException if an error occurs
-     * @throws IllegalArgumentException if {@code page} is less than {@link Constants#FIRST_PAGE}
+     * @throws IllegalArgumentException if {@code page} is less than one
      */
     public Regions getRegions(int page) {
         return this.getPaginated(Regions.class, page, "regions");
@@ -822,12 +1128,41 @@ public class LinodeApiRequestSender {
 // Images
 
     /**
-     * Get images.
+     * Get all images.
+     *
+     * <p>
+     * Pages after the first are loaded asynchronously using the given {@link AsyncTaskExecutor}, if any;
+     * if {@code executor} is null, pages are loaded synchronously and sequentially.
+     *
+     * @param executor executor for loading pages
+     * @return all images
+     * @throws RestClientException if an error occurs
+     * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     */
+    public List<Image> getAllImages(AsyncTaskExecutor executor) throws InterruptedException {
+        return this.getAll(Images.class, executor, "images");
+    }
+
+    /**
+     * Get all images.
+     *
+     * <p>
+     * Pages are loaded synchronously and sequentially.
+     *
+     * @return all images
+     * @throws RestClientException if an error occurs
+     */
+    public List<Image> getAllImages() {
+        return this.getAll(Images.class, "linode/images");
+    }
+
+    /**
+     * Get one page of images.
      *
      * @param page page number
      * @return one page of images
      * @throws RestClientException if an error occurs
-     * @throws IllegalArgumentException if {@code page} is less than {@link Constants#FIRST_PAGE}
+     * @throws IllegalArgumentException if {@code page} is less than one
      */
     public Images getImages(int page) {
         return this.getPaginated(Images.class, page, "images");
@@ -865,7 +1200,7 @@ public class LinodeApiRequestSender {
      * @param <R> response type
      * @return response from query
      * @throws RestClientException if an error occurs
-     * @throws IllegalArgumentException if {@code page} is less than {@link Constants#FIRST_PAGE}
+     * @throws IllegalArgumentException if {@code page} is less than one
      * @throws IllegalArgumentException if {@code responseType} or {@code pathTemplate} is null
      */
     protected <R> R get(Class<R> responseType, String pathTemplate, Object... templateParameters) {
@@ -959,6 +1294,82 @@ public class LinodeApiRequestSender {
     }
 
     /**
+     * Get all instances of the specified type, by querying for and aggreating however many pages there are.
+     *
+     * <p>
+     * Pages are loaded synchronously and sequentially.
+     *
+     * @param responseType paginated response type
+     * @param pathTemplate resource URI path (relative)
+     * @param templateParameters parameter values for parameters in {@code pathTemplate}
+     * @param <T> item type
+     * @param <P> paginated response type
+     * @return combined results from all pages
+     * @throws RestClientException if an error occurs
+     * @throws IllegalArgumentException if any parameter is null
+     */
+    protected <T, P extends Paginated<T>> List<T> getAll(Class<P> responseType, String pathTemplate, Object... templateParameters) {
+        try {
+            return this.getAll(responseType, null, pathTemplate, templateParameters);
+        } catch (InterruptedException e) {
+            throw new RuntimeException("unexpected exception", e);
+        }
+    }
+
+    /**
+     * Get all instances of the specified type, by querying for and aggreating however many pages there are.
+     *
+     * <p>
+     * Pages after the first are loaded asynchronously using the given {@link AsyncTaskExecutor}, if any;
+     * if {@code executor} is null, pages are loaded synchronously and sequentially.
+     *
+     * @param responseType paginated response type
+     * @param executor executor loading pages
+     * @param pathTemplate resource URI path (relative)
+     * @param templateParameters parameter values for parameters in {@code pathTemplate}
+     * @param <T> item type
+     * @param <P> paginated response type
+     * @return combined results from all pages
+     * @throws RestClientException if an error occurs
+     * @throws IllegalArgumentException if {@code responseType}, {@code pathTemplate}, or {@code templateParameters} is null
+     * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     */
+    protected <T, P extends Paginated<T>> List<T> getAll(Class<P> responseType,
+      AsyncTaskExecutor executor, String pathTemplate, Object... templateParameters) throws InterruptedException {
+
+        // Initialize list
+        final ArrayList<T> list = new ArrayList<>();
+
+        // Get first page
+        final P firstPage = this.getPaginated(responseType, 1, pathTemplate, templateParameters);
+        list.addAll(firstPage.getData());
+
+        // Get remaining pages synchonously if no executor provided
+        if (executor == null) {
+            for (int pageNum = 2; pageNum <= firstPage.getPages(); pageNum++)
+                list.addAll(this.getPaginated(responseType, pageNum, pathTemplate, templateParameters).getData());
+            return list;
+        }
+
+        // Get remaining pages asynchonously using executor
+        final ArrayList<Future<P>> futureList = new ArrayList<>(firstPage.getPages() - 1);
+        for (int pageNum = 2; pageNum <= firstPage.getPages(); pageNum++) {
+            final int pageNum0 = pageNum;
+            futureList.add(executor.submit(() -> this.getPaginated(responseType, pageNum0, pathTemplate, templateParameters)));
+        }
+        for (Future<P> future : futureList) {
+            try {
+                list.addAll(future.get().getData());
+            } catch (ExecutionException e) {
+                throw new RestClientException("error in asynchronous page load", e.getCause());
+            }
+        }
+
+        // Done
+        return list;
+    }
+
+    /**
      * Query a paginated resource via GET.
      *
      * @param responseType paginated response type
@@ -966,13 +1377,13 @@ public class LinodeApiRequestSender {
      * @param pathTemplate resource URI path (relative)
      * @param templateParameters parameter values for parameters in {@code pathTemplate}
      * @param <T> item type
-     * @param <R> paginated response type
+     * @param <P> paginated response type
      * @return response from query
      * @throws RestClientException if an error occurs
-     * @throws IllegalArgumentException if {@code page} is less than {@link Constants#FIRST_PAGE}
-     * @throws IllegalArgumentException if {@code responseType} or {@code pathTemplate} is null
+     * @throws IllegalArgumentException if {@code page} is less than one
+     * @throws IllegalArgumentException if {@code responseType}, {@code pathTemplate}, or {@code templateParameters} is null
      */
-    protected <T, R extends Paginated<T>> R getPaginated(Class<R> responseType,
+    protected <T, P extends Paginated<T>> P getPaginated(Class<P> responseType,
       int page, String pathTemplate, Object... templateParameters) {
 
         // Sanity check
@@ -980,7 +1391,9 @@ public class LinodeApiRequestSender {
             throw new IllegalArgumentException("null responseType");
         if (pathTemplate == null)
             throw new IllegalArgumentException("null pathTemplate");
-        if (page < Constants.FIRST_PAGE)
+        if (templateParameters == null)
+            throw new IllegalArgumentException("null templateParameters");
+        if (page < 1)
             throw new IllegalArgumentException("page < 1");
 
         // Perform query
@@ -996,10 +1409,23 @@ public class LinodeApiRequestSender {
      * @throws IllegalArgumentException if {@code executor} is null
      */
     protected void submit(Consumer<RestTemplate> executor) {
-        this.query((Function<RestTemplate, Void>)rt -> {
-            executor.accept(rt);
-            return null;
-        });
+
+        // Sanity check
+        if (executor == null)
+            throw new IllegalArgumentException("null executor");
+
+        // Send request
+        try {
+            executor.accept(this.restTemplate);
+        } catch (LinodeApiException e) {
+            throw e;
+        } catch (RestClientException e) {
+            if (e.getCause() instanceof SocketException | e.getCause() instanceof NoHttpResponseException)
+                this.log.error("error sending Linode API request: " + e);
+            else
+                this.log.error("error sending Linode API request: " + e, e);
+            throw new LinodeApiException("error sending Linode API request", e);
+        }
     }
 
     /**
@@ -1021,6 +1447,8 @@ public class LinodeApiRequestSender {
         R response;
         try {
             response = executor.apply(this.restTemplate);
+        } catch (LinodeApiException e) {
+            throw e;
         } catch (RestClientException e) {
             if (e.getCause() instanceof SocketException | e.getCause() instanceof NoHttpResponseException)
                 this.log.error("error sending Linode API request: " + e);
@@ -1052,6 +1480,8 @@ public class LinodeApiRequestSender {
         // Sanity check
         if (pathTemplate == null)
             throw new IllegalArgumentException("null path");
+        if (queryParams == null)
+            throw new IllegalArgumentException("null queryParams");
 
         // Split off query portion
         final String pathPortion;

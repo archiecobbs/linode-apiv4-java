@@ -5,11 +5,13 @@
 
 package org.dellroad.linode.apiv4.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Linode statistics.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Stats {
 
     private String title;
@@ -31,6 +33,7 @@ public class Stats {
 
 // Data
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Data {
 
         private float[][] cpu;
@@ -68,6 +71,7 @@ public class Stats {
 
     // Io
 
+        @JsonIgnoreProperties(ignoreUnknown = true)
         public static class Io {
 
             private float[][] swap;
@@ -90,6 +94,7 @@ public class Stats {
 
     // Net
 
+        @JsonIgnoreProperties(ignoreUnknown = true)
         public static class Net {
 
             private float[][] in;

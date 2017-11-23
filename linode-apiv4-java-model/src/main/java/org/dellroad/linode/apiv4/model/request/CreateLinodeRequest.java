@@ -5,6 +5,7 @@
 
 package org.dellroad.linode.apiv4.model.request;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @see org.dellroad.linode.apiv4.spring.LinodeApiRequestSender
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CreateLinodeRequest extends AbstractDiskRequest {
 
     private String regionId;

@@ -8,10 +8,7 @@ package org.dellroad.linode.apiv4.spring;
 import java.net.URI;
 import java.util.function.Supplier;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
-import org.apache.http.client.HttpClient;
+import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -19,6 +16,9 @@ import org.apache.http.config.SocketConfig;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 
@@ -26,15 +26,23 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
  * Extends Spring's {@link HttpComponentsClientHttpRequestFactory} to set connection and read timeouts,
  * setup authorization, etc.
  */
-public class LinodeApiHttpRequestFactory extends HttpComponentsClientHttpRequestFactory {
+public class LinodeApiHttpRequestFactory extends HttpComponentsClientHttpRequestFactory
+  implements InitializingBean, DisposableBean {
 
-    public static final int DEFAULT_TIMEOUT = 30_000;               // 30 seconds
+    /**
+     * Default request timeout in milliseconds ({@value #DEFAULT_TIMEOUT}).
+     */
+    public static final int DEFAULT_TIMEOUT = 30_000;
+
+    /**
+     * Default maximum number of simultaneous connections ({@value #DEFAULT_MAX_SIMULTANEOUS_REQUESTS}).
+     */
+    public static final int DEFAULT_MAX_SIMULTANEOUS_REQUESTS = 16;
 
     private final PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
     private int timeout = DEFAULT_TIMEOUT;
     private Supplier<String> tokenSupplier;
-    private int maxSimultaneousRequests;
-    private HttpClient httpClient;
+    private int maxSimultaneousRequests = DEFAULT_MAX_SIMULTANEOUS_REQUESTS;
 
 // Properties
 
@@ -72,7 +80,7 @@ public class LinodeApiHttpRequestFactory extends HttpComponentsClientHttpRequest
      * Configure a fixed authorization token.
      *
      * @param token authorization token
-     * @throws IllegalArgumentException if {@code token} is null
+     * @throws IllegalArgumentException if {@code token} is null or empty
      */
     public void setAuthorizationToken(final String token) {
         if (token == null || token.isEmpty())
@@ -82,21 +90,22 @@ public class LinodeApiHttpRequestFactory extends HttpComponentsClientHttpRequest
 
 // Lifecycle
 
-    @PostConstruct
-    public void setupHttpClient() {
-        if (this.tokenSupplier == null)
-            throw new IllegalStateException("no tokenSupplier configured");
+    @Override
+    public void afterPropertiesSet() throws Exception {
         this.configureConnectionManager(this.connectionManager);
         final HttpClientBuilder builder = HttpClients.custom()
           .setConnectionManager(this.connectionManager)
-          .addInterceptorLast(new AuthorizationRequestInterceptor(
-           () -> this.tokenSupplier != null ? this.tokenSupplier.get() : null))
+          .addInterceptorLast((HttpRequestInterceptor)(request, context) -> {
+            final String token = this.tokenSupplier != null ? this.tokenSupplier.get() : null;
+            if (token != null)
+                request.addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + token);
+          })
           .setDefaultSocketConfig(SocketConfig.custom().setSoKeepAlive(true).build());
         this.setHttpClient(this.configureHttpClient(builder).build());
     }
 
-    @PreDestroy
-    public void shutdown() {
+    @Override
+    public void destroy() {
         this.connectionManager.shutdown();
     }
 
