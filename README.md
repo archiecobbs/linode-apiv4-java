@@ -12,6 +12,14 @@ The **linode-apiv4-java-spring** module is for projects using [Spring Framework]
 
 **Current status:** partially complete; not fully tested.
 
+Current release: None yet
+
+Current pre-release: `1.0.0-SNAPSHOT`
+
+### Using It
+
+See [this Javadoc](https://archiecobbs.github.io/linode-apiv4-java/site/apidocs/index.html?org/dellroad/linode/apiv4/spring/package-summary.html) for an example of how to use this library.
+
 ### Getting It
 
 **linode-apiv4-java** is available from [Maven Central](http://search.maven.org/#search|ga|1|a%3Alinode-apiv4-java):
