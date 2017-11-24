@@ -131,7 +131,67 @@
 <!--   -->
 </a>
 <h2 title="Package org.dellroad.linode.apiv4.spring Description">Package org.dellroad.linode.apiv4.spring Description</h2>
-<div class="block">Linode v4 API Spring integration.</div>
+<div class="block">Linode v4 API Spring integration.
+
+ <p><b>Overview</b></p>
+
+ <p>
+ Here are the primary classes provided:
+ <ul>
+  <li><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring"><code>LinodeApiRequestSender</code></a> - Java version of the API</li>
+  <li><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html" title="class in org.dellroad.linode.apiv4.spring"><code>LinodeApiHttpRequestFactory</code></a> - configures how HTTP requests
+      are performed, including token authorization</li>
+  <li><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiException.html" title="class in org.dellroad.linode.apiv4.spring"><code>LinodeApiException</code></a> - thrown if there is an error, including
+      a decode of the JSON error payload (if any)</li>
+ </ul>
+
+ <p><b>XML Setup</b></p>
+
+ <p>
+ This package comes with pre-configured Spring XML beans that you can include in your Spring application:
+ <pre>
+     &lt;import resource="classpath:org/dellroad/linode/apiv4/spring/linodeApi.xml"/&gt;
+ </pre>
+
+ <p>
+ The XML sets up a <a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring"><code>LinodeApiRequestSender</code></a> which can be used to perform API queries:
+ <pre>
+  import <a href="../../../../../org/dellroad/linode/apiv4/model/Linode.html" title="class in org.dellroad.linode.apiv4.model"><code>Linode</code></a>;
+  import <a href="../../../../../org/dellroad/linode/apiv4/model/request/CreateLinodeRequest.html" title="class in org.dellroad.linode.apiv4.model.request"><code>CreateLinodeRequest</code></a>;
+  import <a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html" title="class in org.dellroad.linode.apiv4.spring"><code>LinodeApiHttpRequestFactory</code></a>;
+  import <a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring"><code>LinodeApiRequestSender</code></a>;
+  import org.springframework.beans.factory.annotation.Autowired;
+
+  public class MyBean {
+
+      &#64;Autowired
+      private <a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html" title="class in org.dellroad.linode.apiv4.spring"><code>LinodeApiRequestSender</code></a> sender;
+
+      &#64;Autowired
+      private <a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiHttpRequestFactory.html" title="class in org.dellroad.linode.apiv4.spring"><code>LinodeApiHttpRequestFactory</code></a> requestFactory;
+
+      // Throws <a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiException.html" title="class in org.dellroad.linode.apiv4.spring"><code>LinodeApiException</code></a> if something goes wrong
+      public Linode createLinode() {
+
+          // Set authorization token (you only need to do this once)
+          this.requestFactory.setAuthorizationToken("0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef");
+
+          // Setup request
+          final CreateLinodeRequest request = new CreateLinodeRequest}();
+          request.setTypeId("g5-nanode-1");
+          request.setRegionId("us-west-1a")
+          request.setLabel("MyLinode");
+          request.setGroup("MyLinodeGroup");
+
+          // Send request and return the newly created Linode
+          return this.sender.createLinode(request);
+      }
+  }
+ </pre></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="http://projects.spring.io/spring-framework/">Spring Framework</a></dd>
+</dl>
 </div>
 <!-- ======= START OF BOTTOM NAVBAR ====== -->
 <div class="bottomNav"><a name="navbar.bottom">
