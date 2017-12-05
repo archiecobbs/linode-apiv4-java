@@ -283,10 +283,10 @@
                     <notimestamp>true</notimestamp>
                     <additionalparam>-Xdoclint:-reference</additionalparam>
                     <links>
-                        <link>http://docs.spring.io/spring/docs/${spring.version}/javadoc-api/</link>
+                        <link>https://docs.spring.io/spring/docs/${spring.version}/javadoc-api/</link>
                         <link>https://hc.apache.org/httpcomponents-core-ga/httpcore/apidocs/</link>
                         <link>https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/</link>
-                        <link>http://slf4j.org/apidocs/</link>
+                        <link>https://www.slf4j.org/apidocs/</link>
                     </links>
                 </configuration>
                 <executions>
@@ -393,10 +393,10 @@
                     <notimestamp>true</notimestamp>
                     <aggregate>true</aggregate>
                     <links>
-                        <link>http://docs.spring.io/spring/docs/${spring.version}/javadoc-api/</link>
+                        <link>https://docs.spring.io/spring/docs/${spring.version}/javadoc-api/</link>
                         <link>https://hc.apache.org/httpcomponents-core-ga/httpcore/apidocs/</link>
                         <link>https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/</link>
-                        <link>http://slf4j.org/apidocs/</link>
+                        <link>https://www.slf4j.org/apidocs/</link>
                     </links>
                 </configuration>
                 <reportSets>
