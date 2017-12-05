@@ -1597,7 +1597,8 @@ public class LinodeApiRequestSender implements InitializingBean {
      * Convert value to JSON.
      *
      * @param value value to convert
-     * @throws IllegalArgumentException if a JSON encoding error occurs
+     * @return JSON encoding of {@code value}
+     * @throws JsonProcessingException if a JSON encoding error occurs
      * @throws IllegalArgumentException if {@code value} is null
      */
     protected String toJson(Object value) throws JsonProcessingException {

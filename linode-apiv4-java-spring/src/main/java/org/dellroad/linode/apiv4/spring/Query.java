@@ -11,7 +11,7 @@ import org.dellroad.linode.apiv4.Constants;
 import org.springframework.util.LinkedMultiValueMap;
 
 /**
- * Generic request with name/value pairs as parameters, plus an optional {@link Filter}.
+ * Generic request with name/value pairs as parameters.
  */
 @SuppressWarnings("serial")
 class Query extends LinkedMultiValueMap<String, Object> {

@@ -116,6 +116,7 @@ public class FilterBuilder {
      * Configure sort ordering.
      *
      * @param attribute which attribute to sort by (ascending)
+     * @return this instance
      * @throws IllegalArgumentException if {@code attribute} is null
      */
     public FilterBuilder orderBy(String attribute) {
@@ -127,6 +128,7 @@ public class FilterBuilder {
      *
      * @param attribute which attribute to sort by
      * @param ascending true for ascending ordering, false for descending
+     * @return this instance
      * @throws IllegalArgumentException if {@code attribute} is null
      */
     public FilterBuilder orderBy(String attribute, boolean ascending) {
@@ -143,6 +145,7 @@ public class FilterBuilder {
      * Configure filter requirement.
      *
      * @param condition condition to apply to restrict results
+     * @return this instance
      * @throws IllegalArgumentException if {@code condition} is null
      */
     public FilterBuilder where(Condition condition) {
