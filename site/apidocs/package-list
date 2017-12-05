@@ -1,4 +1,5 @@
 org.dellroad.linode.apiv4
+org.dellroad.linode.apiv4.filter
 org.dellroad.linode.apiv4.model
-org.dellroad.linode.apiv4.model.request
+org.dellroad.linode.apiv4.request
 org.dellroad.linode.apiv4.spring
