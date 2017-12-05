@@ -6,4 +6,4 @@
 /**
  * Linode v4 API request objects.
  */
-package org.dellroad.linode.apiv4.model.request;
+package org.dellroad.linode.apiv4.request;

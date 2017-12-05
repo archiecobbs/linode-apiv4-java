@@ -30,7 +30,7 @@
  * The XML sets up a {@link org.dellroad.linode.apiv4.spring.LinodeApiRequestSender} which can be used to perform API queries:
  * <pre>
  *  import org.dellroad.linode.apiv4.model.{@link org.dellroad.linode.apiv4.model.Linode};
- *  import org.dellroad.linode.apiv4.model.request.{@link org.dellroad.linode.apiv4.model.request.CreateLinodeRequest};
+ *  import org.dellroad.linode.apiv4.request.{@link org.dellroad.linode.apiv4.request.CreateLinodeRequest};
  *  import org.dellroad.linode.apiv4.spring.{@link org.dellroad.linode.apiv4.spring.LinodeApiHttpRequestFactory};
  *  import org.dellroad.linode.apiv4.spring.{@link org.dellroad.linode.apiv4.spring.LinodeApiRequestSender};
  *  import org.springframework.beans.factory.annotation.Autowired;

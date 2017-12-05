@@ -14,12 +14,14 @@ import java.util.function.Function;
 
 import org.apache.commons.lang3.builder.MultilineRecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.dellroad.linode.apiv4.filter.FilterBuilder;
 import org.dellroad.linode.apiv4.model.Backup;
 import org.dellroad.linode.apiv4.model.BackupInfo;
 import org.dellroad.linode.apiv4.model.Config;
 import org.dellroad.linode.apiv4.model.Configs;
 import org.dellroad.linode.apiv4.model.Disk;
 import org.dellroad.linode.apiv4.model.Disks;
+import org.dellroad.linode.apiv4.model.Distribution;
 import org.dellroad.linode.apiv4.model.IPInfo;
 import org.dellroad.linode.apiv4.model.IPv4;
 import org.dellroad.linode.apiv4.model.IPv4Info;
@@ -34,7 +36,7 @@ import org.dellroad.linode.apiv4.model.StackScripts;
 import org.dellroad.linode.apiv4.model.Stats;
 import org.dellroad.linode.apiv4.model.Type;
 import org.dellroad.linode.apiv4.model.Types;
-import org.dellroad.linode.apiv4.model.request.CreateLinodeRequest;
+import org.dellroad.linode.apiv4.request.CreateLinodeRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -108,7 +110,7 @@ public class QueryTest {
     public void testLinodes() throws Exception {
         if (this.authToken == null)
             return;
-        for (Linode linode : this.sender.getAllLinodes(this.executor)) {
+        for (Linode linode : this.sender.getAllLinodes(this.executor, null)) {
 
             // Linode
             this.log.info("getAllLinodes(): {}", this.toString(linode));
@@ -120,14 +122,14 @@ public class QueryTest {
             this.log.info("getLinodeBackupInfo({}): {}", linode.getId(), this.toString(backupInfo));
 
             // Configs
-            for (Config config : this.sender.getAllLinodeConfigs(this.executor, linode.getId())) {
+            for (Config config : this.sender.getAllLinodeConfigs(this.executor, null, linode.getId())) {
                 this.log.info("getAllLinodeConfigs(): {}", this.toString(config));
                 config = this.sender.getLinodeConfig(linode.getId(), config.getId());
                 this.log.info("getLinodeConfig({}): {}", config.getId(), this.toString(config));
             }
 
             // Disks
-            for (Disk disk : this.sender.getAllLinodeDisks(this.executor, linode.getId())) {
+            for (Disk disk : this.sender.getAllLinodeDisks(this.executor, null, linode.getId())) {
                 this.log.info("getAllLinodeDisks(): {}", this.toString(disk));
                 disk = this.sender.getLinodeDisk(linode.getId(), disk.getId());
                 this.log.info("getLinodeDisk({}): {}", disk.getId(), this.toString(disk));
@@ -200,7 +202,7 @@ public class QueryTest {
 
     @Test
     public void testRegions() throws Exception {
-        for (Region region : this.sender.getAllRegions(this.executor)) {
+        for (Region region : this.sender.getAllRegions(this.executor, null)) {
             this.log.info("getRegions(): {}", this.toString(region));
             region = this.sender.getRegion(region.getId());
             this.log.info("getRegion({}): {}", region.getId(), this.toString(region));
@@ -208,8 +210,24 @@ public class QueryTest {
     }
 
     @Test
+    public void testFilterDistributions() throws Exception {
+        final FilterBuilder fb = new FilterBuilder();
+        Distribution prev = null;
+        for (Distribution dist : this.sender.getAllDistributions(
+          this.executor, fb.where(fb.equal("vendor", "Debian")).orderBy("label").build())) {
+            assert dist.getVendor().equals("Debian") : "wrong vendor: \"" + dist.getVendor() + "\" != \"Debian\"";
+            if (prev == null)
+                prev = dist;
+            else {
+                assert dist.getLabel().compareTo(prev.getLabel()) >= 0 :
+                  "wrong order: \"" + dist.getLabel() + "\" < \"" + prev.getLabel() + "\"";
+            }
+        }
+    }
+
+    @Test
     public void testTypes() throws Exception {
-        for (Type type : this.sender.getAllTypes(this.executor)) {
+        for (Type type : this.sender.getAllTypes(this.executor, null)) {
             this.log.info("getTypes(): {}", this.toString(type));
             type = this.sender.getType(type.getId());
             this.log.info("getType({}): {}", type.getId(), this.toString(type));
@@ -219,11 +237,11 @@ public class QueryTest {
     @Test
     public void testStackScripts() throws Exception {
         this.log.info("getStackScripts() page 1");
-        final StackScripts page1 = this.sender.getStackScripts(1);
+        final StackScripts page1 = this.sender.getStackScripts(null, 1);
         this.log.info("getStackScripts() page 2");
-        final StackScripts page2 = this.sender.getStackScripts(2);
+        final StackScripts page2 = this.sender.getStackScripts(null, 2);
         this.log.info("getStackScripts() page 3");
-        final StackScripts page3 = this.sender.getStackScripts(3);
+        final StackScripts page3 = this.sender.getStackScripts(null, 3);
         List<StackScript> list = new ArrayList<>();
         list.addAll(page1.getData());
         list.addAll(page2.getData());
@@ -233,7 +251,7 @@ public class QueryTest {
     }
 
     private Region randomRegion() throws InterruptedException {
-        final List<Region> regions = this.sender.getAllRegions(this.executor);
+        final List<Region> regions = this.sender.getAllRegions(this.executor, null);
         return regions.get(this.random.nextInt(regions.size()));
     }
 
@@ -247,7 +265,7 @@ public class QueryTest {
     }
 
     private Type cheapestType() throws InterruptedException {
-        final List<Type> types = this.sender.getAllTypes(this.executor);
+        final List<Type> types = this.sender.getAllTypes(this.executor, null);
         Collections.sort(types, Comparator.<Type>comparingDouble(t -> t.getPrice().getHourly()));
         return types.get(0);
     }

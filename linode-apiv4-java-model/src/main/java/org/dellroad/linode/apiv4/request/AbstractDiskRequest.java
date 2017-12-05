@@ -3,7 +3,7 @@
  * Copyright (C) 2017 Archie L. Cobbs. All rights reserved.
  */
 
-package org.dellroad.linode.apiv4.model.request;
+package org.dellroad.linode.apiv4.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
