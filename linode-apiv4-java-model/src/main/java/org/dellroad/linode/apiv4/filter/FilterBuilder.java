@@ -25,22 +25,22 @@ public class FilterBuilder {
 // And/Or
 
     public Condition and(Condition... conditions) {
-        this.checkConditions(conditions);
+        FilterBuilder.checkConditions(conditions);
         return this.and(Arrays.asList(conditions));
     }
 
     public Condition and(List<Condition> conditions) {
-        this.checkConditions(conditions);
+        FilterBuilder.checkConditions(conditions);
         return new Condition(Constants.FILTER_AND, Collections.unmodifiableList(conditions));
     }
 
     public Condition or(Condition... conditions) {
-        this.checkConditions(conditions);
+        FilterBuilder.checkConditions(conditions);
         return this.and(Arrays.asList(conditions));
     }
 
     public Condition or(List<Condition> conditions) {
-        this.checkConditions(conditions);
+        FilterBuilder.checkConditions(conditions);
         return new Condition(Constants.FILTER_OR, Collections.unmodifiableList(conditions));
     }
 
@@ -175,13 +175,13 @@ public class FilterBuilder {
 
 // Internal methods
 
-    private void checkConditions(Condition[] conditions) {
+    private static void checkConditions(Condition[] conditions) {
         if (conditions == null)
             throw new IllegalArgumentException("null conditions");
-        this.checkConditions(Arrays.asList(conditions));
+        FilterBuilder.checkConditions(Arrays.asList(conditions));
     }
 
-    private void checkConditions(List<Condition> conditions) {
+    private static void checkConditions(List<Condition> conditions) {
         if (conditions == null)
             throw new IllegalArgumentException("null conditions");
         for (Condition condition : conditions) {
