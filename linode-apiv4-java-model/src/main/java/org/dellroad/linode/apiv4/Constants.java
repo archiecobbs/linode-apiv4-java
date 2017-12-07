@@ -69,7 +69,7 @@ public final class Constants {
     /**
      * Filtering operator.
      */
-    public static final String FILTER_ORDER_BY = "+order-by";
+    public static final String FILTER_ORDER_BY = "+order_by";
 
     /**
      * Filtering operator.
