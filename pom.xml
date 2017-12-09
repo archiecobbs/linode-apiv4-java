@@ -307,6 +307,7 @@
                 <configuration>
                     <systemPropertyVariables>
                         <!-- Set API auth token here to activate unit tests for API actions that require authorization -->
+                        <!-- Or run maven with "-DauthToken=..." -->
                         <authToken/>
                     </systemPropertyVariables>
                     <properties>
