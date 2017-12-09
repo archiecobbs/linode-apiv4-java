@@ -120,39 +120,25 @@ public class LinodeApiRequestSender implements InitializingBean {
      *
      * @param executor executor for loading pages
      * @param filter filter for returned values, or null for no filter
-     * @return all Linodes
+     * @return mutable list of all Linodes matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
      */
-    public List<Linode> getAllLinodes(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
+    public List<Linode> getLinodes(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
         return this.getAll(Linodes.class, executor, filter, "linode/instances");
-    }
-
-    /**
-     * Get all Linode instances.
-     *
-     * <p>
-     * Pages are loaded synchronously and sequentially.
-     *
-     * @param filter filter for returned values, or null for no filter
-     * @return all Linodes
-     * @throws RestClientException if an error occurs
-     */
-    public List<Linode> getAllLinodes(Filter filter) {
-        return this.getAll(Linodes.class, filter, "linode/instances");
     }
 
     /**
      * Get one page of Linode instances.
      *
      * @param filter filter for returned values, or null for no filter
-     * @param page page number
+     * @param page page number (the first page is number one)
      * @return one page of Linodes
      * @throws RestClientException if an error occurs
      * @throws IllegalArgumentException if {@code page} is less than one
      */
-    public Linodes getLinodes(Filter filter, int page) {
-        return this.getPaginated(Linodes.class, filter, page, "linode/instances");
+    public Linodes getLinodesPage(Filter filter, int page) {
+        return this.getPage(Linodes.class, filter, page, "linode/instances");
     }
 
     /**
@@ -348,41 +334,26 @@ public class LinodeApiRequestSender implements InitializingBean {
      * @param executor executor for loading pages
      * @param filter filter for returned values, or null for no filter
      * @param linodeId Linode ID
-     * @return all attached volumes
+     * @return mutable list of all volumes associated with the specified Linode matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
      */
-    public List<Volume> getAllLinodeVolumes(AsyncTaskExecutor executor, Filter filter, int linodeId) throws InterruptedException {
+    public List<Volume> getLinodeVolumes(AsyncTaskExecutor executor, Filter filter, int linodeId) throws InterruptedException {
         return this.getAll(Volumes.class, executor, filter, "linode/instances/{id}/volumes", linodeId);
-    }
-
-    /**
-     * Get all volumes attached to a Linode instance.
-     *
-     * <p>
-     * Pages are loaded synchronously and sequentially.
-     *
-     * @param filter filter for returned values, or null for no filter
-     * @param linodeId Linode ID
-     * @return all attached volumes
-     * @throws RestClientException if an error occurs
-     */
-    public List<Volume> getAllLinodeVolumes(Filter filter, int linodeId) {
-        return this.getAll(Volumes.class, filter, "linode/instances/{id}/volumes", linodeId);
     }
 
     /**
      * Get one page of the volumes attached to a Linode instance.
      *
      * @param filter filter for returned values, or null for no filter
-     * @param page page number
+     * @param page page number (the first page is number one)
      * @param linodeId Linode ID
      * @return one page of volumes
      * @throws RestClientException if an error occurs
      * @throws IllegalArgumentException if {@code page} is less than one
      */
-    public Volumes getLinodeVolumes(Filter filter, int page, int linodeId) {
-        return this.getPaginated(Volumes.class, filter, page, "linode/instances/{id}/volumes", linodeId);
+    public Volumes getLinodeVolumesPage(Filter filter, int page, int linodeId) {
+        return this.getPage(Volumes.class, filter, page, "linode/instances/{id}/volumes", linodeId);
     }
 
 // Linodes: Backups
@@ -414,41 +385,26 @@ public class LinodeApiRequestSender implements InitializingBean {
      * @param executor executor for loading pages
      * @param filter filter for returned values, or null for no filter
      * @param linodeId Linode ID
-     * @return all associated configs
+     * @return mutable list of all configs associated with the specified Linode matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
      */
-    public List<Config> getAllLinodeConfigs(AsyncTaskExecutor executor, Filter filter, int linodeId) throws InterruptedException {
+    public List<Config> getLinodeConfigs(AsyncTaskExecutor executor, Filter filter, int linodeId) throws InterruptedException {
         return this.getAll(Configs.class, executor, filter, "linode/instances/{id}/configs", linodeId);
-    }
-
-    /**
-     * Get all configs associated with a Linode instance.
-     *
-     * <p>
-     * Pages are loaded synchronously and sequentially.
-     *
-     * @param filter filter for returned values, or null for no filter
-     * @param linodeId Linode ID
-     * @return all associated configs
-     * @throws RestClientException if an error occurs
-     */
-    public List<Config> getAllLinodeConfigs(Filter filter, int linodeId) {
-        return this.getAll(Configs.class, filter, "linode/instances/{id}/configs", linodeId);
     }
 
     /**
      * Get one page of the configurations associated with a Linode instance.
      *
      * @param filter filter for returned values, or null for no filter
-     * @param page page number
+     * @param page page number (the first page is number one)
      * @param linodeId Linode ID
      * @return one page of configs for instance
      * @throws RestClientException if an error occurs
      * @throws IllegalArgumentException if {@code page} is less than one
      */
-    public Configs getLinodeConfigs(Filter filter, int page, int linodeId) {
-        return this.getPaginated(Configs.class, filter, page, "linode/instances/{id}/configs", linodeId);
+    public Configs getLinodeConfigsPage(Filter filter, int page, int linodeId) {
+        return this.getPage(Configs.class, filter, page, "linode/instances/{id}/configs", linodeId);
     }
 
     /**
@@ -515,41 +471,26 @@ public class LinodeApiRequestSender implements InitializingBean {
      * @param executor executor for loading pages
      * @param filter filter for returned values, or null for no filter
      * @param linodeId Linode ID
-     * @return all associated disks
+     * @return mutable list of all disks associated with the specified Linode matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
      */
-    public List<Disk> getAllLinodeDisks(AsyncTaskExecutor executor, Filter filter, int linodeId) throws InterruptedException {
+    public List<Disk> getLinodeDisks(AsyncTaskExecutor executor, Filter filter, int linodeId) throws InterruptedException {
         return this.getAll(Disks.class, executor, filter, "linode/instances/{id}/disks", linodeId);
-    }
-
-    /**
-     * Get all disks associated with a Linode instance.
-     *
-     * <p>
-     * Pages are loaded synchronously and sequentially.
-     *
-     * @param filter filter for returned values, or null for no filter
-     * @param linodeId Linode ID
-     * @return all associated disks
-     * @throws RestClientException if an error occurs
-     */
-    public List<Disk> getAllLinodeDisks(Filter filter, int linodeId) {
-        return this.getAll(Disks.class, filter, "linode/instances/{id}/disks", linodeId);
     }
 
     /**
      * Get one page of the disks associated with a Linode instance.
      *
      * @param filter filter for returned values, or null for no filter
-     * @param page page number
+     * @param page page number (the first page is number one)
      * @param linodeId Linode ID
      * @return linode disks info
      * @throws RestClientException if an error occurs
      * @throws IllegalArgumentException if {@code page} is less than one
      */
-    public Disks getLinodeDisks(Filter filter, int page, int linodeId) {
-        return this.getPaginated(Disks.class, filter, page, "linode/instances/{id}/disks", linodeId);
+    public Disks getLinodeDisksPage(Filter filter, int page, int linodeId) {
+        return this.getPage(Disks.class, filter, page, "linode/instances/{id}/disks", linodeId);
     }
 
     /**
@@ -659,39 +600,25 @@ public class LinodeApiRequestSender implements InitializingBean {
      *
      * @param executor executor for loading pages
      * @param filter filter for returned values, or null for no filter
-     * @return all distributions
+     * @return mutable list of all distributions matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
      */
-    public List<Distribution> getAllDistributions(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
+    public List<Distribution> getDistributions(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
         return this.getAll(Distributions.class, executor, filter, "linode/distributions");
-    }
-
-    /**
-     * Get all Linux distributions.
-     *
-     * <p>
-     * Pages are loaded synchronously and sequentially.
-     *
-     * @param filter filter for returned values, or null for no filter
-     * @return all distributions
-     * @throws RestClientException if an error occurs
-     */
-    public List<Distribution> getAllDistributions(Filter filter) {
-        return this.getAll(Distributions.class, filter, "linode/distributions");
     }
 
     /**
      * Get one page of Linux distributions.
      *
      * @param filter filter for returned values, or null for no filter
-     * @param page page number
+     * @param page page number (the first page is number one)
      * @return one page of distributions
      * @throws RestClientException if an error occurs
      * @throws IllegalArgumentException if {@code page} is less than one
      */
-    public Distributions getDistributions(Filter filter, int page) {
-        return this.getPaginated(Distributions.class, filter, page, "linode/distributions");
+    public Distributions getDistributionsPage(Filter filter, int page) {
+        return this.getPage(Distributions.class, filter, page, "linode/distributions");
     }
 
     /**
@@ -785,39 +712,25 @@ public class LinodeApiRequestSender implements InitializingBean {
      *
      * @param executor executor for loading pages
      * @param filter filter for returned values, or null for no filter
-     * @return all kernels
+     * @return mutable list of all kernels matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
      */
-    public List<Kernel> getAllKernels(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
+    public List<Kernel> getKernels(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
         return this.getAll(Kernels.class, executor, filter, "linode/kernels");
-    }
-
-    /**
-     * Get all kernels.
-     *
-     * <p>
-     * Pages are loaded synchronously and sequentially.
-     *
-     * @param filter filter for returned values, or null for no filter
-     * @return all kernels
-     * @throws RestClientException if an error occurs
-     */
-    public List<Kernel> getAllKernels(Filter filter) {
-        return this.getAll(Kernels.class, filter, "linode/kernels");
     }
 
     /**
      * Get one page of kernels.
      *
      * @param filter filter for returned values, or null for no filter
-     * @param page page number
+     * @param page page number (the first page is number one)
      * @return one page of kernel
      * @throws RestClientException if an error occurs
      * @throws IllegalArgumentException if {@code page} is less than one
      */
-    public Kernels getKernels(Filter filter, int page) {
-        return this.getPaginated(Kernels.class, filter, page, "linode/kernels");
+    public Kernels getKernelsPage(Filter filter, int page) {
+        return this.getPage(Kernels.class, filter, page, "linode/kernels");
     }
 
     /**
@@ -845,39 +758,25 @@ public class LinodeApiRequestSender implements InitializingBean {
      *
      * @param executor executor for loading pages
      * @param filter filter for returned values, or null for no filter
-     * @return all StackScripts
+     * @return mutable list of all StackScripts matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
      */
-    public List<StackScript> getAllStackScripts(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
+    public List<StackScript> getStackScripts(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
         return this.getAll(StackScripts.class, executor, filter, "linode/stackscripts");
-    }
-
-    /**
-     * Get all StackScripts.
-     *
-     * <p>
-     * Pages are loaded synchronously and sequentially.
-     *
-     * @param filter filter for returned values, or null for no filter
-     * @return all StackScripts
-     * @throws RestClientException if an error occurs
-     */
-    public List<StackScript> getAllStackScripts(Filter filter) {
-        return this.getAll(StackScripts.class, filter, "linode/stackscripts");
     }
 
     /**
      * Get one page of StackScripts.
      *
      * @param filter filter for returned values, or null for no filter
-     * @param page page number
+     * @param page page number (the first page is number one)
      * @return one page of StackScripts
      * @throws RestClientException if an error occurs
      * @throws IllegalArgumentException if {@code page} is less than one
      */
-    public StackScripts getStackScripts(Filter filter, int page) {
-        return this.getPaginated(StackScripts.class, filter, page, "linode/stackscripts");
+    public StackScripts getStackScriptsPage(Filter filter, int page) {
+        return this.getPage(StackScripts.class, filter, page, "linode/stackscripts");
     }
 
     /**
@@ -931,39 +830,25 @@ public class LinodeApiRequestSender implements InitializingBean {
      *
      * @param executor executor for loading pages
      * @param filter filter for returned values, or null for no filter
-     * @return all types
+     * @return mutable list of all Linode types matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
      */
-    public List<Type> getAllTypes(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
+    public List<Type> getTypes(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
         return this.getAll(Types.class, executor, filter, "linode/types");
-    }
-
-    /**
-     * Get all Linode types.
-     *
-     * <p>
-     * Pages are loaded synchronously and sequentially.
-     *
-     * @param filter filter for returned values, or null for no filter
-     * @return all types
-     * @throws RestClientException if an error occurs
-     */
-    public List<Type> getAllTypes(Filter filter) {
-        return this.getAll(Types.class, filter, "linode/types");
     }
 
     /**
      * Get one page of Linode types.
      *
      * @param filter filter for returned values, or null for no filter
-     * @param page page number
+     * @param page page number (the first page is number one)
      * @return one page of instance types
      * @throws RestClientException if an error occurs
      * @throws IllegalArgumentException if {@code page} is less than one
      */
-    public Types getTypes(Filter filter, int page) {
-        return this.getPaginated(Types.class, filter, page, "linode/types");
+    public Types getTypesPage(Filter filter, int page) {
+        return this.getPage(Types.class, filter, page, "linode/types");
     }
 
     /**
@@ -991,39 +876,25 @@ public class LinodeApiRequestSender implements InitializingBean {
      *
      * @param executor executor for loading pages
      * @param filter filter for returned values, or null for no filter
-     * @return all volumes
+     * @return mutable list of all volumes matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
      */
-    public List<Volume> getAllVolumes(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
+    public List<Volume> getVolumes(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
         return this.getAll(Volumes.class, executor, filter, "linode/volumes");
-    }
-
-    /**
-     * Get all volumes.
-     *
-     * <p>
-     * Pages are loaded synchronously and sequentially.
-     *
-     * @param filter filter for returned values, or null for no filter
-     * @return all volumes
-     * @throws RestClientException if an error occurs
-     */
-    public List<Volume> getAllVolumes(Filter filter) {
-        return this.getAll(Volumes.class, filter, "linode/volumes");
     }
 
     /**
      * Get one page of volumes.
      *
      * @param filter filter for returned values, or null for no filter
-     * @param page page number
+     * @param page page number (the first page is number one)
      * @return one page of volumes
      * @throws RestClientException if an error occurs
      * @throws IllegalArgumentException if {@code page} is less than one
      */
-    public Volumes getVolumes(Filter filter, int page) {
-        return this.getPaginated(Volumes.class, filter, page, "linode/volumes");
+    public Volumes getVolumesPage(Filter filter, int page) {
+        return this.getPage(Volumes.class, filter, page, "linode/volumes");
     }
 
     /**
@@ -1113,39 +984,25 @@ public class LinodeApiRequestSender implements InitializingBean {
      *
      * @param executor executor for loading pages
      * @param filter filter for returned values, or null for no filter
-     * @return all regions
+     * @return mutable list of all regions matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
      */
-    public List<Region> getAllRegions(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
+    public List<Region> getRegions(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
         return this.getAll(Regions.class, executor, filter, "regions");
-    }
-
-    /**
-     * Get all Linode regions.
-     *
-     * <p>
-     * Pages are loaded synchronously and sequentially.
-     *
-     * @param filter filter for returned values, or null for no filter
-     * @return all regions
-     * @throws RestClientException if an error occurs
-     */
-    public List<Region> getAllRegions(Filter filter) {
-        return this.getAll(Regions.class, filter, "linode/regions");
     }
 
     /**
      * Get one page of Linode regions.
      *
      * @param filter filter for returned values, or null for no filter
-     * @param page page number
+     * @param page page number (the first page is number one)
      * @return one page of regions
      * @throws RestClientException if an error occurs
      * @throws IllegalArgumentException if {@code page} is less than one
      */
-    public Regions getRegions(Filter filter, int page) {
-        return this.getPaginated(Regions.class, filter, page, "regions");
+    public Regions getRegionsPage(Filter filter, int page) {
+        return this.getPage(Regions.class, filter, page, "regions");
     }
 
     /**
@@ -1185,39 +1042,25 @@ public class LinodeApiRequestSender implements InitializingBean {
      *
      * @param executor executor for loading pages
      * @param filter filter for returned values, or null for no filter
-     * @return all images
+     * @return mutable list of all images matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
      */
-    public List<Image> getAllImages(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
+    public List<Image> getImages(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
         return this.getAll(Images.class, executor, filter, "images");
-    }
-
-    /**
-     * Get all images.
-     *
-     * <p>
-     * Pages are loaded synchronously and sequentially.
-     *
-     * @param filter filter for returned values, or null for no filter
-     * @return all images
-     * @throws RestClientException if an error occurs
-     */
-    public List<Image> getAllImages(Filter filter) {
-        return this.getAll(Images.class, filter, "linode/images");
     }
 
     /**
      * Get one page of images.
      *
      * @param filter filter for returned values, or null for no filter
-     * @param page page number
+     * @param page page number (the first page is number one)
      * @return one page of images
      * @throws RestClientException if an error occurs
      * @throws IllegalArgumentException if {@code page} is less than one
      */
-    public Images getImages(Filter filter, int page) {
-        return this.getPaginated(Images.class, filter, page, "images");
+    public Images getImagesPage(Filter filter, int page) {
+        return this.getPage(Images.class, filter, page, "images");
     }
 
     /**
@@ -1349,36 +1192,11 @@ public class LinodeApiRequestSender implements InitializingBean {
      * Get all instances of the specified type, by querying for and aggreating however many pages there are.
      *
      * <p>
-     * Pages are loaded synchronously and sequentially.
-     *
-     * @param responseType paginated response type
-     * @param filter filter for returned values, or null for no filter
-     * @param pathTemplate resource URI path (relative)
-     * @param templateParameters parameter values for parameters in {@code pathTemplate}
-     * @param <T> item type
-     * @param <P> paginated response type
-     * @return combined results from all pages
-     * @throws RestClientException if an error occurs
-     * @throws IllegalArgumentException if any parameter is null
-     */
-    protected <T, P extends Paginated<T>> List<T> getAll(Class<P> responseType,
-      Filter filter, String pathTemplate, Object... templateParameters) {
-        try {
-            return this.getAll(responseType, null, filter, pathTemplate, templateParameters);
-        } catch (InterruptedException e) {
-            throw new RuntimeException("unexpected exception", e);
-        }
-    }
-
-    /**
-     * Get all instances of the specified type, by querying for and aggreating however many pages there are.
-     *
-     * <p>
      * Pages after the first are loaded asynchronously using the given {@link AsyncTaskExecutor}, if any;
      * if {@code executor} is null, pages are loaded synchronously and sequentially.
      *
      * @param responseType paginated response type
-     * @param executor executor loading pages
+     * @param executor executor for loading pages, or null to load pages synchronously
      * @param filter filter for returned values, or null for no filter
      * @param pathTemplate resource URI path (relative)
      * @param templateParameters parameter values for parameters in {@code pathTemplate}
@@ -1396,13 +1214,13 @@ public class LinodeApiRequestSender implements InitializingBean {
         final ArrayList<T> list = new ArrayList<>();
 
         // Get first page
-        final P firstPage = this.getPaginated(responseType, filter, 1, pathTemplate, templateParameters);
+        final P firstPage = this.getPage(responseType, filter, 1, pathTemplate, templateParameters);
         list.addAll(firstPage.getData());
 
         // Get remaining pages synchonously if no executor provided
         if (executor == null) {
             for (int pageNum = 2; pageNum <= firstPage.getPages(); pageNum++)
-                list.addAll(this.getPaginated(responseType, filter, pageNum, pathTemplate, templateParameters).getData());
+                list.addAll(this.getPage(responseType, filter, pageNum, pathTemplate, templateParameters).getData());
             return list;
         }
 
@@ -1410,8 +1228,7 @@ public class LinodeApiRequestSender implements InitializingBean {
         final ArrayList<Future<P>> futureList = new ArrayList<>(firstPage.getPages() - 1);
         for (int pageNum = 2; pageNum <= firstPage.getPages(); pageNum++) {
             final int pageNum0 = pageNum;
-            futureList.add(executor.submit(() ->
-              this.getPaginated(responseType, filter, pageNum0, pathTemplate, templateParameters)));
+            futureList.add(executor.submit(() -> this.getPage(responseType, filter, pageNum0, pathTemplate, templateParameters)));
         }
         for (Future<P> future : futureList) {
             try {
@@ -1430,7 +1247,7 @@ public class LinodeApiRequestSender implements InitializingBean {
      *
      * @param responseType paginated response type
      * @param filter filter for returned values, or null for no filter
-     * @param page page number
+     * @param page page number (the first page is number one)
      * @param pathTemplate resource URI path (relative)
      * @param templateParameters parameter values for parameters in {@code pathTemplate}
      * @param <T> item type
@@ -1440,7 +1257,7 @@ public class LinodeApiRequestSender implements InitializingBean {
      * @throws IllegalArgumentException if {@code page} is less than one
      * @throws IllegalArgumentException if {@code responseType}, {@code pathTemplate}, or {@code templateParameters} is null
      */
-    protected <T, P extends Paginated<T>> P getPaginated(Class<P> responseType, Filter filter,
+    protected <T, P extends Paginated<T>> P getPage(Class<P> responseType, Filter filter,
       int page, String pathTemplate, Object... templateParameters) {
 
         // Sanity check

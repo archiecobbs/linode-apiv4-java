@@ -27,6 +27,8 @@ import org.dellroad.linode.apiv4.model.IPv4;
 import org.dellroad.linode.apiv4.model.IPv4Info;
 import org.dellroad.linode.apiv4.model.IPv6;
 import org.dellroad.linode.apiv4.model.IPv6Info;
+import org.dellroad.linode.apiv4.model.Image;
+import org.dellroad.linode.apiv4.model.Kernel;
 import org.dellroad.linode.apiv4.model.Linode;
 import org.dellroad.linode.apiv4.model.Linodes;
 import org.dellroad.linode.apiv4.model.Region;
@@ -36,6 +38,7 @@ import org.dellroad.linode.apiv4.model.StackScripts;
 import org.dellroad.linode.apiv4.model.Stats;
 import org.dellroad.linode.apiv4.model.Type;
 import org.dellroad.linode.apiv4.model.Types;
+import org.dellroad.linode.apiv4.model.Volume;
 import org.dellroad.linode.apiv4.request.CreateLinodeRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -106,50 +109,66 @@ public class QueryTest {
         }
     }
 
+// getLinodes(), getLinodeBackupInfo(), getLinodeConfigs(), getLinodeDisks(), getLinodeVolumes(), getIPInfo(), getStats()
+
     @Test
     public void testLinodes() throws Exception {
         if (this.authToken == null)
             return;
-        for (Linode linode : this.sender.getAllLinodes(this.executor, null)) {
+        for (Linode linode : this.sender.getLinodes(this.executor, null)) {
 
             // Linode
-            this.log.info("getAllLinodes(): {}", this.toString(linode));
+            this.log.info("getLinodes(): {}", this.toString(linode));
             linode = this.sender.getLinode(linode.getId());
             this.log.info("getLinode({}): {}", linode.getId(), this.toString(linode));
 
-            // Backups
+            // Backup info
             final BackupInfo backupInfo = this.sender.getLinodeBackupInfo(linode.getId());
             this.log.info("getLinodeBackupInfo({}): {}", linode.getId(), this.toString(backupInfo));
 
             // Configs
-            for (Config config : this.sender.getAllLinodeConfigs(this.executor, null, linode.getId())) {
-                this.log.info("getAllLinodeConfigs(): {}", this.toString(config));
+            for (Config config : this.sender.getLinodeConfigs(this.executor, null, linode.getId())) {
+                this.log.info("getLinodeConfigs(): {}", this.toString(config));
                 config = this.sender.getLinodeConfig(linode.getId(), config.getId());
                 this.log.info("getLinodeConfig({}): {}", config.getId(), this.toString(config));
             }
 
             // Disks
-            for (Disk disk : this.sender.getAllLinodeDisks(this.executor, null, linode.getId())) {
-                this.log.info("getAllLinodeDisks(): {}", this.toString(disk));
+            for (Disk disk : this.sender.getLinodeDisks(this.executor, null, linode.getId())) {
+                this.log.info("getLinodeDisks(): {}", this.toString(disk));
                 disk = this.sender.getLinodeDisk(linode.getId(), disk.getId());
                 this.log.info("getLinodeDisk({}): {}", disk.getId(), this.toString(disk));
             }
 
+            // Volumes
+            for (Volume volume : this.sender.getLinodeVolumes(this.executor, null, linode.getId())) {
+                this.log.info("getLinodeVolumes(): {}", this.toString(volume));
+                volume = this.sender.getVolume(volume.getId());
+                this.log.info("getVolume({}): {}", volume.getId(), this.toString(volume));
+            }
+
             // IPInfo
             final IPInfo ipInfo = this.sender.getIPInfo(linode.getId());
-            this.log.info("getLinodeIPInfo({}): {}", linode.getId(), this.toString(ipInfo));
+            this.log.info("getIPInfo({}): {}", linode.getId(), this.toString(ipInfo));
             for (IPv4 ip : ipInfo.getIPv4().getPublic())
-                this.log.info("getLinodeIPInfo({}): public: {}", linode.getId(), this.toString(ip));
+                this.log.info("getIPInfo({}): public: {}", linode.getId(), this.toString(ip));
             for (IPv4 ip : ipInfo.getIPv4().getPrivate())
-                this.log.info("getLinodeIPInfo({}): private: {}", linode.getId(), this.toString(ip));
+                this.log.info("getIPInfo({}): private: {}", linode.getId(), this.toString(ip));
             for (IPv4 ip : ipInfo.getIPv4().getShared())
-                this.log.info("getLinodeIPInfo({}): shared: {}", linode.getId(), this.toString(ip));
+                this.log.info("getIPInfo({}): shared: {}", linode.getId(), this.toString(ip));
 
             // Stats
-            final Stats stats = this.sender.getStats(linode.getId());
-            this.log.info("getStats(): {}", this.toString(stats));
+            try {
+                final Stats stats = this.sender.getStats(linode.getId());
+                this.log.info("getStats(): {}", this.toString(stats));
+            } catch (LinodeApiException e) {
+                if (!e.getMessage().contains("unavailable at this time"))   // happens with new linodes
+                    throw e;
+            }
         }
     }
+
+// createLinode() - error
 
     @Test
     public void testCreateLinodeError() throws Exception {
@@ -177,43 +196,68 @@ public class QueryTest {
         }
     }
 
+// createLinode(), updateLinode(), deleteLinode(),
+
     @Test
     public void testCreateLinode() throws Exception {
         if (this.authToken == null)
             return;
 
         // Create create request
-        final CreateLinodeRequest request = new CreateLinodeRequest();
-        request.setTypeId(this.cheapestType().getId());
-        request.setRegionId(this.randomRegion().getId());
-        request.setLabel(this.randomLabel());
-        request.setGroup(this.unitTestGroup());
-        request.setBooted(false);
+        final CreateLinodeRequest createRequest = new CreateLinodeRequest();
+        createRequest.setTypeId(this.cheapestType().getId());
+        createRequest.setRegionId(this.randomRegion().getId());
+        createRequest.setLabel(this.randomLabel());
+        createRequest.setGroup(this.unitTestGroup());
+        createRequest.setBooted(false);
 
         // Create it
-        this.log.info("creating Linode using " + this.toString(request));
-        final Linode linode = this.sender.createLinode(request);
+        this.log.info("creating Linode using " + this.toString(createRequest));
+        final Linode linode = this.sender.createLinode(createRequest);
         this.log.info("created new Linode " + this.toString(linode));
+
+        // Update it
+        final Linode updateRequest = new Linode();
+        updateRequest.setId(linode.getId());
+        updateRequest.setLabel(this.randomLabel());
+        this.log.info("updating Linode using " + this.toString(updateRequest));
+        this.sender.updateLinode(updateRequest);
 
         // Delete it
         this.log.info("deleting Linode " + linode.getId());
         this.sender.deleteLinode(linode.getId());
     }
 
-    @Test
-    public void testRegions() throws Exception {
-        for (Region region : this.sender.getAllRegions(this.executor, null)) {
-            this.log.info("getRegions(): {}", this.toString(region));
-            region = this.sender.getRegion(region.getId());
-            this.log.info("getRegion({}): {}", region.getId(), this.toString(region));
-        }
-    }
+// bootLinode() - TODO
+// cloneLinode() - TODO
+// kvmifyLinode() - TODO
+// mutateLinode() - TODO
+// rebootLinode() - TODO
+// rebuildLinode() - TODO
+// rescueLinode() - TODO
+// resizeLinode() - TODO
+// shutdownLinode() - TODO
+// restoreBackup() - TODO
+// enableBackup() - TODO
+// cancelBackup() - TODO
+
+// createLinodeConfig() - TODO
+// updateLinodeConfig() - TODO
+// deleteLinodeConfig() - TODO
+
+// createLinodeDisk() - TODO
+// updateLinodeDisk() - TODO
+// deleteLinodeDisk() - TODO
+// updateLinodeDisk() - TODO
+// updateLinodeDiskPassword() - TODO
+
+// getDistributions()
 
     @Test
     public void testFilterDistributions() throws Exception {
         final FilterBuilder fb = new FilterBuilder();
         Distribution prev = null;
-        for (Distribution dist : this.sender.getAllDistributions(
+        for (Distribution dist : this.sender.getDistributions(
           this.executor, fb.where(fb.equal("vendor", "Debian")).orderBy("label").build())) {
             assert dist.getVendor().equals("Debian") : "wrong vendor: \"" + dist.getVendor() + "\" != \"Debian\"";
             if (prev == null)
@@ -225,23 +269,34 @@ public class QueryTest {
         }
     }
 
+// allocateIP()
+// getIP()
+// updateIP()
+// deleteIP()
+
+// getKernels()
+
     @Test
-    public void testTypes() throws Exception {
-        for (Type type : this.sender.getAllTypes(this.executor, null)) {
-            this.log.info("getTypes(): {}", this.toString(type));
-            type = this.sender.getType(type.getId());
-            this.log.info("getType({}): {}", type.getId(), this.toString(type));
+    public void testKernels() throws Exception {
+        for (Kernel kernel : this.sender.getKernels(this.executor, null)) {
+            this.log.info("getKernels(): {}", this.toString(kernel));
+            if (kernel.getVersion().equals("2.6.18"))      // avoid weird bug
+                continue;
+            kernel = this.sender.getKernel(kernel.getId());
+            this.log.info("getKernel({}): {}", kernel.getId(), this.toString(kernel));
         }
     }
+
+// getStackScripts()
 
     @Test
     public void testStackScripts() throws Exception {
         this.log.info("getStackScripts() page 1");
-        final StackScripts page1 = this.sender.getStackScripts(null, 1);
+        final StackScripts page1 = this.sender.getStackScriptsPage(null, 1);
         this.log.info("getStackScripts() page 2");
-        final StackScripts page2 = this.sender.getStackScripts(null, 2);
+        final StackScripts page2 = this.sender.getStackScriptsPage(null, 2);
         this.log.info("getStackScripts() page 3");
-        final StackScripts page3 = this.sender.getStackScripts(null, 3);
+        final StackScripts page3 = this.sender.getStackScriptsPage(null, 3);
         List<StackScript> list = new ArrayList<>();
         list.addAll(page1.getData());
         list.addAll(page2.getData());
@@ -250,8 +305,72 @@ public class QueryTest {
             this.log.info("getStackScript({}): {} length script", stackScript.getId(), stackScript.getScript().length());
     }
 
+// getTypes()
+
+    @Test
+    public void testTypes() throws Exception {
+        for (Type type : this.sender.getTypes(this.executor, null)) {
+            this.log.info("getTypes(): {}", this.toString(type));
+            type = this.sender.getType(type.getId());
+            this.log.info("getType({}): {}", type.getId(), this.toString(type));
+        }
+    }
+
+// getVolumes()
+
+    @Test
+    public void testVolumes() throws Exception {
+        if (this.authToken == null)
+            return;
+        for (Volume volume : this.sender.getVolumes(this.executor, null)) {
+            this.log.info("getVolumes(): {}", this.toString(volume));
+            volume = this.sender.getVolume(volume.getId());
+            this.log.info("getVolume({}): {}", volume.getId(), this.toString(volume));
+        }
+    }
+
+// createVolume() - TODO
+// deleteVolume() - TODO
+// attachVolume() - TODO
+// cloneVolume() - TODO
+
+// Domains - TODO
+// Longview - TODO
+// NodeBalancers - TODO
+// Networking - TODO
+
+// getRegions()
+
+    @Test
+    public void testRegions() throws Exception {
+        for (Region region : this.sender.getRegions(this.executor, null)) {
+            this.log.info("getRegions(): {}", this.toString(region));
+            region = this.sender.getRegion(region.getId());
+            this.log.info("getRegion({}): {}", region.getId(), this.toString(region));
+        }
+    }
+
+// Support - TODO
+// Account - TODO
+// Profile - TODO
+
+// getImages()
+
+    @Test
+    public void testImages() throws Exception {
+        if (this.authToken == null)
+            return;
+        for (Image image : this.sender.getImages(this.executor, null)) {
+            this.log.info("getImages(): {}", this.toString(image));
+            image = this.sender.getImage(image.getId());
+            this.log.info("getImage({}): {}", image.getId(), this.toString(image));
+        }
+    }
+
+// deleteImage() - TODO
+
     private Region randomRegion() throws InterruptedException {
-        final List<Region> regions = this.sender.getAllRegions(this.executor, null);
+        final List<Region> regions = this.sender.getRegions(this.executor, null);
         return regions.get(this.random.nextInt(regions.size()));
     }
 
@@ -265,7 +384,7 @@ public class QueryTest {
     }
 
     private Type cheapestType() throws InterruptedException {
-        final List<Type> types = this.sender.getAllTypes(this.executor, null);
+        final List<Type> types = this.sender.getTypes(this.executor, null);
         Collections.sort(types, Comparator.<Type>comparingDouble(t -> t.getPrice().getHourly()));
         return types.get(0);
     }
