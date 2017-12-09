@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * @see <a href="https://developers.linode.com/v4/reference/linode#kernels">Kernels</a>
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Kernel extends AbstractIntIdLabeled {
+public class Kernel extends AbstractStringId {
 
     private boolean xen;
     private boolean kvm;

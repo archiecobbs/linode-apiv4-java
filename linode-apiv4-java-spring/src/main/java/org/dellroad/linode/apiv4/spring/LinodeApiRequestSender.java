@@ -823,8 +823,11 @@ public class LinodeApiRequestSender implements InitializingBean {
      * @param kernelId kernel ID
      * @return specified kernel
      * @throws RestClientException if an error occurs
+     * @throws IllegalArgumentException if {@code kernelId} is null
      */
-    public Kernel getKernel(int kernelId) {
+    public Kernel getKernel(String kernelId) {
+        if (kernelId == null)
+            throw new IllegalArgumentException("null kernelId");
         return this.get(Kernel.class, "linode/kernels/{did}", kernelId);
     }
 
