@@ -119,13 +119,15 @@ public class LinodeApiRequestSender implements InitializingBean {
      * if {@code executor} is null, pages are loaded synchronously and sequentially.
      *
      * @param executor executor for loading pages
+     * @param maxResults limit on the number of results returned, or zero for no limit
      * @param filter filter for returned values, or null for no filter
      * @return mutable list of all Linodes matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     * @throws IllegalArgumentException if {@code maxResults} is negative
      */
-    public List<Linode> getLinodes(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
-        return this.getAll(Linodes.class, executor, filter, "linode/instances");
+    public List<Linode> getLinodes(AsyncTaskExecutor executor, int maxResults, Filter filter) throws InterruptedException {
+        return this.getAll(Linodes.class, executor, maxResults, filter, "linode/instances");
     }
 
     /**
@@ -332,14 +334,17 @@ public class LinodeApiRequestSender implements InitializingBean {
      * if {@code executor} is null, pages are loaded synchronously and sequentially.
      *
      * @param executor executor for loading pages
+     * @param maxResults limit on the number of results returned, or zero for no limit
      * @param filter filter for returned values, or null for no filter
      * @param linodeId Linode ID
      * @return mutable list of all volumes associated with the specified Linode matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     * @throws IllegalArgumentException if {@code maxResults} is negative
      */
-    public List<Volume> getLinodeVolumes(AsyncTaskExecutor executor, Filter filter, int linodeId) throws InterruptedException {
-        return this.getAll(Volumes.class, executor, filter, "linode/instances/{id}/volumes", linodeId);
+    public List<Volume> getLinodeVolumes(AsyncTaskExecutor executor, int maxResults, Filter filter, int linodeId)
+      throws InterruptedException {
+        return this.getAll(Volumes.class, executor, maxResults, filter, "linode/instances/{id}/volumes", linodeId);
     }
 
     /**
@@ -383,14 +388,17 @@ public class LinodeApiRequestSender implements InitializingBean {
      * if {@code executor} is null, pages are loaded synchronously and sequentially.
      *
      * @param executor executor for loading pages
+     * @param maxResults limit on the number of results returned, or zero for no limit
      * @param filter filter for returned values, or null for no filter
      * @param linodeId Linode ID
      * @return mutable list of all configs associated with the specified Linode matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     * @throws IllegalArgumentException if {@code maxResults} is negative
      */
-    public List<Config> getLinodeConfigs(AsyncTaskExecutor executor, Filter filter, int linodeId) throws InterruptedException {
-        return this.getAll(Configs.class, executor, filter, "linode/instances/{id}/configs", linodeId);
+    public List<Config> getLinodeConfigs(AsyncTaskExecutor executor, int maxResults, Filter filter, int linodeId)
+      throws InterruptedException {
+        return this.getAll(Configs.class, executor, maxResults, filter, "linode/instances/{id}/configs", linodeId);
     }
 
     /**
@@ -469,14 +477,17 @@ public class LinodeApiRequestSender implements InitializingBean {
      * if {@code executor} is null, pages are loaded synchronously and sequentially.
      *
      * @param executor executor for loading pages
+     * @param maxResults limit on the number of results returned, or zero for no limit
      * @param filter filter for returned values, or null for no filter
      * @param linodeId Linode ID
      * @return mutable list of all disks associated with the specified Linode matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     * @throws IllegalArgumentException if {@code maxResults} is negative
      */
-    public List<Disk> getLinodeDisks(AsyncTaskExecutor executor, Filter filter, int linodeId) throws InterruptedException {
-        return this.getAll(Disks.class, executor, filter, "linode/instances/{id}/disks", linodeId);
+    public List<Disk> getLinodeDisks(AsyncTaskExecutor executor, int maxResults, Filter filter, int linodeId)
+      throws InterruptedException {
+        return this.getAll(Disks.class, executor, maxResults, filter, "linode/instances/{id}/disks", linodeId);
     }
 
     /**
@@ -599,13 +610,16 @@ public class LinodeApiRequestSender implements InitializingBean {
      * if {@code executor} is null, pages are loaded synchronously and sequentially.
      *
      * @param executor executor for loading pages
+     * @param maxResults limit on the number of results returned, or zero for no limit
      * @param filter filter for returned values, or null for no filter
      * @return mutable list of all distributions matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     * @throws IllegalArgumentException if {@code maxResults} is negative
      */
-    public List<Distribution> getDistributions(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
-        return this.getAll(Distributions.class, executor, filter, "linode/distributions");
+    public List<Distribution> getDistributions(AsyncTaskExecutor executor, int maxResults, Filter filter)
+      throws InterruptedException {
+        return this.getAll(Distributions.class, executor, maxResults, filter, "linode/distributions");
     }
 
     /**
@@ -711,13 +725,15 @@ public class LinodeApiRequestSender implements InitializingBean {
      * if {@code executor} is null, pages are loaded synchronously and sequentially.
      *
      * @param executor executor for loading pages
+     * @param maxResults limit on the number of results returned, or zero for no limit
      * @param filter filter for returned values, or null for no filter
      * @return mutable list of all kernels matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     * @throws IllegalArgumentException if {@code maxResults} is negative
      */
-    public List<Kernel> getKernels(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
-        return this.getAll(Kernels.class, executor, filter, "linode/kernels");
+    public List<Kernel> getKernels(AsyncTaskExecutor executor, int maxResults, Filter filter) throws InterruptedException {
+        return this.getAll(Kernels.class, executor, maxResults, filter, "linode/kernels");
     }
 
     /**
@@ -757,13 +773,16 @@ public class LinodeApiRequestSender implements InitializingBean {
      * if {@code executor} is null, pages are loaded synchronously and sequentially.
      *
      * @param executor executor for loading pages
+     * @param maxResults limit on the number of results returned, or zero for no limit
      * @param filter filter for returned values, or null for no filter
      * @return mutable list of all StackScripts matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     * @throws IllegalArgumentException if {@code maxResults} is negative
      */
-    public List<StackScript> getStackScripts(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
-        return this.getAll(StackScripts.class, executor, filter, "linode/stackscripts");
+    public List<StackScript> getStackScripts(AsyncTaskExecutor executor, int maxResults, Filter filter)
+      throws InterruptedException {
+        return this.getAll(StackScripts.class, executor, maxResults, filter, "linode/stackscripts");
     }
 
     /**
@@ -829,13 +848,15 @@ public class LinodeApiRequestSender implements InitializingBean {
      * if {@code executor} is null, pages are loaded synchronously and sequentially.
      *
      * @param executor executor for loading pages
+     * @param maxResults limit on the number of results returned, or zero for no limit
      * @param filter filter for returned values, or null for no filter
      * @return mutable list of all Linode types matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     * @throws IllegalArgumentException if {@code maxResults} is negative
      */
-    public List<Type> getTypes(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
-        return this.getAll(Types.class, executor, filter, "linode/types");
+    public List<Type> getTypes(AsyncTaskExecutor executor, int maxResults, Filter filter) throws InterruptedException {
+        return this.getAll(Types.class, executor, maxResults, filter, "linode/types");
     }
 
     /**
@@ -875,13 +896,15 @@ public class LinodeApiRequestSender implements InitializingBean {
      * if {@code executor} is null, pages are loaded synchronously and sequentially.
      *
      * @param executor executor for loading pages
+     * @param maxResults limit on the number of results returned, or zero for no limit
      * @param filter filter for returned values, or null for no filter
      * @return mutable list of all volumes matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     * @throws IllegalArgumentException if {@code maxResults} is negative
      */
-    public List<Volume> getVolumes(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
-        return this.getAll(Volumes.class, executor, filter, "linode/volumes");
+    public List<Volume> getVolumes(AsyncTaskExecutor executor, int maxResults, Filter filter) throws InterruptedException {
+        return this.getAll(Volumes.class, executor, maxResults, filter, "linode/volumes");
     }
 
     /**
@@ -983,13 +1006,15 @@ public class LinodeApiRequestSender implements InitializingBean {
      * if {@code executor} is null, pages are loaded synchronously and sequentially.
      *
      * @param executor executor for loading pages
+     * @param maxResults limit on the number of results returned, or zero for no limit
      * @param filter filter for returned values, or null for no filter
      * @return mutable list of all regions matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     * @throws IllegalArgumentException if {@code maxResults} is negative
      */
-    public List<Region> getRegions(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
-        return this.getAll(Regions.class, executor, filter, "regions");
+    public List<Region> getRegions(AsyncTaskExecutor executor, int maxResults, Filter filter) throws InterruptedException {
+        return this.getAll(Regions.class, executor, maxResults, filter, "regions");
     }
 
     /**
@@ -1041,13 +1066,15 @@ public class LinodeApiRequestSender implements InitializingBean {
      * if {@code executor} is null, pages are loaded synchronously and sequentially.
      *
      * @param executor executor for loading pages
+     * @param maxResults limit on the number of results returned, or zero for no limit
      * @param filter filter for returned values, or null for no filter
      * @return mutable list of all images matching {@code filter}
      * @throws RestClientException if an error occurs
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     * @throws IllegalArgumentException if {@code maxResults} is negative
      */
-    public List<Image> getImages(AsyncTaskExecutor executor, Filter filter) throws InterruptedException {
-        return this.getAll(Images.class, executor, filter, "images");
+    public List<Image> getImages(AsyncTaskExecutor executor, int maxResults, Filter filter) throws InterruptedException {
+        return this.getAll(Images.class, executor, maxResults, filter, "images");
     }
 
     /**
@@ -1197,6 +1224,7 @@ public class LinodeApiRequestSender implements InitializingBean {
      *
      * @param responseType paginated response type
      * @param executor executor for loading pages, or null to load pages synchronously
+     * @param maxResults limit on the number of results returned, or zero for no limit
      * @param filter filter for returned values, or null for no filter
      * @param pathTemplate resource URI path (relative)
      * @param templateParameters parameter values for parameters in {@code pathTemplate}
@@ -1206,9 +1234,16 @@ public class LinodeApiRequestSender implements InitializingBean {
      * @throws RestClientException if an error occurs
      * @throws IllegalArgumentException if {@code responseType}, {@code pathTemplate}, or {@code templateParameters} is null
      * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
+     * @throws IllegalArgumentException if {@code maxResults} is negative
      */
-    protected <T, P extends Paginated<T>> List<T> getAll(Class<P> responseType,
-      AsyncTaskExecutor executor, Filter filter, String pathTemplate, Object... templateParameters) throws InterruptedException {
+    protected <T, P extends Paginated<T>> List<T> getAll(Class<P> responseType, AsyncTaskExecutor executor,
+      int maxResults, Filter filter, String pathTemplate, Object... templateParameters) throws InterruptedException {
+
+        // Sanity check
+        if (maxResults < 0)
+            throw new IllegalArgumentException("maxResults < 0");
+        if (maxResults == 0)
+            maxResults = Integer.MAX_VALUE;
 
         // Initialize list
         final ArrayList<T> list = new ArrayList<>();
@@ -1217,26 +1252,31 @@ public class LinodeApiRequestSender implements InitializingBean {
         final P firstPage = this.getPage(responseType, filter, 1, pathTemplate, templateParameters);
         list.addAll(firstPage.getData());
 
-        // Get remaining pages synchonously if no executor provided
+        // Get remaining pages synchonously if no executor provided, otherwise asynchonously using executor
         if (executor == null) {
-            for (int pageNum = 2; pageNum <= firstPage.getPages(); pageNum++)
+            for (int pageNum = 2; pageNum <= firstPage.getPages() && list.size() < maxResults; pageNum++)
                 list.addAll(this.getPage(responseType, filter, pageNum, pathTemplate, templateParameters).getData());
-            return list;
-        }
-
-        // Get remaining pages asynchonously using executor
-        final ArrayList<Future<P>> futureList = new ArrayList<>(firstPage.getPages() - 1);
-        for (int pageNum = 2; pageNum <= firstPage.getPages(); pageNum++) {
-            final int pageNum0 = pageNum;
-            futureList.add(executor.submit(() -> this.getPage(responseType, filter, pageNum0, pathTemplate, templateParameters)));
-        }
-        for (Future<P> future : futureList) {
-            try {
-                list.addAll(future.get().getData());
-            } catch (ExecutionException e) {
-                throw new RestClientException("error in asynchronous page load", e.getCause());
+        } else {
+            final ArrayList<Future<P>> futureList = new ArrayList<>(firstPage.getPages() - 1);
+            final int numPages = Math.min(firstPage.getPages(),
+              (int)Math.round(Math.ceil((double)maxResults / (double)firstPage.getData().size())));
+            for (int pageNum = 2; pageNum <= numPages; pageNum++) {
+                final int pageNum0 = pageNum;
+                futureList.add(executor.submit(()
+                  -> this.getPage(responseType, filter, pageNum0, pathTemplate, templateParameters)));
+            }
+            for (Future<P> future : futureList) {
+                try {
+                    list.addAll(future.get().getData());
+                } catch (ExecutionException e) {
+                    throw new RestClientException("error in asynchronous page load", e.getCause());
+                }
             }
         }
+
+        // Trim list if last page went over
+        if (list.size() > maxResults)
+            list.subList(maxResults, list.size()).clear();
 
         // Done
         return list;
