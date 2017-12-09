@@ -192,8 +192,9 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code>protected &lt;T,P extends <a href="../../../../../../org/dellroad/linode/apiv4/model/Paginated.html" title="class in org.dellroad.linode.apiv4.model">Paginated</a>&lt;T&gt;&gt;<br><a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;T&gt;</code></td>
-<td class="colLast"><span class="typeNameLabel">LinodeApiRequestSender.</span><code><span class="memberNameLink"><a href="../../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAll-java.lang.Class-org.springframework.core.task.AsyncTaskExecutor-org.dellroad.linode.apiv4.filter.Filter-java.lang.String-java.lang.Object...-">getAll</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&lt;P&gt;&nbsp;responseType,
+<td class="colLast"><span class="typeNameLabel">LinodeApiRequestSender.</span><code><span class="memberNameLink"><a href="../../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAll-java.lang.Class-org.springframework.core.task.AsyncTaskExecutor-int-org.dellroad.linode.apiv4.filter.Filter-java.lang.String-java.lang.Object...-">getAll</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&lt;P&gt;&nbsp;responseType,
       <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/core/task/AsyncTaskExecutor.html?is-external=true" title="class or interface in org.springframework.core.task">AsyncTaskExecutor</a>&nbsp;executor,
+      int&nbsp;maxResults,
       <a href="../../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter,
       <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;pathTemplate,
       <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>...&nbsp;templateParameters)</code>
@@ -201,21 +202,12 @@
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>protected &lt;T,P extends <a href="../../../../../../org/dellroad/linode/apiv4/model/Paginated.html" title="class in org.dellroad.linode.apiv4.model">Paginated</a>&lt;T&gt;&gt;<br><a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;T&gt;</code></td>
-<td class="colLast"><span class="typeNameLabel">LinodeApiRequestSender.</span><code><span class="memberNameLink"><a href="../../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAll-java.lang.Class-org.dellroad.linode.apiv4.filter.Filter-java.lang.String-java.lang.Object...-">getAll</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&lt;P&gt;&nbsp;responseType,
-      <a href="../../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter,
-      <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;pathTemplate,
-      <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>...&nbsp;templateParameters)</code>
-<div class="block">Get all instances of the specified type, by querying for and aggreating however many pages there are.</div>
-</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><code>protected &lt;T,P extends <a href="../../../../../../org/dellroad/linode/apiv4/model/Paginated.html" title="class in org.dellroad.linode.apiv4.model">Paginated</a>&lt;T&gt;&gt;<br>P</code></td>
-<td class="colLast"><span class="typeNameLabel">LinodeApiRequestSender.</span><code><span class="memberNameLink"><a href="../../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getPaginated-java.lang.Class-org.dellroad.linode.apiv4.filter.Filter-int-java.lang.String-java.lang.Object...-">getPaginated</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&lt;P&gt;&nbsp;responseType,
-            <a href="../../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter,
-            int&nbsp;page,
-            <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;pathTemplate,
-            <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>...&nbsp;templateParameters)</code>
+<td class="colLast"><span class="typeNameLabel">LinodeApiRequestSender.</span><code><span class="memberNameLink"><a href="../../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getPage-java.lang.Class-org.dellroad.linode.apiv4.filter.Filter-int-java.lang.String-java.lang.Object...-">getPage</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&lt;P&gt;&nbsp;responseType,
+       <a href="../../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter,
+       int&nbsp;page,
+       <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;pathTemplate,
+       <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>...&nbsp;templateParameters)</code>
 <div class="block">Query a paginated resource via GET.</div>
 </td>
 </tr>
