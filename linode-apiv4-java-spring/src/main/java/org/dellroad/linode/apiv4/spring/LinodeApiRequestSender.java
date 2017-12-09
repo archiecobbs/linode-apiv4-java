@@ -186,10 +186,13 @@ public class LinodeApiRequestSender implements InitializingBean {
      * @param request update info
      * @throws RestClientException if an error occurs
      * @throws IllegalArgumentException if {@code request} is null
+     * @throws IllegalArgumentException if {@code request} has invalid ID
      */
     public void updateLinode(Linode request) {
         if (request == null)
             throw new IllegalArgumentException("null request");
+        if (request.getId() <= 0)
+            throw new IllegalArgumentException("invalid linode ID");
         this.put(request, "linode/instances/{id}", request.getId());
     }
 
@@ -1154,8 +1157,11 @@ public class LinodeApiRequestSender implements InitializingBean {
      * @param regionId region ID
      * @return specified region
      * @throws RestClientException if an error occurs
+     * @throws IllegalArgumentException if {@code regionId} is null
      */
     public Region getRegion(String regionId) {
+        if (regionId == null)
+            throw new IllegalArgumentException("null regionId");
         return this.get(Region.class, "regions/{id}", regionId);
     }
 
