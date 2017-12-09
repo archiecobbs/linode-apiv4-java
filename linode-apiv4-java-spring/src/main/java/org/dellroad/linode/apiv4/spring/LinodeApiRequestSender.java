@@ -1046,11 +1046,8 @@ public class LinodeApiRequestSender implements InitializingBean {
      * @param volumeId volume ID
      * @return specified volume
      * @throws RestClientException if an error occurs
-     * @throws IllegalArgumentException if {@code volumeId} is null
      */
-    public Volume getVolume(String volumeId) {
-        if (volumeId == null)
-            throw new IllegalArgumentException("null volumeId");
+    public Volume getVolume(int volumeId) {
         return this.get(Volume.class, "linode/volumes/{vid}", volumeId);
     }
 
