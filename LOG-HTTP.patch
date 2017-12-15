@@ -1,0 +1,201 @@
+diff --git a/linode-apiv4-java-spring/src/main/java/org/dellroad/linode/apiv4/spring/LoggingRestTemplate.java b/linode-apiv4-java-spring/src/main/java/org/dellroad/linode/apiv4/spring/LoggingRestTemplate.java
+new file mode 100644
+index 0000000..cdced47
+--- /dev/null
++++ b/linode-apiv4-java-spring/src/main/java/org/dellroad/linode/apiv4/spring/LoggingRestTemplate.java
+@@ -0,0 +1,178 @@
++
++/*
++ * Copyright (C) 2017 Archie L. Cobbs. All rights reserved.
++ */
++
++package org.dellroad.linode.apiv4.spring;
++
++import java.io.ByteArrayOutputStream;
++import java.io.IOException;
++import java.io.InputStream;
++import java.lang.reflect.Constructor;
++import java.nio.charset.StandardCharsets;
++import java.util.List;
++import java.util.Map;
++
++import org.slf4j.Logger;
++import org.slf4j.LoggerFactory;
++import org.springframework.beans.factory.InitializingBean;
++import org.springframework.http.HttpHeaders;
++import org.springframework.http.HttpRequest;
++import org.springframework.http.HttpStatus;
++import org.springframework.http.client.ClientHttpRequestExecution;
++import org.springframework.http.client.ClientHttpRequestInterceptor;
++import org.springframework.http.client.ClientHttpResponse;
++import org.springframework.web.client.RestTemplate;
++
++/**
++ * A {@link RestTemplate} that logs every request and response at DEBUG level to a configured {@link Logger}.
++ */
++public class LoggingRestTemplate extends RestTemplate implements InitializingBean {
++
++    // Bleh, this class is not public
++    private static final String RESPONSE_WRAPPER_CLASS = "org.springframework.http.client.BufferingClientHttpResponseWrapper";
++
++    private Logger log = LoggerFactory.getLogger(this.getClass());
++
++    private boolean hideAuthorizationHeaders = true;
++    private Class<?> wrapperClass;
++    private Constructor<?> wrapperConstructor;
++
++// Properties
++
++    /**
++     * Configure the logger to log requests and responses to.
++     *
++     * <p>
++     * Default is the logger associated with this instance's class.
++     *
++     * @param log log destination, or null to disable
++     */
++    public void setLogger(Logger log) {
++        this.log = log;
++    }
++
++    /**
++     * Configure the logger to log requests and responses to by name.
++     *
++     * @param name name of the log destination, or null to disable
++     */
++    public void setLoggerName(String name) {
++        this.setLogger(name != null ? LoggerFactory.getLogger(name) : null);
++    }
++
++    /**
++     * Configure whether to hide the contents of {@code Authorization} headers.
++     *
++     * <p>
++     * Default true.
++     *
++     * @param hideAuthorizationHeaders true to hide, otherwise false
++     */
++    public void setHideAuthorizationHeaders(boolean hideAuthorizationHeaders) {
++        this.hideAuthorizationHeaders = hideAuthorizationHeaders;
++    }
++
++// Lifecycle
++
++    @Override
++    public void afterPropertiesSet() throws Exception {
++        this.getInterceptors().add(new ClientHttpRequestInterceptor() {
++            @Override
++            public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
++              throws IOException {
++
++                // Log request
++                if (LoggingRestTemplate.this.log != null && LoggingRestTemplate.this.log.isDebugEnabled())
++                    LoggingRestTemplate.this.traceRequest(request, body);
++
++                // Perform request
++                ClientHttpResponse response = execution.execute(request, body);
++
++                // Log response
++                if (LoggingRestTemplate.this.log != null && LoggingRestTemplate.this.log.isDebugEnabled()) {
++                    final ClientHttpResponse bufferedResponse = LoggingRestTemplate.this.ensureBuffered(response);
++                    if (bufferedResponse != null) {
++                        response = bufferedResponse;
++                        LoggingRestTemplate.this.traceResponse(response);
++                    }
++                }
++
++                // Done
++                return response;
++            }
++        });
++    }
++
++// Internal methods
++
++    /**
++     * Log a request.
++     */
++    protected void traceRequest(HttpRequest request, byte... body) {
++        this.log.debug("xmit: {} {}\n{}{}\n", request.getMethod(), request.getURI(), this.toString(request.getHeaders()),
++          body != null && body.length > 0 ? "\n\n" + new String(body, StandardCharsets.UTF_8) : "");
++    }
++
++    /**
++     * Log a response.
++     */
++    protected void traceResponse(ClientHttpResponse response) {
++        final ByteArrayOutputStream bodyBuf = new ByteArrayOutputStream();
++        HttpStatus statusCode = null;
++        try {
++            statusCode = response.getStatusCode();
++        } catch (IOException e) {
++            this.log.error("error getting HTTP response status code", e);
++        }
++        String statusText = null;
++        try {
++            statusText = response.getStatusText();
++        } catch (IOException e) {
++            this.log.error("error getting HTTP response status text", e);
++        }
++        try (final InputStream input = response.getBody()) {
++            byte[] b = new byte[1024];
++            int r;
++            while ((r = input.read(b)) != -1)
++                bodyBuf.write(b, 0, r);
++        } catch (IOException e) {
++            this.log.error("error getting HTTP response body", e);
++        }
++        this.log.debug("recv: {} {}\n{}{}\n", statusCode, statusText, this.toString(response.getHeaders()),
++          bodyBuf.size() > 0 ? "\n\n" + new String(bodyBuf.toByteArray(), StandardCharsets.UTF_8) : "");
++    }
++
++    private ClientHttpResponse ensureBuffered(ClientHttpResponse response) {
++        try {
++            if (this.wrapperClass == null)
++                this.wrapperClass = Class.forName(RESPONSE_WRAPPER_CLASS, false, ClientHttpResponse.class.getClassLoader());
++            if (!this.wrapperClass.isInstance(response)) {
++                if (this.wrapperConstructor == null) {
++                    this.wrapperConstructor = this.wrapperClass.getDeclaredConstructor(ClientHttpResponse.class);
++                    this.wrapperConstructor.setAccessible(true);
++                }
++                response = (ClientHttpResponse)this.wrapperConstructor.newInstance(response);
++            }
++            return response;
++        } catch (Exception e) {
++            this.log.error("error creating {} instance: {}", RESPONSE_WRAPPER_CLASS, e);
++            return null;
++        }
++    }
++
++    private String toString(HttpHeaders headers) {
++        final StringBuilder headerBuf = new StringBuilder();
++        for (Map.Entry<String, List<String>> entry : headers.entrySet()) {
++            if (headerBuf.length() > 0)
++                headerBuf.append('\n');
++            final String name = entry.getKey();
++            for (String value : entry.getValue()) {
++                if (this.hideAuthorizationHeaders && name.equalsIgnoreCase(HttpHeaders.AUTHORIZATION))
++                    value = "[omitted]";
++                headerBuf.append(name).append(": ").append(value);
++            }
++        }
++        return headerBuf.toString();
++    }
++}
+diff --git a/linode-apiv4-java-spring/src/main/resources/org/dellroad/linode/apiv4/spring/linodeApi.xml b/linode-apiv4-java-spring/src/main/resources/org/dellroad/linode/apiv4/spring/linodeApi.xml
+index 02c3eff..a8340d4 100644
+--- a/linode-apiv4-java-spring/src/main/resources/org/dellroad/linode/apiv4/spring/linodeApi.xml
++++ b/linode-apiv4-java-spring/src/main/resources/org/dellroad/linode/apiv4/spring/linodeApi.xml
+@@ -24,8 +24,12 @@
+       p:timeout="30000"/>
+ 
+     <!-- Spring REST template -->
++<!--
+     <bean id="linodeApiRestTemplate" class="org.springframework.web.client.RestTemplate"
+       p:requestFactory-ref="linodeApiHttpRequestFactory">
++-->
++    <bean id="linodeApiRestTemplate" class="org.dellroad.linode.apiv4.spring.LoggingRestTemplate"
++      p:hideAuthorizationHeaders="false" p:requestFactory-ref="linodeApiHttpRequestFactory">
+ 
+         <!-- Custom error handler to extract error message from JSON payload -->
+         <property name="errorHandler">
