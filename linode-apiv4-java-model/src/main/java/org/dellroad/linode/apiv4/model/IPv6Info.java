@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class IPv6Info {
 
     private IPv6[] addresses;
-    private IPv6 slacc;
+    private IPv6 slaac;
     private String linkLocal;
     private IPv6Pool[] global;
 
@@ -28,11 +28,11 @@ public class IPv6Info {
         this.addresses = addresses;
     }
 
-    public IPv6 getSlacc() {
-        return this.slacc;
+    public IPv6 getSlaac() {
+        return this.slaac;
     }
-    public void setSlacc(final IPv6 slacc) {
-        this.slacc = slacc;
+    public void setSlaac(final IPv6 slaac) {
+        this.slaac = slaac;
     }
 
     @JsonProperty("link_local")
