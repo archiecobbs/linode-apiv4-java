@@ -132,7 +132,7 @@ public class Image extends AbstractStringIdLabeled {
 // Status
 
     /**
-     * {@link Linode} status.
+     * {@link Image} status.
      */
     public enum Status {
         CREATING,
