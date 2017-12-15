@@ -11,19 +11,19 @@ import java.util.Map;
 
 class AbstractDiskRequest {
 
-    private String distributionId;
+    private String imageId;
     private String rootPassword;
     private String[] authorizedKeys;
     private String label;
     private Integer stackScriptId;
     private Map<String, String> stackScriptData;
 
-    @JsonProperty("distribution")
-    public String getDistributionId() {
-        return this.distributionId;
+    @JsonProperty("image")
+    public String getImageId() {
+        return this.imageId;
     }
-    public void setDistributionId(final String distributionId) {
-        this.distributionId = distributionId;
+    public void setImageId(final String imageId) {
+        this.imageId = imageId;
     }
 
     @JsonProperty("root_pass")

@@ -21,7 +21,6 @@ import org.dellroad.linode.apiv4.model.Config;
 import org.dellroad.linode.apiv4.model.Configs;
 import org.dellroad.linode.apiv4.model.Disk;
 import org.dellroad.linode.apiv4.model.Disks;
-import org.dellroad.linode.apiv4.model.Distribution;
 import org.dellroad.linode.apiv4.model.IPInfo;
 import org.dellroad.linode.apiv4.model.IPv4;
 import org.dellroad.linode.apiv4.model.IPv4Info;
@@ -254,24 +253,6 @@ public class QueryTest {
 // updateLinodeDisk() - TODO
 // updateLinodeDiskPassword() - TODO
 
-// getDistributions()
-
-    @Test
-    public void testFilterDistributions() throws Exception {
-        final FilterBuilder fb = new FilterBuilder();
-        Distribution prev = null;
-        for (Distribution dist : this.sender.getDistributions(
-          this.executor, MAX_RESULTS, fb.where(fb.equal("vendor", "Debian")).orderBy("label").build())) {
-            assert dist.getVendor().equals("Debian") : "wrong vendor: \"" + dist.getVendor() + "\" != \"Debian\"";
-            if (prev == null)
-                prev = dist;
-            else {
-                assert dist.getLabel().compareTo(prev.getLabel()) >= 0 :
-                  "wrong order: \"" + dist.getLabel() + "\" < \"" + prev.getLabel() + "\"";
-            }
-        }
-    }
-
 // allocateIP()
 // getIP()
 // updateIP()
@@ -370,6 +351,22 @@ public class QueryTest {
             this.log.info("getImages(): {}", this.toString(image));
             image = this.sender.getImage(image.getId());
             this.log.info("getImage({}): {}", image.getId(), this.toString(image));
+        }
+    }
+
+    @Test
+    public void testFilterImages() throws Exception {
+        final FilterBuilder fb = new FilterBuilder();
+        Image prev = null;
+        for (Image image : this.sender.getImages(this.executor, MAX_RESULTS,
+          fb.where(fb.and(fb.equal("public", true), fb.equal("vendor", "Debian"))).orderBy("label").build())) {
+            assert image.getVendor().equals("Debian") : "wrong vendor: \"" + image.getVendor() + "\" != \"Debian\"";
+            if (prev == null)
+                prev = image;
+            else {
+                assert image.getLabel().compareTo(prev.getLabel()) >= 0 :
+                  "wrong order: \"" + image.getLabel() + "\" < \"" + prev.getLabel() + "\"";
+            }
         }
     }
 

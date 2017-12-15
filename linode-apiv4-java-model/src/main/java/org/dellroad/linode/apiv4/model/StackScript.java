@@ -24,7 +24,7 @@ public class StackScript extends AbstractIntIdLabeled {
     private String username;
     private String userGravatarId;
     private String description;
-    private String[] distributionIds;
+    private String[] imageIds;
     private int deploymentsTotal;
     private int deploymentsActive;
     private boolean publicx;
@@ -56,12 +56,12 @@ public class StackScript extends AbstractIntIdLabeled {
         this.description = description;
     }
 
-    @JsonProperty("distributions")
-    public String[] getDistributionIds() {
-        return this.distributionIds;
+    @JsonProperty("images")
+    public String[] getImageIds() {
+        return this.imageIds;
     }
-    public void setDistributionIds(final String[] distributionIds) {
-        this.distributionIds = distributionIds;
+    public void setImageIds(final String[] imageIds) {
+        this.imageIds = imageIds;
     }
 
     @JsonProperty("deployments_total")
@@ -104,6 +104,7 @@ public class StackScript extends AbstractIntIdLabeled {
         this.updated = updated;
     }
 
+    @JsonProperty("rev_note")
     public String getRevNote() {
         return this.revNote;
     }

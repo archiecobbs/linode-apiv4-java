@@ -5,8 +5,10 @@
 
 package org.dellroad.linode.apiv4.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.util.Date;
 
@@ -20,16 +22,16 @@ import org.dellroad.linode.apiv4.Constants;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Disk extends AbstractIntIdLabeled {
 
-    private DiskStatus status;
+    private Status status;
     private int size;
     private Filesystem filesystem;
     private Date created;
     private Date updated;
 
-    public DiskStatus getStatus() {
+    public Status getStatus() {
         return this.status;
     }
-    public void setStatus(final DiskStatus status) {
+    public void setStatus(final Status status) {
         this.status = status;
     }
 
@@ -61,5 +63,29 @@ public class Disk extends AbstractIntIdLabeled {
     }
     public void setUpdated(final Date updated) {
         this.updated = updated;
+    }
+
+// Status
+
+    /**
+     * Linode {@link Disk} status.
+     *
+     * @see <a href="https://developers.linode.com/v4/reference/linode#disks">Disks</a>
+     */
+    public enum Status {
+        READY,
+        NOT_READY,
+        DELETING;
+
+        @JsonCreator
+        public static Status parse(String value) {
+            return Status.valueOf(value.replace(' ', '_').toUpperCase());
+        }
+
+        @JsonValue
+        @Override
+        public String toString() {
+            return this.name().replace('_', ' ').toLowerCase();
+        }
     }
 }

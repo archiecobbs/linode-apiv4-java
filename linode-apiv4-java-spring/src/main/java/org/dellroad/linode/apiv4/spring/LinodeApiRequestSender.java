@@ -32,8 +32,6 @@ import org.dellroad.linode.apiv4.model.Config;
 import org.dellroad.linode.apiv4.model.Configs;
 import org.dellroad.linode.apiv4.model.Disk;
 import org.dellroad.linode.apiv4.model.Disks;
-import org.dellroad.linode.apiv4.model.Distribution;
-import org.dellroad.linode.apiv4.model.Distributions;
 import org.dellroad.linode.apiv4.model.IP;
 import org.dellroad.linode.apiv4.model.IPInfo;
 import org.dellroad.linode.apiv4.model.IPv4;
@@ -600,52 +598,6 @@ public class LinodeApiRequestSender implements InitializingBean {
         this.put(new Query("size", size), "linode/instances/{id}/disks/{did}/resize", linodeId, diskId);
     }
 
-// Distributions
-
-    /**
-     * Get all Linux distributions.
-     *
-     * <p>
-     * Pages after the first are loaded asynchronously using the given {@link AsyncTaskExecutor}, if any;
-     * if {@code executor} is null, pages are loaded synchronously and sequentially.
-     *
-     * @param executor executor for loading pages
-     * @param maxResults limit on the number of results returned, or zero for no limit
-     * @param filter filter for returned values, or null for no filter
-     * @return mutable list of all distributions matching {@code filter}
-     * @throws RestClientException if an error occurs
-     * @throws InterruptedException if the current thread is interrupted while waiting for {@code executor}
-     * @throws IllegalArgumentException if {@code maxResults} is negative
-     */
-    public List<Distribution> getDistributions(AsyncTaskExecutor executor, int maxResults, Filter filter)
-      throws InterruptedException {
-        return this.getAll(Distributions.class, executor, maxResults, filter, "linode/distributions");
-    }
-
-    /**
-     * Get one page of Linux distributions.
-     *
-     * @param filter filter for returned values, or null for no filter
-     * @param page page number (the first page is number one)
-     * @return one page of distributions
-     * @throws RestClientException if an error occurs
-     * @throws IllegalArgumentException if {@code page} is less than one
-     */
-    public Distributions getDistributionsPage(Filter filter, int page) {
-        return this.getPage(Distributions.class, filter, page, "linode/distributions");
-    }
-
-    /**
-     * Get a specific Linux distribution.
-     *
-     * @param distId distribution ID
-     * @return requested distribution
-     * @throws RestClientException if an error occurs
-     */
-    public Distribution getDistribution(int distId) {
-        return this.get(Distribution.class, "linode/distributions/{did}", distId);
-    }
-
 // IPs
 
     /**
@@ -760,7 +712,7 @@ public class LinodeApiRequestSender implements InitializingBean {
     public Kernel getKernel(String kernelId) {
         if (kernelId == null)
             throw new IllegalArgumentException("null kernelId");
-        return this.get(Kernel.class, "linode/kernels/{did}", kernelId);
+        return this.get(Kernel.class, "linode/kernels/{id}", kernelId);
     }
 
 // StackScripts
@@ -904,7 +856,7 @@ public class LinodeApiRequestSender implements InitializingBean {
      * @throws IllegalArgumentException if {@code maxResults} is negative
      */
     public List<Volume> getVolumes(AsyncTaskExecutor executor, int maxResults, Filter filter) throws InterruptedException {
-        return this.getAll(Volumes.class, executor, maxResults, filter, "linode/volumes");
+        return this.getAll(Volumes.class, executor, maxResults, filter, "volumes");
     }
 
     /**
@@ -917,7 +869,7 @@ public class LinodeApiRequestSender implements InitializingBean {
      * @throws IllegalArgumentException if {@code page} is less than one
      */
     public Volumes getVolumesPage(Filter filter, int page) {
-        return this.getPage(Volumes.class, filter, page, "linode/volumes");
+        return this.getPage(Volumes.class, filter, page, "volumes");
     }
 
     /**
@@ -931,7 +883,7 @@ public class LinodeApiRequestSender implements InitializingBean {
     public Volume createVolume(CreateVolumeRequest request) {
         if (request == null)
             throw new IllegalArgumentException("null request");
-        return this.postFor(Volume.class, request, "linode/volumes");
+        return this.postFor(Volume.class, request, "volumes");
     }
 
     /**
@@ -942,7 +894,7 @@ public class LinodeApiRequestSender implements InitializingBean {
      * @throws RestClientException if an error occurs
      */
     public Volume getVolume(int volumeId) {
-        return this.get(Volume.class, "linode/volumes/{vid}", volumeId);
+        return this.get(Volume.class, "volumes/{vid}", volumeId);
     }
 
     /**
@@ -952,7 +904,7 @@ public class LinodeApiRequestSender implements InitializingBean {
      * @throws RestClientException if an error occurs
      */
     public void deleteVolume(int volumeId) {
-        this.delete("linode/volumes/{vid}", volumeId);
+        this.delete("volumes/{vid}", volumeId);
     }
 
     /**
@@ -964,7 +916,17 @@ public class LinodeApiRequestSender implements InitializingBean {
      * @throws RestClientException if an error occurs
      */
     public void attachVolume(int linodeId, int volumeId, Integer configId) {
-        this.post(new Query("linode_id", linodeId, "config_id", configId), "linode/volumes/{vid}/attach", volumeId);
+        this.post(new Query("linode_id", linodeId, "config_id", configId), "volumes/{vid}/attach", volumeId);
+    }
+
+    /**
+     * Detach a volume from its Linode.
+     *
+     * @param volumeId volume ID
+     * @throws RestClientException if an error occurs
+     */
+    public void detachVolume(int volumeId) {
+        this.post(new Query(), "volumes/{vid}/detach", volumeId);
     }
 
     /**
@@ -977,7 +939,7 @@ public class LinodeApiRequestSender implements InitializingBean {
      * @throws IllegalArgumentException if {@code label} is null
      */
     public Volume cloneVolume(int volumeId, String label) {
-        return this.postFor(Volume.class, new Query("label", label), "linode/volumes/{vid}", volumeId);
+        return this.postFor(Volume.class, new Query("label", label), "volumes/{vid}", volumeId);
     }
 
 // Domains
@@ -1096,8 +1058,11 @@ public class LinodeApiRequestSender implements InitializingBean {
      * @param imageId image ID
      * @return specified image
      * @throws RestClientException if an error occurs
+     * @throws IllegalArgumentException if {@code kernelId} is null
      */
-    public Image getImage(int imageId) {
+    public Image getImage(String imageId) {
+        if (imageId == null)
+            throw new IllegalArgumentException("null imageId");
         return this.get(Image.class, "images/{id}", imageId);
     }
 

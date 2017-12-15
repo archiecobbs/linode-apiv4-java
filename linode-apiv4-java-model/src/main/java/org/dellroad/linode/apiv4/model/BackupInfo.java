@@ -5,8 +5,13 @@
 
 package org.dellroad.linode.apiv4.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Date;
+
+import org.dellroad.linode.apiv4.Constants;
 
 /**
  * {@link Linode} backup info.
@@ -85,7 +90,7 @@ public class BackupInfo {
     public static class Service {
 
         private boolean enabled;
-        private String updated;         // XXX what is this?
+        private Date updated;
 
         public boolean isEnabled() {
             return this.enabled;
@@ -94,10 +99,11 @@ public class BackupInfo {
             this.enabled = enabled;
         }
 
-        public String getUpdated() {
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.TIMESTAMP_FORMAT, timezone = Constants.TIMESTAMP_TIMEZONE)
+        public Date getUpdated() {
             return this.updated;
         }
-        public void setUpdated(final String updated) {
+        public void setUpdated(final Date updated) {
             this.updated = updated;
         }
     }

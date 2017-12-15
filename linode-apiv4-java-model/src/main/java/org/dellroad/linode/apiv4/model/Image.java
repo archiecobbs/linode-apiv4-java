@@ -18,19 +18,26 @@ import org.dellroad.linode.apiv4.Constants;
 /**
  * Linode image.
  *
+ * <p>
+ * Also used to represent distributions.
+ *
  * @see <a href="https://developers.linode.com/v4/reference/images">Images</a>
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Image extends AbstractIntIdLabeled {
+public class Image extends AbstractStringIdLabeled {
 
     private String description;
-    private String status;
+    private Status status;
     private Filesystem filesystem;
     private Date created;
     private Date updated;
-    private String type;
+    private Type type;
     private boolean publicx;
+    private boolean deprecated;
     private Date lastUsed;
+    private int minDeploySize;
+    private String creator;
+    private String vendor;
 
     public String getDescription() {
         return this.description;
@@ -39,11 +46,10 @@ public class Image extends AbstractIntIdLabeled {
         this.description = description;
     }
 
-    // XXX - what is this??
-    public String getStatus() {
+    public Status getStatus() {
         return this.status;
     }
-    public void setStatus(final String status) {
+    public void setStatus(final Status status) {
         this.status = status;
     }
 
@@ -78,11 +84,17 @@ public class Image extends AbstractIntIdLabeled {
         this.publicx = publicx;
     }
 
-    // XXX - what is this??
-    public String getType() {
+    public boolean isDeprecated() {
+        return this.deprecated;
+    }
+    public void setDeprecated(final boolean deprecated) {
+        this.deprecated = deprecated;
+    }
+
+    public Type getType() {
         return this.type;
     }
-    public void setType(final String type) {
+    public void setType(final Type type) {
         this.type = type;
     }
 
@@ -95,13 +107,37 @@ public class Image extends AbstractIntIdLabeled {
         this.lastUsed = lastUsed;
     }
 
+    @JsonProperty("min_deploy_size")
+    public int getMinDeploySize() {
+        return this.minDeploySize;
+    }
+    public void setMinDeploySize(final int minDeploySize) {
+        this.minDeploySize = minDeploySize;
+    }
+
+    public String getCreator() {
+        return this.creator;
+    }
+    public void setCreator(final String creator) {
+        this.creator = creator;
+    }
+
+    public String getVendor() {
+        return this.vendor;
+    }
+    public void setVendor(final String vendor) {
+        this.vendor = vendor;
+    }
+
 // Status
 
     /**
-     * {@link Linode} status. XXX incomplete
+     * {@link Linode} status.
      */
     public enum Status {
-        AVAILABLE;
+        CREATING,
+        AVAILABLE,
+        DELETED;
 
         @JsonCreator
         public static Status parse(String value) {
@@ -118,10 +154,11 @@ public class Image extends AbstractIntIdLabeled {
 // Type
 
     /**
-     * {@link Image} type. XXX incomplete
+     * {@link Image} type.
      */
     public enum Type {
-        MANUAL;
+        MANUAL,
+        AUTOMATIC;          // XXX unconfirmed
 
         @JsonCreator
         public static Type parse(String value) {

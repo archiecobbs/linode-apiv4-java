@@ -27,11 +27,11 @@ public class Linode extends AbstractIntIdLabeled {
     private Backups backups;
     private Date created;
     private String regionId;
-    private String distributionId;
+    private String imageId;
     private String group;
     private String[] ipv4;
     private String ipv6;
-    private String type;
+    private String typeId;
     private Status status;
     private Date updated;
     private Hypervisor hypervisor;
@@ -67,12 +67,12 @@ public class Linode extends AbstractIntIdLabeled {
         this.regionId = regionId;
     }
 
-    @JsonProperty("distribution")
-    public String getDistributionId() {
-        return this.distributionId;
+    @JsonProperty("image")
+    public String getImageId() {
+        return this.imageId;
     }
-    public void setDistributionId(final String distributionId) {
-        this.distributionId = distributionId;
+    public void setImageId(final String imageId) {
+        this.imageId = imageId;
     }
 
     public String getGroup() {
@@ -96,11 +96,12 @@ public class Linode extends AbstractIntIdLabeled {
         this.ipv6 = ipv6;
     }
 
-    public String getType() {
-        return this.type;
+    @JsonProperty("type")
+    public String getTypeId() {
+        return this.typeId;
     }
-    public void setType(final String type) {
-        this.type = type;
+    public void setTypeId(final String typeId) {
+        this.typeId = typeId;
     }
 
     public Status getStatus() {

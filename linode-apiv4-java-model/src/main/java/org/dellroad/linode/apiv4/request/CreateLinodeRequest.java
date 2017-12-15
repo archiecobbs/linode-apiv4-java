@@ -20,7 +20,7 @@ public class CreateLinodeRequest extends AbstractDiskRequest {
     private String typeId;
     private String group;
     private Integer backupId;
-    private Integer imageId;
+    private boolean backupsEnabled;
     private boolean booted;
 
     @JsonProperty("region")
@@ -54,12 +54,12 @@ public class CreateLinodeRequest extends AbstractDiskRequest {
         this.backupId = backupId;
     }
 
-    @JsonProperty("image_id")
-    public Integer getImageId() {
-        return this.imageId;
+    @JsonProperty("backups_enabled")
+    public boolean isBackupsEnabled() {
+        return this.backupsEnabled;
     }
-    public void setImageId(final Integer imageId) {
-        this.imageId = imageId;
+    public void setBackupsEnabled(final boolean backupsEnabled) {
+        this.backupsEnabled = backupsEnabled;
     }
 
     public boolean isBooted() {
