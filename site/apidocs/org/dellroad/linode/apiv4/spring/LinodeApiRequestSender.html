@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10,"i33":10,"i34":10,"i35":10,"i36":10,"i37":10,"i38":10,"i39":10,"i40":10,"i41":10,"i42":10,"i43":10,"i44":10,"i45":10,"i46":10,"i47":10,"i48":10,"i49":10,"i50":10,"i51":10,"i52":10,"i53":10,"i54":10,"i55":10,"i56":10,"i57":10,"i58":10,"i59":10,"i60":10,"i61":10,"i62":10,"i63":10,"i64":10,"i65":10,"i66":10,"i67":10,"i68":10,"i69":10,"i70":10,"i71":10,"i72":10,"i73":10,"i74":10,"i75":10,"i76":10,"i77":10,"i78":10,"i79":10,"i80":10,"i81":10,"i82":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10,"i33":10,"i34":10,"i35":10,"i36":10,"i37":10,"i38":10,"i39":10,"i40":10,"i41":10,"i42":10,"i43":10,"i44":10,"i45":10,"i46":10,"i47":10,"i48":10,"i49":10,"i50":10,"i51":10,"i52":10,"i53":10,"i54":10,"i55":10,"i56":10,"i57":10,"i58":10,"i59":10,"i60":10,"i61":10,"i62":10,"i63":10,"i64":10,"i65":10,"i66":10,"i67":10,"i68":10,"i69":10,"i70":10,"i71":10,"i72":10,"i73":10,"i74":10,"i75":10,"i76":10,"i77":10,"i78":10,"i79":10,"i80":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -297,6 +297,12 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 </td>
 </tr>
 <tr id="i19" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#detachVolume-int-">detachVolume</a></span>(int&nbsp;volumeId)</code>
+<div class="block">Detach a volume from its Linode.</div>
+</td>
+</tr>
+<tr id="i20" class="altColor">
 <td class="colFirst"><code>protected &lt;R&gt;&nbsp;R</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#get-java.lang.Class-java.lang.String-java.lang.Object...-">get</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&lt;R&gt;&nbsp;responseType,
    <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;pathTemplate,
@@ -304,7 +310,7 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Query a resource via GET.</div>
 </td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code>protected &lt;T,P extends <a href="../../../../../org/dellroad/linode/apiv4/model/Paginated.html" title="class in org.dellroad.linode.apiv4.model">Paginated</a>&lt;T&gt;&gt;<br><a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getAll-java.lang.Class-org.springframework.core.task.AsyncTaskExecutor-int-org.dellroad.linode.apiv4.filter.Filter-java.lang.String-java.lang.Object...-">getAll</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&lt;P&gt;&nbsp;responseType,
       <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/core/task/AsyncTaskExecutor.html?is-external=true" title="class or interface in org.springframework.core.task">AsyncTaskExecutor</a>&nbsp;executor,
@@ -315,38 +321,17 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Get all instances of the specified type, by querying for and aggreating however many pages there are.</div>
 </td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/net/URI.html?is-external=true" title="class or interface in java.net">URI</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getBaseURI--">getBaseURI</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i22" class="altColor">
-<td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Distribution.html" title="class in org.dellroad.linode.apiv4.model">Distribution</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getDistribution-int-">getDistribution</a></span>(int&nbsp;distId)</code>
-<div class="block">Get a specific Linux distribution.</div>
-</td>
-</tr>
 <tr id="i23" class="rowColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../org/dellroad/linode/apiv4/model/Distribution.html" title="class in org.dellroad.linode.apiv4.model">Distribution</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getDistributions-org.springframework.core.task.AsyncTaskExecutor-int-org.dellroad.linode.apiv4.filter.Filter-">getDistributions</a></span>(<a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/core/task/AsyncTaskExecutor.html?is-external=true" title="class or interface in org.springframework.core.task">AsyncTaskExecutor</a>&nbsp;executor,
-                int&nbsp;maxResults,
-                <a href="../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter)</code>
-<div class="block">Get all Linux distributions.</div>
-</td>
-</tr>
-<tr id="i24" class="altColor">
-<td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Distributions.html" title="class in org.dellroad.linode.apiv4.model">Distributions</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getDistributionsPage-org.dellroad.linode.apiv4.filter.Filter-int-">getDistributionsPage</a></span>(<a href="../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter,
-                    int&nbsp;page)</code>
-<div class="block">Get one page of Linux distributions.</div>
-</td>
-</tr>
-<tr id="i25" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html" title="class in org.dellroad.linode.apiv4.model">Image</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getImage-int-">getImage</a></span>(int&nbsp;imageId)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getImage-java.lang.String-">getImage</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;imageId)</code>
 <div class="block">Get an image.</div>
 </td>
 </tr>
-<tr id="i26" class="altColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../org/dellroad/linode/apiv4/model/Image.html" title="class in org.dellroad.linode.apiv4.model">Image</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getImages-org.springframework.core.task.AsyncTaskExecutor-int-org.dellroad.linode.apiv4.filter.Filter-">getImages</a></span>(<a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/core/task/AsyncTaskExecutor.html?is-external=true" title="class or interface in org.springframework.core.task">AsyncTaskExecutor</a>&nbsp;executor,
          int&nbsp;maxResults,
@@ -354,33 +339,33 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Get all images.</div>
 </td>
 </tr>
-<tr id="i27" class="rowColor">
+<tr id="i25" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Images.html" title="class in org.dellroad.linode.apiv4.model">Images</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getImagesPage-org.dellroad.linode.apiv4.filter.Filter-int-">getImagesPage</a></span>(<a href="../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter,
              int&nbsp;page)</code>
 <div class="block">Get one page of images.</div>
 </td>
 </tr>
-<tr id="i28" class="altColor">
+<tr id="i26" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/IPv4.html" title="class in org.dellroad.linode.apiv4.model">IPv4</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getIP-int-java.lang.String-">getIP</a></span>(int&nbsp;linodeId,
      <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;address)</code>
 <div class="block">Get info about a specific IPv4 address.</div>
 </td>
 </tr>
-<tr id="i29" class="rowColor">
+<tr id="i27" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/IPInfo.html" title="class in org.dellroad.linode.apiv4.model">IPInfo</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getIPInfo-int-">getIPInfo</a></span>(int&nbsp;linodeId)</code>
 <div class="block">Get IP info.</div>
 </td>
 </tr>
-<tr id="i30" class="altColor">
+<tr id="i28" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html" title="class in org.dellroad.linode.apiv4.model">Kernel</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getKernel-java.lang.String-">getKernel</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;kernelId)</code>
 <div class="block">Get a specific kernel.</div>
 </td>
 </tr>
-<tr id="i31" class="rowColor">
+<tr id="i29" class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html" title="class in org.dellroad.linode.apiv4.model">Kernel</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getKernels-org.springframework.core.task.AsyncTaskExecutor-int-org.dellroad.linode.apiv4.filter.Filter-">getKernels</a></span>(<a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/core/task/AsyncTaskExecutor.html?is-external=true" title="class or interface in org.springframework.core.task">AsyncTaskExecutor</a>&nbsp;executor,
           int&nbsp;maxResults,
@@ -388,33 +373,33 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Get all kernels.</div>
 </td>
 </tr>
-<tr id="i32" class="altColor">
+<tr id="i30" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Kernels.html" title="class in org.dellroad.linode.apiv4.model">Kernels</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getKernelsPage-org.dellroad.linode.apiv4.filter.Filter-int-">getKernelsPage</a></span>(<a href="../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter,
               int&nbsp;page)</code>
 <div class="block">Get one page of kernels.</div>
 </td>
 </tr>
-<tr id="i33" class="rowColor">
+<tr id="i31" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Linode.html" title="class in org.dellroad.linode.apiv4.model">Linode</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getLinode-int-">getLinode</a></span>(int&nbsp;linodeId)</code>
 <div class="block">Get a particular Linode instance.</div>
 </td>
 </tr>
-<tr id="i34" class="altColor">
+<tr id="i32" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/BackupInfo.html" title="class in org.dellroad.linode.apiv4.model">BackupInfo</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getLinodeBackupInfo-int-">getLinodeBackupInfo</a></span>(int&nbsp;linodeId)</code>
 <div class="block">Get backup info about a Linode instance.</div>
 </td>
 </tr>
-<tr id="i35" class="rowColor">
+<tr id="i33" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Config.html" title="class in org.dellroad.linode.apiv4.model">Config</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getLinodeConfig-int-int-">getLinodeConfig</a></span>(int&nbsp;linodeId,
                int&nbsp;configId)</code>
 <div class="block">Get a particular Linode config.</div>
 </td>
 </tr>
-<tr id="i36" class="altColor">
+<tr id="i34" class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../org/dellroad/linode/apiv4/model/Config.html" title="class in org.dellroad.linode.apiv4.model">Config</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getLinodeConfigs-org.springframework.core.task.AsyncTaskExecutor-int-org.dellroad.linode.apiv4.filter.Filter-int-">getLinodeConfigs</a></span>(<a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/core/task/AsyncTaskExecutor.html?is-external=true" title="class or interface in org.springframework.core.task">AsyncTaskExecutor</a>&nbsp;executor,
                 int&nbsp;maxResults,
@@ -423,7 +408,7 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Get all configs associated with a Linode instance.</div>
 </td>
 </tr>
-<tr id="i37" class="rowColor">
+<tr id="i35" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Configs.html" title="class in org.dellroad.linode.apiv4.model">Configs</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getLinodeConfigsPage-org.dellroad.linode.apiv4.filter.Filter-int-int-">getLinodeConfigsPage</a></span>(<a href="../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter,
                     int&nbsp;page,
@@ -431,14 +416,14 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Get one page of the configurations associated with a Linode instance.</div>
 </td>
 </tr>
-<tr id="i38" class="altColor">
+<tr id="i36" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Disk.html" title="class in org.dellroad.linode.apiv4.model">Disk</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getLinodeDisk-int-int-">getLinodeDisk</a></span>(int&nbsp;linodeId,
              int&nbsp;diskId)</code>
 <div class="block">Get the specified disk.</div>
 </td>
 </tr>
-<tr id="i39" class="rowColor">
+<tr id="i37" class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../org/dellroad/linode/apiv4/model/Disk.html" title="class in org.dellroad.linode.apiv4.model">Disk</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getLinodeDisks-org.springframework.core.task.AsyncTaskExecutor-int-org.dellroad.linode.apiv4.filter.Filter-int-">getLinodeDisks</a></span>(<a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/core/task/AsyncTaskExecutor.html?is-external=true" title="class or interface in org.springframework.core.task">AsyncTaskExecutor</a>&nbsp;executor,
               int&nbsp;maxResults,
@@ -447,7 +432,7 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Get all disks associated with a Linode instance.</div>
 </td>
 </tr>
-<tr id="i40" class="altColor">
+<tr id="i38" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Disks.html" title="class in org.dellroad.linode.apiv4.model">Disks</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getLinodeDisksPage-org.dellroad.linode.apiv4.filter.Filter-int-int-">getLinodeDisksPage</a></span>(<a href="../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter,
                   int&nbsp;page,
@@ -455,7 +440,7 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Get one page of the disks associated with a Linode instance.</div>
 </td>
 </tr>
-<tr id="i41" class="rowColor">
+<tr id="i39" class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../org/dellroad/linode/apiv4/model/Linode.html" title="class in org.dellroad.linode.apiv4.model">Linode</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getLinodes-org.springframework.core.task.AsyncTaskExecutor-int-org.dellroad.linode.apiv4.filter.Filter-">getLinodes</a></span>(<a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/core/task/AsyncTaskExecutor.html?is-external=true" title="class or interface in org.springframework.core.task">AsyncTaskExecutor</a>&nbsp;executor,
           int&nbsp;maxResults,
@@ -463,14 +448,14 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Get all Linode instances.</div>
 </td>
 </tr>
-<tr id="i42" class="altColor">
+<tr id="i40" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Linodes.html" title="class in org.dellroad.linode.apiv4.model">Linodes</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getLinodesPage-org.dellroad.linode.apiv4.filter.Filter-int-">getLinodesPage</a></span>(<a href="../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter,
               int&nbsp;page)</code>
 <div class="block">Get one page of Linode instances.</div>
 </td>
 </tr>
-<tr id="i43" class="rowColor">
+<tr id="i41" class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../org/dellroad/linode/apiv4/model/Volume.html" title="class in org.dellroad.linode.apiv4.model">Volume</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getLinodeVolumes-org.springframework.core.task.AsyncTaskExecutor-int-org.dellroad.linode.apiv4.filter.Filter-int-">getLinodeVolumes</a></span>(<a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/core/task/AsyncTaskExecutor.html?is-external=true" title="class or interface in org.springframework.core.task">AsyncTaskExecutor</a>&nbsp;executor,
                 int&nbsp;maxResults,
@@ -479,7 +464,7 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Get all volumes attached to a Linode instance.</div>
 </td>
 </tr>
-<tr id="i44" class="altColor">
+<tr id="i42" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Volumes.html" title="class in org.dellroad.linode.apiv4.model">Volumes</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getLinodeVolumesPage-org.dellroad.linode.apiv4.filter.Filter-int-int-">getLinodeVolumesPage</a></span>(<a href="../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter,
                     int&nbsp;page,
@@ -487,7 +472,7 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Get one page of the volumes attached to a Linode instance.</div>
 </td>
 </tr>
-<tr id="i45" class="rowColor">
+<tr id="i43" class="rowColor">
 <td class="colFirst"><code>protected &lt;T,P extends <a href="../../../../../org/dellroad/linode/apiv4/model/Paginated.html" title="class in org.dellroad.linode.apiv4.model">Paginated</a>&lt;T&gt;&gt;<br>P</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getPage-java.lang.Class-org.dellroad.linode.apiv4.filter.Filter-int-java.lang.String-java.lang.Object...-">getPage</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&lt;P&gt;&nbsp;responseType,
        <a href="../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter,
@@ -497,13 +482,13 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Query a paginated resource via GET.</div>
 </td>
 </tr>
-<tr id="i46" class="altColor">
+<tr id="i44" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Region.html" title="class in org.dellroad.linode.apiv4.model">Region</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getRegion-java.lang.String-">getRegion</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;regionId)</code>
 <div class="block">Get a Linode region.</div>
 </td>
 </tr>
-<tr id="i47" class="rowColor">
+<tr id="i45" class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../org/dellroad/linode/apiv4/model/Region.html" title="class in org.dellroad.linode.apiv4.model">Region</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getRegions-org.springframework.core.task.AsyncTaskExecutor-int-org.dellroad.linode.apiv4.filter.Filter-">getRegions</a></span>(<a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/core/task/AsyncTaskExecutor.html?is-external=true" title="class or interface in org.springframework.core.task">AsyncTaskExecutor</a>&nbsp;executor,
           int&nbsp;maxResults,
@@ -511,24 +496,24 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Get all Linode regions.</div>
 </td>
 </tr>
-<tr id="i48" class="altColor">
+<tr id="i46" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Regions.html" title="class in org.dellroad.linode.apiv4.model">Regions</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getRegionsPage-org.dellroad.linode.apiv4.filter.Filter-int-">getRegionsPage</a></span>(<a href="../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter,
               int&nbsp;page)</code>
 <div class="block">Get one page of Linode regions.</div>
 </td>
 </tr>
-<tr id="i49" class="rowColor">
+<tr id="i47" class="rowColor">
 <td class="colFirst"><code><a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/web/client/RestTemplate.html?is-external=true" title="class or interface in org.springframework.web.client">RestTemplate</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getRestTemplate--">getRestTemplate</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i50" class="altColor">
+<tr id="i48" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/StackScript.html" title="class in org.dellroad.linode.apiv4.model">StackScript</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getStackScript-int-">getStackScript</a></span>(int&nbsp;scriptId)</code>
 <div class="block">Get a specific StackScript.</div>
 </td>
 </tr>
-<tr id="i51" class="rowColor">
+<tr id="i49" class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../org/dellroad/linode/apiv4/model/StackScript.html" title="class in org.dellroad.linode.apiv4.model">StackScript</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getStackScripts-org.springframework.core.task.AsyncTaskExecutor-int-org.dellroad.linode.apiv4.filter.Filter-">getStackScripts</a></span>(<a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/core/task/AsyncTaskExecutor.html?is-external=true" title="class or interface in org.springframework.core.task">AsyncTaskExecutor</a>&nbsp;executor,
                int&nbsp;maxResults,
@@ -536,33 +521,33 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Get all StackScripts.</div>
 </td>
 </tr>
-<tr id="i52" class="altColor">
+<tr id="i50" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/StackScripts.html" title="class in org.dellroad.linode.apiv4.model">StackScripts</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getStackScriptsPage-org.dellroad.linode.apiv4.filter.Filter-int-">getStackScriptsPage</a></span>(<a href="../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter,
                    int&nbsp;page)</code>
 <div class="block">Get one page of StackScripts.</div>
 </td>
 </tr>
-<tr id="i53" class="rowColor">
+<tr id="i51" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Stats.html" title="class in org.dellroad.linode.apiv4.model">Stats</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getStats-int-">getStats</a></span>(int&nbsp;linodeId)</code>
 <div class="block">Get stats for the past 24 hours.</div>
 </td>
 </tr>
-<tr id="i54" class="altColor">
+<tr id="i52" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Stats.html" title="class in org.dellroad.linode.apiv4.model">Stats</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getStats-int-java.time.YearMonth-">getStats</a></span>(int&nbsp;linodeId,
         <a href="http://docs.oracle.com/javase/8/docs/api/java/time/YearMonth.html?is-external=true" title="class or interface in java.time">YearMonth</a>&nbsp;month)</code>
 <div class="block">Get stats for the specified month.</div>
 </td>
 </tr>
-<tr id="i55" class="rowColor">
+<tr id="i53" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Type.html" title="class in org.dellroad.linode.apiv4.model">Type</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getType-java.lang.String-">getType</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;typeId)</code>
 <div class="block">Get a specific Linode type.</div>
 </td>
 </tr>
-<tr id="i56" class="altColor">
+<tr id="i54" class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../org/dellroad/linode/apiv4/model/Type.html" title="class in org.dellroad.linode.apiv4.model">Type</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getTypes-org.springframework.core.task.AsyncTaskExecutor-int-org.dellroad.linode.apiv4.filter.Filter-">getTypes</a></span>(<a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/core/task/AsyncTaskExecutor.html?is-external=true" title="class or interface in org.springframework.core.task">AsyncTaskExecutor</a>&nbsp;executor,
         int&nbsp;maxResults,
@@ -570,20 +555,20 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Get all Linode types.</div>
 </td>
 </tr>
-<tr id="i57" class="rowColor">
+<tr id="i55" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Types.html" title="class in org.dellroad.linode.apiv4.model">Types</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getTypesPage-org.dellroad.linode.apiv4.filter.Filter-int-">getTypesPage</a></span>(<a href="../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter,
             int&nbsp;page)</code>
 <div class="block">Get one page of Linode types.</div>
 </td>
 </tr>
-<tr id="i58" class="altColor">
+<tr id="i56" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Volume.html" title="class in org.dellroad.linode.apiv4.model">Volume</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getVolume-int-">getVolume</a></span>(int&nbsp;volumeId)</code>
 <div class="block">Get a specific volume.</div>
 </td>
 </tr>
-<tr id="i59" class="rowColor">
+<tr id="i57" class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../org/dellroad/linode/apiv4/model/Volume.html" title="class in org.dellroad.linode.apiv4.model">Volume</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getVolumes-org.springframework.core.task.AsyncTaskExecutor-int-org.dellroad.linode.apiv4.filter.Filter-">getVolumes</a></span>(<a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/core/task/AsyncTaskExecutor.html?is-external=true" title="class or interface in org.springframework.core.task">AsyncTaskExecutor</a>&nbsp;executor,
           int&nbsp;maxResults,
@@ -591,26 +576,26 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Get all volumes.</div>
 </td>
 </tr>
-<tr id="i60" class="altColor">
+<tr id="i58" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Volumes.html" title="class in org.dellroad.linode.apiv4.model">Volumes</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#getVolumesPage-org.dellroad.linode.apiv4.filter.Filter-int-">getVolumesPage</a></span>(<a href="../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter,
               int&nbsp;page)</code>
 <div class="block">Get one page of volumes.</div>
 </td>
 </tr>
-<tr id="i61" class="rowColor">
+<tr id="i59" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#kvmifyLinode-int-">kvmifyLinode</a></span>(int&nbsp;linodeId)</code>
 <div class="block">Convert a Linode instance to KVM.</div>
 </td>
 </tr>
-<tr id="i62" class="altColor">
+<tr id="i60" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#mutateLinode-int-">mutateLinode</a></span>(int&nbsp;linodeId)</code>
 <div class="block">Upgrade a Linode to its next generation.</div>
 </td>
 </tr>
-<tr id="i63" class="rowColor">
+<tr id="i61" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#post-java.lang.Object-java.lang.String-java.lang.Object...-">post</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;request,
     <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;pathTemplate,
@@ -618,7 +603,7 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">POST to a resource.</div>
 </td>
 </tr>
-<tr id="i64" class="altColor">
+<tr id="i62" class="altColor">
 <td class="colFirst"><code>protected &lt;R&gt;&nbsp;R</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#postFor-java.lang.Class-java.lang.Object-java.lang.String-java.lang.Object...-">postFor</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&lt;R&gt;&nbsp;responseType,
        <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;request,
@@ -627,7 +612,7 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">POST to a resource expecting response.</div>
 </td>
 </tr>
-<tr id="i65" class="rowColor">
+<tr id="i63" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#put-java.lang.Object-java.lang.String-java.lang.Object...-">put</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;request,
    <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;pathTemplate,
@@ -635,66 +620,66 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">PUT a resource.</div>
 </td>
 </tr>
-<tr id="i66" class="altColor">
+<tr id="i64" class="altColor">
 <td class="colFirst"><code>protected &lt;R&gt;&nbsp;R</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#query-java.util.function.Function-">query</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html?is-external=true" title="class or interface in java.util.function">Function</a>&lt;<a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/web/client/RestTemplate.html?is-external=true" title="class or interface in org.springframework.web.client">RestTemplate</a>,R&gt;&nbsp;executor)</code>
 <div class="block">Talk to Linode and get some response.</div>
 </td>
 </tr>
-<tr id="i67" class="rowColor">
+<tr id="i65" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#rebootLinode-int-">rebootLinode</a></span>(int&nbsp;linodeId)</code>
 <div class="block">Reboot a Linode instance.</div>
 </td>
 </tr>
-<tr id="i68" class="altColor">
+<tr id="i66" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#rebootLinode-int-int-">rebootLinode</a></span>(int&nbsp;linodeId,
             int&nbsp;configId)</code>
 <div class="block">Reboot a Linode instance.</div>
 </td>
 </tr>
-<tr id="i69" class="rowColor">
+<tr id="i67" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#rescueLinode-int-org.dellroad.linode.apiv4.request.RescueLinodeRequest-">rescueLinode</a></span>(int&nbsp;linodeId,
             <a href="../../../../../org/dellroad/linode/apiv4/request/RescueLinodeRequest.html" title="class in org.dellroad.linode.apiv4.request">RescueLinodeRequest</a>&nbsp;request)</code>
 <div class="block">Reboot a Linode instance in rescue mode.</div>
 </td>
 </tr>
-<tr id="i70" class="altColor">
+<tr id="i68" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#resizeLinode-int-java.lang.String-">resizeLinode</a></span>(int&nbsp;linodeId,
             <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;typeId)</code>
 <div class="block">Resize a Linode instance.</div>
 </td>
 </tr>
-<tr id="i71" class="rowColor">
+<tr id="i69" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#setBaseURI-java.net.URI-">setBaseURI</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/net/URI.html?is-external=true" title="class or interface in java.net">URI</a>&nbsp;baseURI)</code>&nbsp;</td>
 </tr>
-<tr id="i72" class="altColor">
+<tr id="i70" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#setRestTemplate-org.springframework.web.client.RestTemplate-">setRestTemplate</a></span>(<a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/web/client/RestTemplate.html?is-external=true" title="class or interface in org.springframework.web.client">RestTemplate</a>&nbsp;restTemplate)</code>&nbsp;</td>
 </tr>
-<tr id="i73" class="rowColor">
+<tr id="i71" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#shutdownLinode-int-">shutdownLinode</a></span>(int&nbsp;linodeId)</code>
 <div class="block">Shutdown a Linode.</div>
 </td>
 </tr>
-<tr id="i74" class="altColor">
+<tr id="i72" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#submit-java.util.function.Consumer-">submit</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html?is-external=true" title="class or interface in java.util.function">Consumer</a>&lt;<a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/web/client/RestTemplate.html?is-external=true" title="class or interface in org.springframework.web.client">RestTemplate</a>&gt;&nbsp;executor)</code>
 <div class="block">Talk to Linode.</div>
 </td>
 </tr>
-<tr id="i75" class="rowColor">
+<tr id="i73" class="rowColor">
 <td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#toJson-java.lang.Object-">toJson</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;value)</code>
 <div class="block">Convert value to JSON.</div>
 </td>
 </tr>
-<tr id="i76" class="altColor">
+<tr id="i74" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#updateIP-int-java.lang.String-org.dellroad.linode.apiv4.model.IP-">updateIP</a></span>(int&nbsp;linodeId,
         <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;address,
@@ -702,20 +687,20 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Update info about a specific IPv4 address.</div>
 </td>
 </tr>
-<tr id="i77" class="rowColor">
+<tr id="i75" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#updateLinode-org.dellroad.linode.apiv4.model.Linode-">updateLinode</a></span>(<a href="../../../../../org/dellroad/linode/apiv4/model/Linode.html" title="class in org.dellroad.linode.apiv4.model">Linode</a>&nbsp;request)</code>
 <div class="block">Update a Linode instance.</div>
 </td>
 </tr>
-<tr id="i78" class="altColor">
+<tr id="i76" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#updateLinodeConfig-int-org.dellroad.linode.apiv4.model.Config-">updateLinodeConfig</a></span>(int&nbsp;linodeId,
                   <a href="../../../../../org/dellroad/linode/apiv4/model/Config.html" title="class in org.dellroad.linode.apiv4.model">Config</a>&nbsp;request)</code>
 <div class="block">Update a Linode config.</div>
 </td>
 </tr>
-<tr id="i79" class="rowColor">
+<tr id="i77" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#updateLinodeDisk-int-int-int-">updateLinodeDisk</a></span>(int&nbsp;linodeId,
                 int&nbsp;diskId,
@@ -723,7 +708,7 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Resize a Linode disk.</div>
 </td>
 </tr>
-<tr id="i80" class="altColor">
+<tr id="i78" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#updateLinodeDisk-int-int-java.lang.String-">updateLinodeDisk</a></span>(int&nbsp;linodeId,
                 int&nbsp;diskId,
@@ -731,7 +716,7 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Update a Linode disk.</div>
 </td>
 </tr>
-<tr id="i81" class="rowColor">
+<tr id="i79" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html" title="class in org.dellroad.linode.apiv4.model">Image</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#updateLinodeDiskPassword-int-int-org.dellroad.linode.apiv4.request.ImagizeDiskRequest-">updateLinodeDiskPassword</a></span>(int&nbsp;linodeId,
                         int&nbsp;diskId,
@@ -739,7 +724,7 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <div class="block">Create an image of a disk.</div>
 </td>
 </tr>
-<tr id="i82" class="altColor">
+<tr id="i80" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/spring/LinodeApiRequestSender.html#updateLinodeDiskPassword-int-int-java.lang.String-">updateLinodeDiskPassword</a></span>(int&nbsp;linodeId,
                         int&nbsp;diskId,
@@ -1550,74 +1535,6 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 </dl>
 </li>
 </ul>
-<a name="getDistributions-org.springframework.core.task.AsyncTaskExecutor-int-org.dellroad.linode.apiv4.filter.Filter-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getDistributions</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../org/dellroad/linode/apiv4/model/Distribution.html" title="class in org.dellroad.linode.apiv4.model">Distribution</a>&gt;&nbsp;getDistributions(<a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/core/task/AsyncTaskExecutor.html?is-external=true" title="class or interface in org.springframework.core.task">AsyncTaskExecutor</a>&nbsp;executor,
-                                           int&nbsp;maxResults,
-                                           <a href="../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter)
-                                    throws <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</a></pre>
-<div class="block">Get all Linux distributions.
-
- <p>
- Pages after the first are loaded asynchronously using the given <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/core/task/AsyncTaskExecutor.html?is-external=true" title="class or interface in org.springframework.core.task"><code>AsyncTaskExecutor</code></a>, if any;
- if <code>executor</code> is null, pages are loaded synchronously and sequentially.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>executor</code> - executor for loading pages</dd>
-<dd><code>maxResults</code> - limit on the number of results returned, or zero for no limit</dd>
-<dd><code>filter</code> - filter for returned values, or null for no filter</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>mutable list of all distributions matching <code>filter</code></dd>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/web/client/RestClientException.html?is-external=true" title="class or interface in org.springframework.web.client">RestClientException</a></code> - if an error occurs</dd>
-<dd><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</a></code> - if the current thread is interrupted while waiting for <code>executor</code></dd>
-<dd><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code> - if <code>maxResults</code> is negative</dd>
-</dl>
-</li>
-</ul>
-<a name="getDistributionsPage-org.dellroad.linode.apiv4.filter.Filter-int-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getDistributionsPage</h4>
-<pre>public&nbsp;<a href="../../../../../org/dellroad/linode/apiv4/model/Distributions.html" title="class in org.dellroad.linode.apiv4.model">Distributions</a>&nbsp;getDistributionsPage(<a href="../../../../../org/dellroad/linode/apiv4/filter/Filter.html" title="class in org.dellroad.linode.apiv4.filter">Filter</a>&nbsp;filter,
-                                          int&nbsp;page)</pre>
-<div class="block">Get one page of Linux distributions.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>filter</code> - filter for returned values, or null for no filter</dd>
-<dd><code>page</code> - page number (the first page is number one)</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>one page of distributions</dd>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/web/client/RestClientException.html?is-external=true" title="class or interface in org.springframework.web.client">RestClientException</a></code> - if an error occurs</dd>
-<dd><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code> - if <code>page</code> is less than one</dd>
-</dl>
-</li>
-</ul>
-<a name="getDistribution-int-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getDistribution</h4>
-<pre>public&nbsp;<a href="../../../../../org/dellroad/linode/apiv4/model/Distribution.html" title="class in org.dellroad.linode.apiv4.model">Distribution</a>&nbsp;getDistribution(int&nbsp;distId)</pre>
-<div class="block">Get a specific Linux distribution.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>distId</code> - distribution ID</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>requested distribution</dd>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/web/client/RestClientException.html?is-external=true" title="class or interface in org.springframework.web.client">RestClientException</a></code> - if an error occurs</dd>
-</dl>
-</li>
-</ul>
 <a name="getIPInfo-int-">
 <!--   -->
 </a>
@@ -2085,6 +2002,22 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 </dl>
 </li>
 </ul>
+<a name="detachVolume-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>detachVolume</h4>
+<pre>public&nbsp;void&nbsp;detachVolume(int&nbsp;volumeId)</pre>
+<div class="block">Detach a volume from its Linode.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>volumeId</code> - volume ID</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/web/client/RestClientException.html?is-external=true" title="class or interface in org.springframework.web.client">RestClientException</a></code> - if an error occurs</dd>
+</dl>
+</li>
+</ul>
 <a name="cloneVolume-int-java.lang.String-">
 <!--   -->
 </a>
@@ -2225,13 +2158,13 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 </dl>
 </li>
 </ul>
-<a name="getImage-int-">
+<a name="getImage-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getImage</h4>
-<pre>public&nbsp;<a href="../../../../../org/dellroad/linode/apiv4/model/Image.html" title="class in org.dellroad.linode.apiv4.model">Image</a>&nbsp;getImage(int&nbsp;imageId)</pre>
+<pre>public&nbsp;<a href="../../../../../org/dellroad/linode/apiv4/model/Image.html" title="class in org.dellroad.linode.apiv4.model">Image</a>&nbsp;getImage(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;imageId)</pre>
 <div class="block">Get an image.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -2240,6 +2173,7 @@ implements <a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-ap
 <dd>specified image</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code><a href="https://docs.spring.io/spring/docs/4.3.12.RELEASE/javadoc-api/org/springframework/web/client/RestClientException.html?is-external=true" title="class or interface in org.springframework.web.client">RestClientException</a></code> - if an error occurs</dd>
+<dd><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code> - if <code>kernelId</code> is null</dd>
 </dl>
 </li>
 </ul>

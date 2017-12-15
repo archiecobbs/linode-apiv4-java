@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -50,7 +50,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../org/dellroad/linode/apiv4/model/IPv6Pool.html" title="class in org.dellroad.linode.apiv4.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../org/dellroad/linode/apiv4/model/Kernels.html" title="class in org.dellroad.linode.apiv4.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.Architecture.html" title="enum in org.dellroad.linode.apiv4.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?org/dellroad/linode/apiv4/model/Kernel.html" target="_top">Frames</a></li>
@@ -74,7 +74,7 @@ var activeTableTab = "activeTableTab";
 <div>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
-<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#nested.class.summary">Nested</a>&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
@@ -122,6 +122,27 @@ extends <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="nested.class.summary">
+<!--   -->
+</a>
+<h3>Nested Class Summary</h3>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Nested Class Summary table, listing nested classes, and an explanation">
+<caption><span>Nested Classes</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Class and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static class&nbsp;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.Architecture.html" title="enum in org.dellroad.linode.apiv4.model">Kernel.Architecture</a></span></code>
+<div class="block">Linode <a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html" title="class in org.dellroad.linode.apiv4.model"><code>Kernel</code></a> architectures.</div>
+</td>
+</tr>
+</table>
+</li>
+</ul>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <ul class="blockList">
 <li class="blockList"><a name="constructor.summary">
@@ -152,34 +173,58 @@ extends <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html#getId--">getId</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.Architecture.html" title="enum in org.dellroad.linode.apiv4.model">Kernel.Architecture</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html#getArchitecture--">getArchitecture</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html#getVersion--">getVersion</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html#getId--">getId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html#getLabel--">getLabel</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html#getVersion--">getVersion</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html#isKvm--">isKvm</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html#isPvops--">isPvops</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html#isXen--">isXen</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html#setArchitecture-org.dellroad.linode.apiv4.model.Kernel.Architecture-">setArchitecture</a></span>(<a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.Architecture.html" title="enum in org.dellroad.linode.apiv4.model">Kernel.Architecture</a>&nbsp;architecture)</code>&nbsp;</td>
+</tr>
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html#setId-java.lang.String-">setId</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;id)</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html#setKvm-boolean-">setKvm</a></span>(boolean&nbsp;kvm)</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i10" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html#setLabel-java.lang.String-">setLabel</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;label)</code>&nbsp;</td>
+</tr>
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html#setPvops-boolean-">setPvops</a></span>(boolean&nbsp;pvops)</code>&nbsp;</td>
+</tr>
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html#setVersion-java.lang.String-">setVersion</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;version)</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.html#setXen-boolean-">setXen</a></span>(boolean&nbsp;xen)</code>&nbsp;</td>
 </tr>
@@ -276,6 +321,60 @@ extends <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?
 <pre>public&nbsp;void&nbsp;setVersion(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;version)</pre>
 </li>
 </ul>
+<a name="getArchitecture--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getArchitecture</h4>
+<pre>public&nbsp;<a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.Architecture.html" title="enum in org.dellroad.linode.apiv4.model">Kernel.Architecture</a>&nbsp;getArchitecture()</pre>
+</li>
+</ul>
+<a name="setArchitecture-org.dellroad.linode.apiv4.model.Kernel.Architecture-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setArchitecture</h4>
+<pre>public&nbsp;void&nbsp;setArchitecture(<a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.Architecture.html" title="enum in org.dellroad.linode.apiv4.model">Kernel.Architecture</a>&nbsp;architecture)</pre>
+</li>
+</ul>
+<a name="isPvops--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isPvops</h4>
+<pre>public&nbsp;boolean&nbsp;isPvops()</pre>
+</li>
+</ul>
+<a name="setPvops-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setPvops</h4>
+<pre>public&nbsp;void&nbsp;setPvops(boolean&nbsp;pvops)</pre>
+</li>
+</ul>
+<a name="getLabel--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getLabel</h4>
+<pre>public&nbsp;<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getLabel()</pre>
+</li>
+</ul>
+<a name="setLabel-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setLabel</h4>
+<pre>public&nbsp;void&nbsp;setLabel(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;label)</pre>
+</li>
+</ul>
 <a name="getId--">
 <!--   -->
 </a>
@@ -323,7 +422,7 @@ extends <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../org/dellroad/linode/apiv4/model/IPv6Pool.html" title="class in org.dellroad.linode.apiv4.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../org/dellroad/linode/apiv4/model/Kernels.html" title="class in org.dellroad.linode.apiv4.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../org/dellroad/linode/apiv4/model/Kernel.Architecture.html" title="enum in org.dellroad.linode.apiv4.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?org/dellroad/linode/apiv4/model/Kernel.html" target="_top">Frames</a></li>
@@ -347,7 +446,7 @@ extends <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?
 <div>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
-<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#nested.class.summary">Nested</a>&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>

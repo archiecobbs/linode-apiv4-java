@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -111,7 +111,10 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">Image</span>
 extends <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></pre>
-<div class="block">Linode image.</div>
+<div class="block">Linode image.
+
+ <p>
+ Also used to represent distributions.</div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="https://developers.linode.com/v4/reference/images">Images</a></dd>
@@ -184,79 +187,111 @@ extends <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#getDescription--">getDescription</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#getCreator--">getCreator</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#getDescription--">getDescription</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Filesystem.html" title="enum in org.dellroad.linode.apiv4.model">Filesystem</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#getFilesystem--">getFilesystem</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code>int</code></td>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#getId--">getId</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#getLabel--">getLabel</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/util/Date.html?is-external=true" title="class or interface in java.util">Date</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#getLastUsed--">getLastUsed</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#getStatus--">getStatus</a></span>()</code>&nbsp;</td>
-</tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#getType--">getType</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#getMinDeploySize--">getMinDeploySize</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
+<td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Image.Status.html" title="enum in org.dellroad.linode.apiv4.model">Image.Status</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#getStatus--">getStatus</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../org/dellroad/linode/apiv4/model/Image.Type.html" title="enum in org.dellroad.linode.apiv4.model">Image.Type</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#getType--">getType</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/util/Date.html?is-external=true" title="class or interface in java.util">Date</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#getUpdated--">getUpdated</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#getVendor--">getVendor</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i12" class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#isDeprecated--">isDeprecated</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#isPublic--">isPublic</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setCreated-java.util.Date-">setCreated</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/util/Date.html?is-external=true" title="class or interface in java.util">Date</a>&nbsp;created)</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setDescription-java.lang.String-">setDescription</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;description)</code>&nbsp;</td>
-</tr>
-<tr id="i12" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setFilesystem-org.dellroad.linode.apiv4.model.Filesystem-">setFilesystem</a></span>(<a href="../../../../../org/dellroad/linode/apiv4/model/Filesystem.html" title="enum in org.dellroad.linode.apiv4.model">Filesystem</a>&nbsp;filesystem)</code>&nbsp;</td>
-</tr>
-<tr id="i13" class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setId-int-">setId</a></span>(int&nbsp;id)</code>&nbsp;</td>
-</tr>
-<tr id="i14" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setLabel-java.lang.String-">setLabel</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;label)</code>&nbsp;</td>
-</tr>
 <tr id="i15" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setLastUsed-java.util.Date-">setLastUsed</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/util/Date.html?is-external=true" title="class or interface in java.util">Date</a>&nbsp;lastUsed)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setCreator-java.lang.String-">setCreator</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;creator)</code>&nbsp;</td>
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setPublic-boolean-">setPublic</a></span>(boolean&nbsp;publicx)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setDeprecated-boolean-">setDeprecated</a></span>(boolean&nbsp;deprecated)</code>&nbsp;</td>
 </tr>
 <tr id="i17" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setStatus-java.lang.String-">setStatus</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;status)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setDescription-java.lang.String-">setDescription</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;description)</code>&nbsp;</td>
 </tr>
 <tr id="i18" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setType-java.lang.String-">setType</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;type)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setFilesystem-org.dellroad.linode.apiv4.model.Filesystem-">setFilesystem</a></span>(<a href="../../../../../org/dellroad/linode/apiv4/model/Filesystem.html" title="enum in org.dellroad.linode.apiv4.model">Filesystem</a>&nbsp;filesystem)</code>&nbsp;</td>
 </tr>
 <tr id="i19" class="rowColor">
 <td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setId-java.lang.String-">setId</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;id)</code>&nbsp;</td>
+</tr>
+<tr id="i20" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setLabel-java.lang.String-">setLabel</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;label)</code>&nbsp;</td>
+</tr>
+<tr id="i21" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setLastUsed-java.util.Date-">setLastUsed</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/util/Date.html?is-external=true" title="class or interface in java.util">Date</a>&nbsp;lastUsed)</code>&nbsp;</td>
+</tr>
+<tr id="i22" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setMinDeploySize-int-">setMinDeploySize</a></span>(int&nbsp;minDeploySize)</code>&nbsp;</td>
+</tr>
+<tr id="i23" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setPublic-boolean-">setPublic</a></span>(boolean&nbsp;publicx)</code>&nbsp;</td>
+</tr>
+<tr id="i24" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setStatus-org.dellroad.linode.apiv4.model.Image.Status-">setStatus</a></span>(<a href="../../../../../org/dellroad/linode/apiv4/model/Image.Status.html" title="enum in org.dellroad.linode.apiv4.model">Image.Status</a>&nbsp;status)</code>&nbsp;</td>
+</tr>
+<tr id="i25" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setType-org.dellroad.linode.apiv4.model.Image.Type-">setType</a></span>(<a href="../../../../../org/dellroad/linode/apiv4/model/Image.Type.html" title="enum in org.dellroad.linode.apiv4.model">Image.Type</a>&nbsp;type)</code>&nbsp;</td>
+</tr>
+<tr id="i26" class="altColor">
+<td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setUpdated-java.util.Date-">setUpdated</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/util/Date.html?is-external=true" title="class or interface in java.util">Date</a>&nbsp;updated)</code>&nbsp;</td>
+</tr>
+<tr id="i27" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/dellroad/linode/apiv4/model/Image.html#setVendor-java.lang.String-">setVendor</a></span>(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;vendor)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -321,16 +356,16 @@ extends <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>getStatus</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getStatus()</pre>
+<pre>public&nbsp;<a href="../../../../../org/dellroad/linode/apiv4/model/Image.Status.html" title="enum in org.dellroad.linode.apiv4.model">Image.Status</a>&nbsp;getStatus()</pre>
 </li>
 </ul>
-<a name="setStatus-java.lang.String-">
+<a name="setStatus-org.dellroad.linode.apiv4.model.Image.Status-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>setStatus</h4>
-<pre>public&nbsp;void&nbsp;setStatus(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;status)</pre>
+<pre>public&nbsp;void&nbsp;setStatus(<a href="../../../../../org/dellroad/linode/apiv4/model/Image.Status.html" title="enum in org.dellroad.linode.apiv4.model">Image.Status</a>&nbsp;status)</pre>
 </li>
 </ul>
 <a name="getFilesystem--">
@@ -405,22 +440,40 @@ extends <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?
 <pre>public&nbsp;void&nbsp;setPublic(boolean&nbsp;publicx)</pre>
 </li>
 </ul>
+<a name="isDeprecated--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isDeprecated</h4>
+<pre>public&nbsp;boolean&nbsp;isDeprecated()</pre>
+</li>
+</ul>
+<a name="setDeprecated-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setDeprecated</h4>
+<pre>public&nbsp;void&nbsp;setDeprecated(boolean&nbsp;deprecated)</pre>
+</li>
+</ul>
 <a name="getType--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getType</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getType()</pre>
+<pre>public&nbsp;<a href="../../../../../org/dellroad/linode/apiv4/model/Image.Type.html" title="enum in org.dellroad.linode.apiv4.model">Image.Type</a>&nbsp;getType()</pre>
 </li>
 </ul>
-<a name="setType-java.lang.String-">
+<a name="setType-org.dellroad.linode.apiv4.model.Image.Type-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>setType</h4>
-<pre>public&nbsp;void&nbsp;setType(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;type)</pre>
+<pre>public&nbsp;void&nbsp;setType(<a href="../../../../../org/dellroad/linode/apiv4/model/Image.Type.html" title="enum in org.dellroad.linode.apiv4.model">Image.Type</a>&nbsp;type)</pre>
 </li>
 </ul>
 <a name="getLastUsed--">
@@ -439,6 +492,60 @@ extends <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>setLastUsed</h4>
 <pre>public&nbsp;void&nbsp;setLastUsed(<a href="http://docs.oracle.com/javase/8/docs/api/java/util/Date.html?is-external=true" title="class or interface in java.util">Date</a>&nbsp;lastUsed)</pre>
+</li>
+</ul>
+<a name="getMinDeploySize--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getMinDeploySize</h4>
+<pre>public&nbsp;int&nbsp;getMinDeploySize()</pre>
+</li>
+</ul>
+<a name="setMinDeploySize-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setMinDeploySize</h4>
+<pre>public&nbsp;void&nbsp;setMinDeploySize(int&nbsp;minDeploySize)</pre>
+</li>
+</ul>
+<a name="getCreator--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCreator</h4>
+<pre>public&nbsp;<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getCreator()</pre>
+</li>
+</ul>
+<a name="setCreator-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setCreator</h4>
+<pre>public&nbsp;void&nbsp;setCreator(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;creator)</pre>
+</li>
+</ul>
+<a name="getVendor--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getVendor</h4>
+<pre>public&nbsp;<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getVendor()</pre>
+</li>
+</ul>
+<a name="setVendor-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setVendor</h4>
+<pre>public&nbsp;void&nbsp;setVendor(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;vendor)</pre>
 </li>
 </ul>
 <a name="getLabel--">
@@ -465,16 +572,16 @@ extends <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>getId</h4>
-<pre>public&nbsp;int&nbsp;getId()</pre>
+<pre>public&nbsp;<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getId()</pre>
 </li>
 </ul>
-<a name="setId-int-">
+<a name="setId-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>setId</h4>
-<pre>public&nbsp;void&nbsp;setId(int&nbsp;id)</pre>
+<pre>public&nbsp;void&nbsp;setId(<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;id)</pre>
 </li>
 </ul>
 </li>
