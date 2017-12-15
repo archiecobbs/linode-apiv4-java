@@ -5,11 +5,14 @@
 
 package org.dellroad.linode.apiv4.filter;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.dellroad.linode.apiv4.Constants;
 
@@ -165,7 +168,7 @@ public class FilterBuilder {
     public Filter build() {
         final HashMap<String, Object> map = new HashMap<>(3);
         if (this.condition != null)
-            map.put(this.condition.getName(), this.condition.getValue());
+            map.putAll(this.condition.getPair());
         if (this.orderBy != null) {
             map.put(Constants.FILTER_ORDER_BY, this.orderBy);
             map.put(Constants.FILTER_ORDER, this.ascending ? Constants.FILTER_ORDER_ASC : Constants.FILTER_ORDER_DESC);
@@ -200,26 +203,21 @@ public class FilterBuilder {
      */
     public static final class Condition {
 
-        private final String name;
-        private final Object value;
+        private final Map<String, Object> pair;
 
         private Condition(String name, Object value) {
             if (name == null)
                 throw new IllegalArgumentException("null name");
-            this.name = name;
-            this.value = value;
+            this.pair = Collections.singletonMap(name, value);
         }
 
         private Condition(String operator, String name, Object value) {
             this(name, new Condition(operator, value));
         }
 
-        public String getName() {
-            return this.name;
-        }
-
-        public Object getValue() {
-            return this.value;
+        @JsonAnyGetter
+        public Map<String, Object> getPair() {
+            return this.pair;
         }
     }
 }
