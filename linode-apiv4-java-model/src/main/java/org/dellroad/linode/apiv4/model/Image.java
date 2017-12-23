@@ -158,7 +158,7 @@ public class Image extends AbstractStringIdLabeled {
      */
     public enum Type {
         MANUAL,
-        AUTOMATIC;          // XXX unconfirmed
+        AUTOMATIC;
 
         @JsonCreator
         public static Type parse(String value) {

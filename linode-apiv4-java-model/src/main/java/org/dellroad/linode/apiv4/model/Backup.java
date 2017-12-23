@@ -23,8 +23,8 @@ import org.dellroad.linode.apiv4.Constants;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Backup extends AbstractIntIdLabeled {
 
-    private String status;
-    private String type;
+    private Status status;
+    private Type type;
     private String regionId;
     private Date created;
     private Date updated;
@@ -33,19 +33,17 @@ public class Backup extends AbstractIntIdLabeled {
     private Disk[] disks;
     private Availability availability;
 
-    // XXX what is this?
-    public String getStatus() {
+    public Status getStatus() {
         return this.status;
     }
-    public void setStatus(final String status) {
+    public void setStatus(final Status status) {
         this.status = status;
     }
 
-    // XXX what is this?
-    public String getType() {
+    public Type getType() {
         return this.type;
     }
-    public void setType(final String type) {
+    public void setType(final Type type) {
         this.type = type;
     }
 
@@ -110,12 +108,66 @@ public class Backup extends AbstractIntIdLabeled {
     public enum Availability {
         DAILY,
         WEEKLY,
-        SNAPSHOT,
         UNAVAILABLE;
 
         @JsonCreator
         public static Availability parse(String value) {
             return Availability.valueOf(value.toUpperCase());
+        }
+
+        @JsonValue
+        @Override
+        public String toString() {
+            return this.name().toLowerCase();
+        }
+    }
+
+// Status
+
+    /**
+     * {@link Backup} status.
+     */
+    public enum Status {
+        PAUSED,
+        PENDING,
+        RUNNING,
+        NEEDS_POST_PROCESSING,
+        FAILED,
+        USER_ABORTED;
+
+        @JsonCreator
+        public static Status parse(String value) {
+            return Status.valueOf(value.replaceAll("([A-Z])", "_$1").toUpperCase());
+        }
+
+        @JsonValue
+        @Override
+        public String toString() {
+            final String name = this.name();
+            StringBuilder buf = new StringBuilder(name.length());
+            for (int i = 0; i < name.length(); i++) {
+                final char ch = name.charAt(0);
+                if (ch == '_')
+                    buf.append(name.charAt(++i));
+                else
+                    buf.append(Character.toLowerCase(ch));
+            }
+            return buf.toString();
+        }
+    }
+
+// Type
+
+    /**
+     * {@link Backup} type.
+     */
+    public enum Type {
+        AUTO,
+        SNAPSHOT;
+
+        @JsonCreator
+        public static Type parse(String value) {
+            return Type.valueOf(value.toUpperCase());
         }
 
         @JsonValue
