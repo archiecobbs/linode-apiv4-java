@@ -59,6 +59,7 @@ public class QueryTest {
     private ClassPathXmlApplicationContext context;
     private LinodeApiRequestSender sender;
     private ThreadPoolTaskExecutor executor;
+    private LinodeApiRequestSender.AsyncExecutor asyncExecutor;
     private Type cheapestType;
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
@@ -92,6 +93,7 @@ public class QueryTest {
         this.executor.setCorePoolSize(3);
         this.executor.setMaxPoolSize(5);
         this.executor.afterPropertiesSet();
+        this.asyncExecutor = LinodeApiRequestSender.AsyncExecutor.of(this.executor);
     }
 
     @AfterClass
@@ -117,7 +119,7 @@ public class QueryTest {
     public void testLinodes() throws Exception {
         if (this.authToken == null)
             return;
-        for (Linode linode : this.sender.getLinodes(this.executor, MAX_RESULTS, null)) {
+        for (Linode linode : this.sender.getLinodes(this.asyncExecutor, MAX_RESULTS, null)) {
 
             // Linode
             this.log.info("getLinodes(): {}", this.toString(linode));
@@ -129,21 +131,21 @@ public class QueryTest {
             this.log.info("getLinodeBackupInfo({}): {}", linode.getId(), this.toString(backupInfo));
 
             // Configs
-            for (Config config : this.sender.getLinodeConfigs(this.executor, MAX_RESULTS, null, linode.getId())) {
+            for (Config config : this.sender.getLinodeConfigs(this.asyncExecutor, MAX_RESULTS, null, linode.getId())) {
                 this.log.info("getLinodeConfigs(): {}", this.toString(config));
                 config = this.sender.getLinodeConfig(linode.getId(), config.getId());
                 this.log.info("getLinodeConfig({}): {}", config.getId(), this.toString(config));
             }
 
             // Disks
-            for (Disk disk : this.sender.getLinodeDisks(this.executor, MAX_RESULTS, null, linode.getId())) {
+            for (Disk disk : this.sender.getLinodeDisks(this.asyncExecutor, MAX_RESULTS, null, linode.getId())) {
                 this.log.info("getLinodeDisks(): {}", this.toString(disk));
                 disk = this.sender.getLinodeDisk(linode.getId(), disk.getId());
                 this.log.info("getLinodeDisk({}): {}", disk.getId(), this.toString(disk));
             }
 
             // Volumes
-            for (Volume volume : this.sender.getLinodeVolumes(this.executor, MAX_RESULTS, null, linode.getId())) {
+            for (Volume volume : this.sender.getLinodeVolumes(this.asyncExecutor, MAX_RESULTS, null, linode.getId())) {
                 this.log.info("getLinodeVolumes(): {}", this.toString(volume));
                 volume = this.sender.getVolume(volume.getId());
                 this.log.info("getVolume({}): {}", volume.getId(), this.toString(volume));
@@ -263,7 +265,7 @@ public class QueryTest {
     @Test
     public void testKernels() throws Exception {
         int count = 0;
-        for (Kernel kernel : this.sender.getKernels(this.executor, MAX_RESULTS, null)) {
+        for (Kernel kernel : this.sender.getKernels(this.asyncExecutor, MAX_RESULTS, null)) {
             this.log.info("getKernels(): {}", this.toString(kernel));
             if (kernel.getVersion().equals("2.6.18"))      // avoid weird bug
                 continue;
@@ -296,7 +298,7 @@ public class QueryTest {
 
     @Test
     public void testTypes() throws Exception {
-        for (Type type : this.sender.getTypes(this.executor, MAX_RESULTS, null)) {
+        for (Type type : this.sender.getTypes(this.asyncExecutor, MAX_RESULTS, null)) {
             this.log.info("getTypes(): {}", this.toString(type));
             type = this.sender.getType(type.getId());
             this.log.info("getType({}): {}", type.getId(), this.toString(type));
@@ -309,7 +311,7 @@ public class QueryTest {
     public void testVolumes() throws Exception {
         if (this.authToken == null)
             return;
-        for (Volume volume : this.sender.getVolumes(this.executor, MAX_RESULTS, null)) {
+        for (Volume volume : this.sender.getVolumes(this.asyncExecutor, MAX_RESULTS, null)) {
             this.log.info("getVolumes(): {}", this.toString(volume));
             volume = this.sender.getVolume(volume.getId());
             this.log.info("getVolume({}): {}", volume.getId(), this.toString(volume));
@@ -330,7 +332,7 @@ public class QueryTest {
 
     @Test
     public void testRegions() throws Exception {
-        for (Region region : this.sender.getRegions(this.executor, MAX_RESULTS, null)) {
+        for (Region region : this.sender.getRegions(this.asyncExecutor, MAX_RESULTS, null)) {
             this.log.info("getRegions(): {}", this.toString(region));
             region = this.sender.getRegion(region.getId());
             this.log.info("getRegion({}): {}", region.getId(), this.toString(region));
@@ -347,7 +349,7 @@ public class QueryTest {
     public void testImages() throws Exception {
         if (this.authToken == null)
             return;
-        for (Image image : this.sender.getImages(this.executor, MAX_RESULTS, null)) {
+        for (Image image : this.sender.getImages(this.asyncExecutor, MAX_RESULTS, null)) {
             this.log.info("getImages(): {}", this.toString(image));
             image = this.sender.getImage(image.getId());
             this.log.info("getImage({}): {}", image.getId(), this.toString(image));
@@ -358,7 +360,7 @@ public class QueryTest {
     public void testFilterImages() throws Exception {
         final FilterBuilder fb = new FilterBuilder();
         Image prev = null;
-        for (Image image : this.sender.getImages(this.executor, MAX_RESULTS,
+        for (Image image : this.sender.getImages(this.asyncExecutor, MAX_RESULTS,
           fb.where(fb.and(fb.equal("public", true), fb.equal("vendor", "Debian"))).orderBy("label").build())) {
             assert image.getVendor().equals("Debian") : "wrong vendor: \"" + image.getVendor() + "\" != \"Debian\"";
             if (prev == null)
@@ -373,7 +375,7 @@ public class QueryTest {
 // deleteImage() - TODO
 
     private Region randomRegion() throws InterruptedException {
-        final List<Region> regions = this.sender.getRegions(this.executor, MAX_RESULTS, null);
+        final List<Region> regions = this.sender.getRegions(this.asyncExecutor, MAX_RESULTS, null);
         return regions.get(this.random.nextInt(regions.size()));
     }
 
@@ -388,7 +390,7 @@ public class QueryTest {
 
     private Type cheapestType() throws InterruptedException {
         if (this.cheapestType == null) {
-            final List<Type> types = this.sender.getTypes(this.executor, 0, null);
+            final List<Type> types = this.sender.getTypes(this.asyncExecutor, 0, null);
             Collections.sort(types, Comparator.<Type>comparingDouble(t -> t.getPrice().getHourly()));
             this.cheapestType = types.get(0);
         }
