@@ -49,58 +49,7 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class QueryTest {
-
-    private static final int MAX_RESULTS = 27;
-
-    private final Random random = new Random();
-
-    private String authToken;
-    private ClassPathXmlApplicationContext context;
-    private LinodeApiRequestSender sender;
-    private ThreadPoolTaskExecutor executor;
-    private LinodeApiRequestSender.AsyncExecutor asyncExecutor;
-    private Type cheapestType;
-
-    protected final Logger log = LoggerFactory.getLogger(getClass());
-
-    @BeforeClass
-    @Parameters("authToken")
-    public void setup(@Optional String authToken) {
-
-        // Save auth token, if any
-        if (authToken != null && authToken.isEmpty())
-            authToken = null;
-        this.authToken = authToken;
-
-        // Load context
-        this.log.debug("creating unit test application context");
-        this.context = new ClassPathXmlApplicationContext("linodeApi.xml", this.getClass());
-
-        // Get request sender
-        this.sender = this.context.getBean("linodeApiRequestSender", LinodeApiRequestSender.class);
-
-        // Configure auth token
-        if (this.authToken != null) {
-            this.log.info("configuring authorization token for Linode API unit tests");
-            final LinodeApiHttpRequestFactory requestFactory
-              = this.context.getBean("linodeApiHttpRequestFactory", LinodeApiHttpRequestFactory.class);
-            requestFactory.setAuthorizationToken(this.authToken);
-        }
-
-        // Setup executor
-        this.executor = new ThreadPoolTaskExecutor();
-        this.executor.setCorePoolSize(3);
-        this.executor.setMaxPoolSize(5);
-        this.executor.afterPropertiesSet();
-        this.asyncExecutor = LinodeApiRequestSender.AsyncExecutor.of(this.executor);
-    }
-
-    @AfterClass
-    public void shutdown() {
-        this.context.close();
-        this.executor.destroy();
-    }
+public class QueryTest extends SpringTest {
 
     @Test
     public void testError() throws Exception {
@@ -373,31 +322,4 @@ public class QueryTest {
     }
 
 // deleteImage() - TODO
-
-    private Region randomRegion() throws InterruptedException {
-        final List<Region> regions = this.sender.getRegions(this.asyncExecutor, MAX_RESULTS, null);
-        return regions.get(this.random.nextInt(regions.size()));
-    }
-
-    // Note: result must be between 3 and 32 characters
-    private String randomLabel() {
-        return this.getClass().getSimpleName() + "-" + (this.random.nextInt() & 0x7fffffff);
-    }
-
-    private String unitTestGroup() {
-        return this.getClass().getSimpleName() + " Unit Test";
-    }
-
-    private Type cheapestType() throws InterruptedException {
-        if (this.cheapestType == null) {
-            final List<Type> types = this.sender.getTypes(this.asyncExecutor, 0, null);
-            Collections.sort(types, Comparator.<Type>comparingDouble(t -> t.getPrice().getHourly()));
-            this.cheapestType = types.get(0);
-        }
-        return this.cheapestType;
-    }
-
-    public String toString(Object obj) {
-        return new ReflectionToStringBuilder(obj, new MultilineRecursiveToStringStyle()).toString();
-    }
 }
