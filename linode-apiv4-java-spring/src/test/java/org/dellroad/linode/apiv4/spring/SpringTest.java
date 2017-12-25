@@ -79,7 +79,7 @@ public abstract class SpringTest {
         // Logit
         this.log.debug("creating unit test application context");
         if (this.authToken == null)
-            this.log.warn("no <authToken> configured - tests requiring authentication will succeed trivially");
+            this.log.warn("no <authToken> configured - tests requiring authentication will be skipped");
 
         // Load context
         this.context = new ClassPathXmlApplicationContext("linodeApi.xml", this.getClass());
@@ -101,6 +101,12 @@ public abstract class SpringTest {
         this.executor.setMaxPoolSize(5);
         this.executor.afterPropertiesSet();
         this.asyncExecutor = LinodeApiRequestSender.AsyncExecutor.of(this.executor);
+    }
+
+    @Test
+    public void verifyAuthToken() {
+        if (this.authToken == null)
+            throw new RuntimeException("no <authToken> configured - tests requiring authentication cannot be performed");
     }
 
     @AfterClass

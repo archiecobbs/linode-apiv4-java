@@ -64,10 +64,8 @@ public class QueryTest extends SpringTest {
 
 // getLinodes(), getLinodeBackupInfo(), getLinodeConfigs(), getLinodeDisks(), getLinodeVolumes(), getIPInfo(), getStats()
 
-    @Test
+    @Test(dependsOnMethods = "verifyAuthToken")
     public void testLinodes() throws Exception {
-        if (this.authToken == null)
-            return;
         for (Linode linode : this.sender.getLinodes(this.asyncExecutor, MAX_RESULTS, null)) {
 
             // Linode
@@ -123,10 +121,8 @@ public class QueryTest extends SpringTest {
 
 // createLinode() - error
 
-    @Test
+    @Test(dependsOnMethods = "verifyAuthToken")
     public void testCreateLinodeError() throws Exception {
-        if (this.authToken == null)
-            return;
 
         // Create create request
         final CreateLinodeRequest request = new CreateLinodeRequest();
@@ -151,10 +147,8 @@ public class QueryTest extends SpringTest {
 
 // createLinode(), updateLinode(), deleteLinode(),
 
-    @Test
+    @Test(dependsOnMethods = "verifyAuthToken")
     public void testCreateLinode() throws Exception {
-        if (this.authToken == null)
-            return;
 
         // Create create request
         final CreateLinodeRequest createRequest = new CreateLinodeRequest();
@@ -256,10 +250,8 @@ public class QueryTest extends SpringTest {
 
 // getVolumes()
 
-    @Test
+    @Test(dependsOnMethods = "verifyAuthToken")
     public void testVolumes() throws Exception {
-        if (this.authToken == null)
-            return;
         for (Volume volume : this.sender.getVolumes(this.asyncExecutor, MAX_RESULTS, null)) {
             this.log.info("getVolumes(): {}", this.toString(volume));
             volume = this.sender.getVolume(volume.getId());
@@ -294,10 +286,8 @@ public class QueryTest extends SpringTest {
 
 // getImages()
 
-    @Test
+    @Test(dependsOnMethods = "verifyAuthToken")
     public void testImages() throws Exception {
-        if (this.authToken == null)
-            return;
         for (Image image : this.sender.getImages(this.asyncExecutor, MAX_RESULTS, null)) {
             this.log.info("getImages(): {}", this.toString(image));
             image = this.sender.getImage(image.getId());
