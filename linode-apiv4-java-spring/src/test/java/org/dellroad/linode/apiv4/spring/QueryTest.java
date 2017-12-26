@@ -263,7 +263,7 @@ public class QueryTest extends SpringTest {
 
 // getImages()
 
-    @Test(dependsOnMethods = "verifyAuthToken")
+    @Test
     public void testImages() throws Exception {
         for (Image image : this.sender.getImages(this.asyncExecutor, MAX_RESULTS, null)) {
             this.log.info("getImages(): {}", this.toString(image));
