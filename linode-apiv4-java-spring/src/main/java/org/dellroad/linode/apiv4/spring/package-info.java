@@ -50,11 +50,12 @@
  *          this.requestFactory.setAuthorizationToken("0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef");
  *
  *          // Setup request
- *          final CreateLinodeRequest request = new CreateLinodeRequest}();
+ *          final CreateLinodeRequest request = new CreateLinodeRequest();
  *          request.setTypeId("g5-nanode-1");
  *          request.setRegionId("us-west-1a")
  *          request.setLabel("MyLinode");
  *          request.setGroup("MyLinodeGroup");
+ *          ...
  *
  *          // Send request and return the newly created Linode
  *          return this.sender.createLinode(request);
