@@ -7,6 +7,7 @@ package org.dellroad.linode.apiv4.spring;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -104,6 +105,30 @@ public abstract class SpringTest {
 
     protected String unitTestGroup() {
         return this.getClass().getSimpleName() + " Unit Test";
+    }
+
+    protected Image newestPublicVendorImage(String vendor) throws InterruptedException {
+        final FilterBuilder fb = new FilterBuilder();
+        this.log.info("finding the most recent public image from vendor \"{}\"", vendor);
+        final List<Image> images;
+        if (false)                                      //TODO - API is broken, returns "Cannot filter on vendor"
+            images = this.sender.getImages(this.asyncExecutor, 0, fb.where(fb.equal("vendor", vendor)).build());
+        else {
+            images = this.sender.getImages(this.asyncExecutor, 0, null);
+            for (Iterator<Image> i = images.iterator(); i.hasNext(); ) {
+                if (!i.next().getVendor().equals(vendor))
+                    i.remove();
+            }
+        }
+        if (images.isEmpty())
+            throw new RuntimeException("no images found matching vendor \"" + vendor + "\"");
+        Collections.sort(images,
+          Comparator.comparing(Image::isPublic, ((Comparator<Boolean>)Boolean::compare).reversed())
+          .thenComparing(Image::isDeprecated)
+          .thenComparing(Image::getId));
+        final Image image = images.get(0);
+        this.log.info("the most recent public image from vendor \"{}\" is \"{}\"", vendor, image.getId());
+        return image;
     }
 
     protected Type cheapestType() throws InterruptedException {
