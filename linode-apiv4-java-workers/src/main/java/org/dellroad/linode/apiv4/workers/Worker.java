@@ -31,9 +31,13 @@ import org.slf4j.LoggerFactory;
  * <p>
  * {@link Worker} instances are permanently associated with specific Linode instances. In other words, a {@link Worker}'s
  * {@linkplain #getLinodeId Linode ID} never changes. Also, a worker is identified as "the N'th member of worker pool X"
- * entirely by its Linode name. As it's possible for Linode names to change, and for new Linodes to replace old ones with
+ * entirely by its Linode name (see {@link WorkerPool#getWorkerIndex WorkerPool.getWorkerIndex()}).
+ *
+ * <p>
+ * As it's possible for Linode names to change, and for new Linodes to replace old ones with
  * the same name, it's possible for one {@link Worker} instance to replace another one in a worker pool. In this case,
- * the original worker transistions to {@link State#INVALID}.
+ * the original {@link Worker} instance transistions to {@link State#INVALID}, leaves the worker pool, and a new
+ * {@link Worker} instance is automatically instantiated to replace it.
  */
 @ThreadSafe
 public class Worker {
@@ -87,7 +91,7 @@ public class Worker {
 // Accessors
 
     /**
-     * Get the index of this worker in the worker pool.
+     * Get this worker's unique index in its worker pool.
      *
      * @return worker index
      */
@@ -99,6 +103,7 @@ public class Worker {
      * Get the Linode name of this worker.
      *
      * @return linode name
+     * @see WorkerPool#getWorkerName WorkerPool.getWorkerName()
      */
     public String getName() {
         return this.pool.getWorkerName(this.index);
@@ -136,6 +141,7 @@ public class Worker {
      *
      * @return worker's root password, or null if this worker already existed when its worker pool was started
      *  and no {@linkplain WorkerPool#setStandardRootPassword standard root password} was configured
+     * @see WorkerPool#setStandardRootPassword WorkerPool.setStandardRootPassword()
      */
     public String getRootPassword() {
         return this.rootPassword;
@@ -167,9 +173,11 @@ public class Worker {
      * Force this worker into the {@link State#UNMANAGED} state.
      *
      * <p>
-     * This method does nothing in the {@link State#UNMANAGED} and {@link State#INVALID} states. If this worker is in the
-     * {@link State#UNKNOWN}, {@link State#CREATING}, {@link State#RUNNING}, or {@link State#DESTROYING} states, it will be
-     * immediately transitioned to the {@link State#UNMANAGED} state.
+     * This method does nothing in the {@link State#UNMANAGED} and {@link State#INVALID} states.
+     *
+     * <p>
+     * If this worker is in the {@link State#UNKNOWN}, {@link State#CREATING}, {@link State#RUNNING}, or {@link State#DESTROYING}
+     * states, it will be immediately transitioned to the {@link State#UNMANAGED} state.
      *
      * @return true if this worker's state was changed, false if already in {@link State#UNMANAGED} or {@link State#INVALID}
      */
@@ -192,8 +200,9 @@ public class Worker {
      * Reactivate this {@link State#UNMANAGED} worker, transitioning it to the {@link State#UNKNOWN} state.
      *
      * <p>
-     * This method does nothing unless this worker is in the {@link State#UNMANAGED} state. Otherwise, it will be immediately
-     * transitioned to the {@link State#UNKNOWN} state.
+     * This method does nothing unless this worker is in the {@link State#UNMANAGED} state. If so, it will be immediately
+     * transitioned to the {@link State#UNKNOWN} state, and eventually (within several seconds) updated based on the current
+     * status of its corresponding Linode instance.
      *
      * @return true if this worker's state was changed, false if this worker is not currently {@link State#UNMANAGED}
      */
@@ -217,8 +226,10 @@ public class Worker {
     /**
      * Forcibly destroy this worker.
      *
-     * @return true if successful, false if this instance is already in state {@link State#DESTROYING},
-     * or is in state {@link State#INVALID}
+     * <p>
+     * This method does nothing in the {@link State#DESTROYING} and {@link State#INVALID} states.
+     *
+     * @return true if successful, false if this instance is in state {@link State#DESTROYING} or {@link State#INVALID}
      */
     public boolean destroy() {
         return this.pool.destroy(this);
@@ -228,17 +239,20 @@ public class Worker {
      * Execute the specified command on this worker by remote execution over SSH.
      *
      * <p>
+     * If successful, the returned {@link Process} will be added to this worker's {@linkplain #getProcesses current process set}.
+     *
+     * <p>
      * This method invokes the command as {@code root}, using SSH password authentication with this worker's
      * {@linkplain #getRootPassword root password}.
      *
      * <p>
-     * <b>Note:</b> this requires that the {@code sshpass(1)} utility exist on the local system.
+     * <b>Note:</b> This requires that the {@code sshpass(1)} utility exist on the local system. The password is
+     * passed securely via file descriptor ({@code -d} flag).
      *
      * <p>
-     * <b>Note:</b> this only works for Linodes that were created by the owning worker pool; for Linodes that already
-     * existed when the worker pool was started, we have no way of knowing their root password unless one was configured
-     * via {@link WorkerPool#setStandardRootPassword WorkerPool.setStandardRootPassword()}. Use an alternative
-     * form of this method if needed.
+     * <b>Note:</b> For Linodes that already exist when the worker pool is started, there is no way to known the original
+     * root password. Therefore, in such cases we require that a {@link WorkerPool#setStandardRootPassword
+     * WorkerPool.setStandardRootPassword()} is configured, and assume that it is correct.
      *
      * @param command the command to remotely execute on this worker
      * @return resulting process
@@ -256,10 +270,14 @@ public class Worker {
      * Execute the specified command on this worker by remote execution over SSH.
      *
      * <p>
+     * If successful, the returned {@link Process} will be added to this worker's {@linkplain #getProcesses current process set}.
+     *
+     * <p>
      * This method invokes the command using SSH password authentication with the given username and password.
      *
      * <p>
-     * <b>Note:</b> this requires that the {@code sshpass(1)} utility exist on the local system.
+     * <b>Note:</b> This requires that the {@code sshpass(1)} utility exist on the local system. The password is
+     * passed securely via file descriptor ({@code -d} flag).
      *
      * @param username SSH username
      * @param password SSH password
@@ -277,7 +295,10 @@ public class Worker {
     }
 
     /**
-     * Execute the specified command on this worker.
+     * Execute the specified command on this worker by remote execution over SSH.
+     *
+     * <p>
+     * If successful, the returned {@link Process} will be added to this worker's {@linkplain #getProcesses current process set}.
      *
      * <p>
      * This method invokes the command using SSH public key authentication with the given username and
@@ -422,43 +443,43 @@ public class Worker {
          * <div style="margin-left: 20px;">
          * <table border="1" cellpadding="3" cellspacing="0" summary="Mapping from Linode status to Worker state">
          * <tr style="bgcolor:#ccffcc">
-         *  <th>Linode {@linkplain Linode.Status Status}</th>
-         *  <th>Worker {@linkplain State State}</th>
+         *  <th>{@linkplain org.dellroad.linode.apiv4.model.Linode.Status Linode Status}</th>
+         *  <th>{@linkplain State Worker State}</th>
          * </tr>
          * <tr>
-         *  <td>Linode does not exist</td>
+         *  <td>Linode no longer exists</td>
          *  <td>{@link #INVALID}</td>
          * </tr>
          * <tr>
-         *  <td>{@link Linode.Status#BOOTING}</td>
+         *  <td>{@link org.dellroad.linode.apiv4.model.Linode.Status#BOOTING}</td>
          *  <td>{@link #CREATING}</td>
          * </tr>
          * <tr>
-         *  <td>{@link Linode.Status#PROVISIONING}</td>
+         *  <td>{@link org.dellroad.linode.apiv4.model.Linode.Status#PROVISIONING}</td>
          *  <td>{@link #CREATING}</td>
          * </tr>
          * <tr>
-         *  <td>{@link Linode.Status#RUNNING}</td>
+         *  <td>{@link org.dellroad.linode.apiv4.model.Linode.Status#RUNNING}</td>
          *  <td>{@link #RUNNING}</td>
          * </tr>
          * <tr>
-         *  <td>{@link Linode.Status#SHUTTING_DOWN}</td>
+         *  <td>{@link org.dellroad.linode.apiv4.model.Linode.Status#SHUTTING_DOWN}</td>
          *  <td>{@link #DESTROYING}</td>
          * </tr>
          * <tr>
-         *  <td>{@link Linode.Status#DELETING}</td>
+         *  <td>{@link org.dellroad.linode.apiv4.model.Linode.Status#DELETING}</td>
          *  <td>{@link #DESTROYING}</td>
          * </tr>
          * <tr>
-         *  <td>{@link Linode.Status#OFFLINE}</td>
+         *  <td>{@link org.dellroad.linode.apiv4.model.Linode.Status#OFFLINE}</td>
          *  <td>{@link #UNMANAGED}</td>
          * </tr>
          * <tr>
-         *  <td>{@link Linode.Status#MIGRATING}</td>
+         *  <td>{@link org.dellroad.linode.apiv4.model.Linode.Status#MIGRATING}</td>
          *  <td>{@link #UNMANAGED}</td>
          * </tr>
          * <tr>
-         *  <td>{@link Linode.Status#REBOOTING}</td>
+         *  <td>{@link org.dellroad.linode.apiv4.model.Linode.Status#REBOOTING}</td>
          *  <td>{@link #UNMANAGED}</td>
          * </tr>
          * </table>
@@ -467,10 +488,12 @@ public class Worker {
         UNKNOWN((Linode.Status[])null),
 
         /**
-         * The worker is being created and will transition to {@link #RUNNING} once fully up and running.
+         * The worker is being created and will transition to {@link #RUNNING} once it is fully up and running
+         * and {@linkplain WorkerPool#checkSshConnectivity can be reached} via {@code ssh(1)}.
          *
          * <p>
-         * Compatible Linode statuses: {@link Linode.Status#BOOTING}, {@link Linode.Status#PROVISIONING}
+         * Compatible Linode statuses: {@link org.dellroad.linode.apiv4.model.Linode.Status#BOOTING},
+         * {@link org.dellroad.linode.apiv4.model.Linode.Status#PROVISIONING}
          */
         CREATING(Linode.Status.BOOTING, Linode.Status.PROVISIONING),
 
@@ -481,7 +504,7 @@ public class Worker {
          * This is the only state in which {@link Worker#execute Worker.execute()} can be successfully invoked.
          *
          * <p>
-         * Compatible Linode statuses: {@link Linode.Status#RUNNING}
+         * Compatible Linode statuses: {@link org.dellroad.linode.apiv4.model.Linode.Status#RUNNING}
          */
         RUNNING(Linode.Status.RUNNING),
 
@@ -493,8 +516,9 @@ public class Worker {
          * It is expected that it will soon disappear.
          *
          * <p>
-         * Compatible Linode statuses: {@link Linode.Status#RUNNING}, {@link Linode.Status#SHUTTING_DOWN},
-         * {@link Linode.Status#DELETING}
+         * Compatible Linode statuses: {@link org.dellroad.linode.apiv4.model.Linode.Status#RUNNING},
+         * {@link org.dellroad.linode.apiv4.model.Linode.Status#SHUTTING_DOWN},
+         * {@link org.dellroad.linode.apiv4.model.Linode.Status#DELETING}
          */
         DESTROYING(Linode.Status.RUNNING, Linode.Status.SHUTTING_DOWN, Linode.Status.DELETING),
 

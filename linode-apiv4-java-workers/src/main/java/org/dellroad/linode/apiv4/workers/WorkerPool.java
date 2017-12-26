@@ -5,6 +5,7 @@
 
 package org.dellroad.linode.apiv4.workers;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -41,14 +42,14 @@ import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.scheduling.TaskScheduler;
 
 /**
- * A Linode worker pool, on which commands may be executed remotely via SSH.
+ * A managed pool of Linode workers, on which commands may be executed remotely via SSH.
  *
  * <p><b>Linode Naming Convention</b>
  *
  * <p>
  * A worker pool has a {@linkplain #setGroupName group name}, which is used as the Linode display group for workers.
- * Group names can contain only letters, digits, dashes, and underscores; dashes and underscores must may not be repeated.
- * The group name is also a prefix for the names of workers in the pool. For example, if the worker pool group name is
+ * See {@link #setGroupName setGroupName()} for group naming requirements.
+ * The group name is also a unique naming prefix for all workers in the pool. For example, if the worker pool group name is
  * {@code "My-Worker-Pool"} then worker Linodes will be named {@code "My-Worker-Pool-1"}, {@code "My-Worker-Pool-2"}, etc.
  *
  * <p>
@@ -59,20 +60,20 @@ import org.springframework.scheduling.TaskScheduler;
  * <p><b>Pool Size</b>
  *
  * <p>
- * Workers are added to the pool via invocations of {@link #addWorker}. Workers are never automatically added; however,
+ * Workers are added to the pool via invocations of {@link #addWorker addWorker()}. Workers are never automatically added; however,
  * idle workers (those with no remaining {@link Process}es) are automatically shutdown after a configurable
  * {@linkplain #getMaxIdleTime maximum idle time}, until the configurable {@linkplain #getMinWorkers minimum number of
  * workers} is reached.
  *
- * <p><b>Managed vs. Unmanaged</b>
+ * <p><b>Managed vs. Unmanaged Workers</b>
  *
  * <p>
  * Workers are normally expected to follow specific {@linkplain Worker.State state transitions} as they are created, utilized,
  * and shutdown. If a worker is seen doing something unexpected, it transitions to {@link Worker.State#UNMANAGED}. In particular,
- * once a worker is created, it is expected to become {@link Linode.Status#RUNNING} within the {@linkplain #setMaxStartupTime
- * configured maximum startup time}; similarly, when a worker is destroyed, it is expected to disappear within the {@linkplain
- * #setMaxShutdownTime configured maximum shutdown time}. Workers can also be manually controlled via
- * {@link Worker#setUnmanaged} and {@link Worker#setManaged}.
+ * once a worker is created, it is expected to become {@link org.dellroad.linode.apiv4.model.Linode.Status#RUNNING} within the
+ * {@linkplain #setMaxStartupTime configured maximum startup time}; similarly, when a worker is destroyed, it is expected
+ * to disappear within the {@linkplain #setMaxShutdownTime configured maximum shutdown time}. Workers can also be manually
+ * controlled via {@link Worker#setUnmanaged} and {@link Worker#setManaged}.
  *
  * <p>
  * If a {@link Worker}'s Linode disappears unexpectedly (including the situation where a new Linode with the same name
@@ -104,7 +105,7 @@ public class WorkerPool {
     public static final int DEFAULT_MAX_STARTUP_TIME_SECONDS = 600;
 
     /**
-     * Default maximum time (in seconds) for a newly created worker to be up and running
+     * Default maximum time (in seconds) for a destroyed worker to disappear
      * ({@value #DEFAULT_MAX_SHUTDOWN_TIME_SECONDS}).
      *
      * <p>
@@ -123,13 +124,19 @@ public class WorkerPool {
     /**
      * Default Linode group name and worker name prefix ({@value #DEFAULT_GROUP_NAME}).
      *
-     * @see #setGroupName
+     * @see #setGroupName setGroupName()
      */
     public static final String DEFAULT_GROUP_NAME = "Worker-Pool";
 
+    /**
+     * The number of hex digits in randomly generated passwords ({@value #RANDOM_PASSWORD_DIGITS}).
+     *
+     * @see #generateRandomPassword
+     */
+    private static final int RANDOM_PASSWORD_DIGITS = 32;
+
     private static final int SSH_PORT = 22;
     private static final int SSH_CHECK_TIMEOUT_SECONDS = 5;
-    private static final int RANDOM_PASSWORD_DIGITS = 32;
     private static final int CHECK_INTERVAL_SECONDS = 10;
     private static final String GROUP_NAME_PATTERN = "[A-Za-z0-9]([-_]?[A-Za-z0-9])*";
     private static final Duration CHECK_INTERVAL = Duration.ofSeconds(CHECK_INTERVAL_SECONDS);
@@ -179,6 +186,24 @@ public class WorkerPool {
     private ScheduledFuture<?> periodicCheckFuture;
     private final SecureRandom random = new SecureRandom();
 
+// Constructors
+
+    /**
+     * Constructor.
+     */
+    public WorkerPool() {
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param groupName worker Linode group
+     * @throws IllegalArgumentException if {@code groupName} is invalid
+     */
+    public WorkerPool(String groupName) {
+        this.setGroupName(groupName);
+    }
+
 // Properties
 
     /**
@@ -194,12 +219,12 @@ public class WorkerPool {
      * Configure the name of the Linode group in which to put workers.
      *
      * <p>
-     * This setting also determines the name of each worker, by taking the group name, converting spaces to dashes,
-     * and adding the worker index as a suffix. For example, if the group name is {@code "My Workers"} then the worker
-     * Linodes will be named {@code "My-Workers-1"}, {@code "My-Workers-2"}, etc.
+     * This setting also determines the name of each worker, by taking the group name and adding the worker index as a suffix.
+     * For example, if the group name is {@code "My-Workers"} then the worker Linodes will be named {@code "My-Workers-1"},
+     * {@code "My-Workers-2"}, etc.
      *
      * <p>
-     * The only allowed characters are letters (A-Z and a-z), digits, dashes, and underscores. The name must start and end
+     * The only allowed characters are ASCII letters, digits, dashes, and underscores. The name must start and end
      * in a letter or digit, and each dash or underscore must be surrounded by a letter or digit.
      *
      * <p>
@@ -220,7 +245,7 @@ public class WorkerPool {
     }
 
     /**
-     * Get the minimum number of workers to keep alive in the worker pool.
+     * Get the minimum number of workers to keep alive in the worker pool, even if idle.
      *
      * <p>
      * Default is {@value #DEFAULT_MIN_WORKERS}.
@@ -277,7 +302,7 @@ public class WorkerPool {
     }
 
     /**
-     * Get the maximum time to wait for a newly created worker to become up and running.
+     * Get the maximum time to wait for a destroyed worker to disappear.
      *
      * <p>
      * If shutdown takes longer than this, the worker reverts to {@link Worker.State#UNMANAGED}.
@@ -292,7 +317,7 @@ public class WorkerPool {
     }
 
     /**
-     * Set the maximum time to wait for a newly created worker to become up and running.
+     * Set the maximum time to wait for a destroyed worker to disappear.
      *
      * @param maxShutdownTime maxumum worker shutdown time in seconds
      * @throws IllegalStateException if this instance is already {@link #start}ed
@@ -307,7 +332,7 @@ public class WorkerPool {
     }
 
     /**
-     * Get the max idle time for a worker before destroying it.
+     * Get the max idle time for an idle worker before destroying it.
      *
      * <p>
      * When a worker has zero processes for this long, and there are more than the {@linkplain #getMinWorkers minimum number
@@ -391,6 +416,9 @@ public class WorkerPool {
      *
      * <p>
      * If this property is left unset, newly created workers will get a random auto-generated root password.
+     *
+     * <p>
+     * In any case, the root password for a worker, if known, is available via {@link Worker#getRootPassword}.
      *
      * @param standardRootPassword standard root password
      * @throws IllegalStateException if this instance is already {@link #start}ed
@@ -534,7 +562,7 @@ public class WorkerPool {
      *
      * <p>
      * If no {@linkplain #setStandardRootPassword standard root password} is configured, a random root
-     * password will be auto-generated.
+     * password will be auto-generated via {@link #generateRandomPassword}.
      *
      * @param regionId Linode region ID
      * @param typeId Linode type ID
@@ -555,7 +583,7 @@ public class WorkerPool {
      *
      * <p>
      * If no {@linkplain #setStandardRootPassword standard root password} is configured, a random root
-     * password will be auto-generated.
+     * password will be auto-generated via {@link #generateRandomPassword}.
      *
      * @param regionId Linode region ID
      * @param typeId Linode type ID
@@ -635,7 +663,6 @@ public class WorkerPool {
      * <p>
      * Does nothing if already started.
      *
-     * @throws IllegalStateException if the configured minimum number of workers is greater than the maximum number of workers
      * @throws IllegalStateException if no {@link LinodeApiRequestSender} is configured
      * @throws IllegalStateException if no {@link AsyncTaskExecutor} is configured
      * @throws IllegalStateException if no {@link TaskScheduler} is configured
@@ -673,9 +700,10 @@ public class WorkerPool {
      * Stop this instance.
      *
      * <p>
-     * This method does not destroy the remaining workers. Use {@link Worker#destroy} to do that
-     * prior to invoking this method (after this method is invoked, any remaining workers will
-     * have moved to the {@link Worker.State#INVALID} state).
+     * This method does not destroy the remaining workers. Use {@link Worker#destroy} to do that prior to invoking this method.
+     *
+     * <p>
+     * After this method is invoked, any remaining workers will have been moved to the {@link Worker.State#INVALID} state.
      */
     @PreDestroy
     public synchronized void stop() {
@@ -699,7 +727,7 @@ public class WorkerPool {
 
 // Periodic Check
 
-    protected void periodicCheck() {
+    private void periodicCheck() {
         try {
             this.doPeriodicCheck(false);
         } catch (ThreadDeath t) {
@@ -710,7 +738,7 @@ public class WorkerPool {
     }
 
     @SuppressWarnings("fallthrough")
-    protected void doPeriodicCheck(boolean starting) throws InterruptedException {
+    private void doPeriodicCheck(boolean starting) throws InterruptedException {
 
         // Check state and snapshot the objects we need
         LinodeApiRequestSender sender0;
@@ -948,17 +976,17 @@ public class WorkerPool {
      * Check for SSH connectivity.
      *
      * <p>
-     * Linodes reach the {@link Linode.Status#RUNNING} status as soon as they are booted, but the {@code sshd(8)}
-     * daemon does not start listening for connections until several seconds later. The purpose of this method
-     * is to check whether {@code sshd(8)} is ready.
+     * Linodes reach the {@link org.dellroad.linode.apiv4.model.Linode.Status#RUNNING} status as soon as they are booted,
+     * but the {@code sshd(8)} daemon does not start listening for connections until several seconds later. The purpose of
+     * this method is to check whether {@code sshd(8)} is ready.
      *
      * <p>
-     * The implementation in {@link WorkerPool} simply attempts a TCP connection to port 22.
+     * The implementation in {@link WorkerPool} simply attempts to connect to TCP port 22.
      *
      * @param worker worker to check
-     * @throws Exception if check fails
+     * @throws IOException if the check fails
      */
-    protected void checkSshConnectivity(Worker worker) throws Exception {
+    protected void checkSshConnectivity(Worker worker) throws IOException {
         final InetSocketAddress dest = new InetSocketAddress(worker.getIpAddress(), SSH_PORT);
         try (Socket socket = new Socket()) {
             socket.connect(dest, SSH_CHECK_TIMEOUT_SECONDS * 1000);
