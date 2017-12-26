@@ -39,14 +39,14 @@ public abstract class SpringTest {
     protected String authToken;
     protected ClassPathXmlApplicationContext context;
     protected LinodeApiRequestSender sender;
-    protected ThreadPoolTaskExecutor executor;
+    protected ThreadPoolTaskExecutor taskExecutor;
     protected LinodeApiRequestSender.AsyncExecutor asyncExecutor;
 
     private Type cheapestType;
 
     @BeforeClass
     @Parameters("authToken")
-    public void setup(@Optional String authToken) {
+    public void setupContext(@Optional String authToken) {
 
         // Save auth token, if any
         if (authToken != null && authToken.isEmpty())
@@ -59,7 +59,7 @@ public abstract class SpringTest {
             this.log.warn("no <authToken> configured - tests requiring authentication will be skipped");
 
         // Load context
-        this.context = new ClassPathXmlApplicationContext("linodeApi.xml", this.getClass());
+        this.context = new ClassPathXmlApplicationContext("/org/dellroad/linode/apiv4/spring/linodeApi.xml", this.getClass());
 
         // Get request sender
         this.sender = this.context.getBean("linodeApiRequestSender", LinodeApiRequestSender.class);
@@ -73,11 +73,11 @@ public abstract class SpringTest {
         }
 
         // Setup executor
-        this.executor = new ThreadPoolTaskExecutor();
-        this.executor.setCorePoolSize(3);
-        this.executor.setMaxPoolSize(5);
-        this.executor.afterPropertiesSet();
-        this.asyncExecutor = LinodeApiRequestSender.AsyncExecutor.of(this.executor);
+        this.taskExecutor = new ThreadPoolTaskExecutor();
+        this.taskExecutor.setCorePoolSize(3);
+        this.taskExecutor.setMaxPoolSize(5);
+        this.taskExecutor.afterPropertiesSet();
+        this.asyncExecutor = LinodeApiRequestSender.AsyncExecutor.of(this.taskExecutor);
     }
 
     @Test
@@ -87,9 +87,9 @@ public abstract class SpringTest {
     }
 
     @AfterClass
-    public void shutdown() {
+    public void shutdownContext() {
         this.context.close();
-        this.executor.destroy();
+        this.taskExecutor.destroy();
     }
 
     protected Region randomRegion() throws InterruptedException {
