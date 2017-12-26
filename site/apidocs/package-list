@@ -3,3 +3,4 @@ org.dellroad.linode.apiv4.filter
 org.dellroad.linode.apiv4.model
 org.dellroad.linode.apiv4.request
 org.dellroad.linode.apiv4.spring
+org.dellroad.linode.apiv4.workers
