@@ -2,11 +2,11 @@
 
 This is a Java library for using Linode's version 4 API.
 
-There are two sub-modules.
+**linode-apiv4-java-model** is the central sub-module defining Java model classes ready for JSON (de)serialization using [Jackson](https://github.com/FasterXML/jackson).
 
-The **linode-apiv4-java-model** module defines Java model classes ready for JSON (de)serialization using [Jackson](https://github.com/FasterXML/jackson).
+The **linode-apiv4-java-spring** sub-module utilitize some [Spring Framework](https://spring.io/) functionality to provide a convenient API for performing Linode REST API queries over HTTPS.
 
-The **linode-apiv4-java-spring** module is for projects using [Spring Framework](https://spring.io/), providing a convenient setup for performing Linode REST API queries over HTTPS.
+The **linode-apiv4-java-workers** sub-module add to that, implemeting a basic "worker pool" service.
 
 ### Status
 
@@ -32,6 +32,10 @@ See [this Javadoc](https://archiecobbs.github.io/linode-apiv4-java/site/apidocs/
     <dependency>
         <groupId>org.dellroad</groupId>
         <artifactId>linode-apiv4-java-spring</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.dellroad</groupId>
+        <artifactId>linode-apiv4-java-workers</artifactId>
     </dependency>
 ```
 

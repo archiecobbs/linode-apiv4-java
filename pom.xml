@@ -16,6 +16,7 @@
     <modules>
         <module>linode-apiv4-java-model</module>
         <module>linode-apiv4-java-spring</module>
+        <module>linode-apiv4-java-workers</module>
     </modules>
     <licenses>
         <license>
@@ -63,6 +64,13 @@
     </properties>
 
     <dependencies>
+
+        <!-- FindBugs annotations - not needed at runtime -->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- Standard test dependencies -->
         <dependency>
@@ -149,6 +157,13 @@
                 <version>${spring.version}</version>
             </dependency>
 
+            <!-- FindBugs annotations -->
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+                <version>${findbugs.version}</version>
+            </dependency>
+
             <!-- TestNG -->
             <dependency>
                 <groupId>org.testng</groupId>
@@ -160,6 +175,16 @@
             <dependency>
                 <groupId>org.dellroad</groupId>
                 <artifactId>linode-apiv4-java-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.dellroad</groupId>
+                <artifactId>linode-apiv4-java-spring</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.dellroad</groupId>
+                <artifactId>linode-apiv4-java-workers</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -309,6 +334,9 @@
                         <!-- Set API auth token here to activate unit tests for API actions that require authorization -->
                         <!-- Or run maven with "-DauthToken=..." -->
                         <authToken/>
+                        <!-- If unset, a random group name is used. Set this if you want to test what happens e.g.
+                             when machines in the group already exist -->
+                        <workerPoolGroupName/>
                     </systemPropertyVariables>
                     <properties>
                         <property>
