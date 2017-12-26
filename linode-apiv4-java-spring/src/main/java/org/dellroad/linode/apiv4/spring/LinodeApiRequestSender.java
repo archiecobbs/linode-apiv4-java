@@ -1457,6 +1457,8 @@ public class LinodeApiRequestSender implements InitializingBean {
          * Perform the given task asynchronously.
          *
          * @param task task to perform
+         * @param <T> task return type
+         * @return {@link Future} representing the task
          */
         <T> Future<T> submit(Callable<T> task);
 
