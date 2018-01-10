@@ -277,7 +277,7 @@ public class QueryTest extends SpringTest {
         final FilterBuilder fb = new FilterBuilder();
         Image prev = null;
         for (Image image : this.sender.getImages(this.asyncExecutor, MAX_RESULTS,
-          fb.where(fb.and(fb.equal("public", true), fb.equal("vendor", "Debian"))).orderBy("label").build())) {
+          fb.where(fb.and(fb.equal("is_public", true), fb.equal("vendor", "Debian"))).orderBy("label").build())) {
             assert image.getVendor().equals("Debian") : "wrong vendor: \"" + image.getVendor() + "\" != \"Debian\"";
             if (prev == null)
                 prev = image;
