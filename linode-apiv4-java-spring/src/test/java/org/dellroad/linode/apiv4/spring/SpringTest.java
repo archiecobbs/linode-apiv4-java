@@ -93,8 +93,13 @@ public abstract class SpringTest {
         this.taskExecutor.destroy();
     }
 
+    // Pick a random region in the US
     protected Region randomRegion() throws InterruptedException {
         final List<Region> regions = this.sender.getRegions(this.asyncExecutor, MAX_RESULTS, null);
+        for (Iterator<Region> i = regions.iterator(); i.hasNext(); ) {
+            if (!i.next().getCountry().equalsIgnoreCase("US"))
+                i.remove();
+        }
         return regions.get(this.random.nextInt(regions.size()));
     }
 
