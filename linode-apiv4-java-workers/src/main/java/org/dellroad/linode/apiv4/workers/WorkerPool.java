@@ -240,7 +240,7 @@ public class WorkerPool {
         if (groupName == null || groupName.isEmpty())
             throw new IllegalArgumentException("null or empty groupName");
         if (!Pattern.compile(GROUP_NAME_PATTERN).matcher(groupName).matches())
-            throw new IllegalArgumentException("invalid characters in groupName");
+            throw new IllegalArgumentException("invalid groupName \"" + groupName + "\"");
         this.groupName = groupName;
     }
 

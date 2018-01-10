@@ -55,7 +55,7 @@ public class WorkerTest extends SpringTest {
     @Parameters("workerPoolGroupName")
     public void startupWorkerPool(@Optional String workerPoolGroupName) throws Exception {
         this.workerPool.setGroupName(workerPoolGroupName != null && !workerPoolGroupName.isEmpty() ?
-          workerPoolGroupName : this.getClass().getSimpleName() + " " + this.random.nextInt(1000000));
+          workerPoolGroupName : this.getClass().getSimpleName() + "-" + this.random.nextInt(1000000));
         this.workerPool.setMaxIdleTime(90);
         this.workerPool.setRequestSender(this.sender);
         this.workerPool.setTaskExecutor(this.taskExecutor);
