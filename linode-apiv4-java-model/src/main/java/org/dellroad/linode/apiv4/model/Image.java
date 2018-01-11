@@ -27,16 +27,13 @@ import org.dellroad.linode.apiv4.Constants;
 public class Image extends AbstractStringIdLabeled {
 
     private String description;
-    private Status status;
-    private Filesystem filesystem;
     private Date created;
     private Date updated;
     private Type type;
     private boolean publicx;
     private boolean deprecated;
-    private Date lastUsed;
-    private int minDeploySize;
-    private String creator;
+    private int size;
+    private String createdBy;
     private String vendor;
 
     public String getDescription() {
@@ -44,20 +41,6 @@ public class Image extends AbstractStringIdLabeled {
     }
     public void setDescription(final String description) {
         this.description = description;
-    }
-
-    public Status getStatus() {
-        return this.status;
-    }
-    public void setStatus(final Status status) {
-        this.status = status;
-    }
-
-    public Filesystem getFilesystem() {
-        return this.filesystem;
-    }
-    public void setFilesystem(final Filesystem filesystem) {
-        this.filesystem = filesystem;
     }
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.TIMESTAMP_FORMAT, timezone = Constants.TIMESTAMP_TIMEZONE)
@@ -98,28 +81,19 @@ public class Image extends AbstractStringIdLabeled {
         this.type = type;
     }
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.TIMESTAMP_FORMAT, timezone = Constants.TIMESTAMP_TIMEZONE)
-    @JsonProperty("last_used")
-    public Date getLastUsed() {
-        return this.lastUsed;
+    public int getSize() {
+        return this.size;
     }
-    public void setLastUsed(final Date lastUsed) {
-        this.lastUsed = lastUsed;
+    public void setSize(final int size) {
+        this.size = size;
     }
 
-    @JsonProperty("min_deploy_size")
-    public int getMinDeploySize() {
-        return this.minDeploySize;
+    @JsonProperty("created_by")
+    public String getCreatedBy() {
+        return this.createdBy;
     }
-    public void setMinDeploySize(final int minDeploySize) {
-        this.minDeploySize = minDeploySize;
-    }
-
-    public String getCreator() {
-        return this.creator;
-    }
-    public void setCreator(final String creator) {
-        this.creator = creator;
+    public void setCreatedBy(final String createdBy) {
+        this.createdBy = createdBy;
     }
 
     public String getVendor() {
@@ -127,28 +101,6 @@ public class Image extends AbstractStringIdLabeled {
     }
     public void setVendor(final String vendor) {
         this.vendor = vendor;
-    }
-
-// Status
-
-    /**
-     * {@link Image} status.
-     */
-    public enum Status {
-        CREATING,
-        AVAILABLE,
-        DELETED;
-
-        @JsonCreator
-        public static Status parse(String value) {
-            return Status.valueOf(value.toUpperCase());
-        }
-
-        @JsonValue
-        @Override
-        public String toString() {
-            return this.name().toLowerCase();
-        }
     }
 
 // Type
