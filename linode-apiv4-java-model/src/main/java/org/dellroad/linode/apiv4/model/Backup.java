@@ -31,7 +31,6 @@ public class Backup extends AbstractIntIdLabeled {
     private Date finished;
     private String[] configs;
     private Disk[] disks;
-    private Availability availability;
 
     public Status getStatus() {
         return this.status;
@@ -91,35 +90,6 @@ public class Backup extends AbstractIntIdLabeled {
     }
     public void setDisks(final Disk[] disks) {
         this.disks = disks;
-    }
-
-    public Availability getAvailability() {
-        return this.availability;
-    }
-    public void setAvailability(final Availability availability) {
-        this.availability = availability;
-    }
-
-// Availability
-
-    /**
-     * {@link Backup} availability.
-     */
-    public enum Availability {
-        DAILY,
-        WEEKLY,
-        UNAVAILABLE;
-
-        @JsonCreator
-        public static Availability parse(String value) {
-            return Availability.valueOf(value.toUpperCase());
-        }
-
-        @JsonValue
-        @Override
-        public String toString() {
-            return this.name().toLowerCase();
-        }
     }
 
 // Status

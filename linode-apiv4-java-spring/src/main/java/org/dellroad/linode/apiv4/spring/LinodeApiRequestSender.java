@@ -56,9 +56,9 @@ import org.dellroad.linode.apiv4.model.Volumes;
 import org.dellroad.linode.apiv4.request.CloneLinodeRequest;
 import org.dellroad.linode.apiv4.request.CreateConfigRequest;
 import org.dellroad.linode.apiv4.request.CreateDiskRequest;
+import org.dellroad.linode.apiv4.request.CreateImageRequest;
 import org.dellroad.linode.apiv4.request.CreateLinodeRequest;
 import org.dellroad.linode.apiv4.request.CreateVolumeRequest;
-import org.dellroad.linode.apiv4.request.ImagizeDiskRequest;
 import org.dellroad.linode.apiv4.request.RescueLinodeRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -558,22 +558,6 @@ public class LinodeApiRequestSender implements InitializingBean {
     }
 
     /**
-     * Create an image of a disk.
-     *
-     * @param linodeId Linode ID
-     * @param diskId disk ID
-     * @param request image info
-     * @return newly created image
-     * @throws RestClientException if an error occurs
-     * @throws IllegalArgumentException if {@code request} is null
-     */
-    public Image updateLinodeDiskPassword(int linodeId, int diskId, ImagizeDiskRequest request) {
-        if (request == null)
-            throw new IllegalArgumentException("null request");
-        return this.postFor(Image.class, request, "linode/instances/{id}/disks/{did}/imagize", linodeId, diskId);
-    }
-
-    /**
      * Reset root password on a Linode disk.
      *
      * @param linodeId Linode ID
@@ -1066,6 +1050,21 @@ public class LinodeApiRequestSender implements InitializingBean {
         if (imageId == null)
             throw new IllegalArgumentException("null imageId");
         return this.get(Image.class, "images/{id}", imageId);
+    }
+
+    /**
+     * Create an image.
+     *
+     * @param diskId disk ID
+     * @param request image info
+     * @return newly created image
+     * @throws RestClientException if an error occurs
+     * @throws IllegalArgumentException if {@code request} is null
+     */
+    public Image updateLinodeDiskPassword(int diskId, CreateImageRequest request) {
+        if (request == null)
+            throw new IllegalArgumentException("null request");
+        return this.postFor(Image.class, request, "images");
     }
 
     /**
