@@ -14,12 +14,30 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public abstract class IP {
 
+    private int linodeId;
+    private String regionId;
     private String address;
     private String gateway;
     private String subnetMask;
     private Integer prefix;
     private Type type;
     private String rdns;
+
+    @JsonProperty("linode_id")
+    public int getLinodeId() {
+        return this.linodeId;
+    }
+    public void setLinodeId(final int linodeId) {
+        this.linodeId = linodeId;
+    }
+
+    @JsonProperty("region")
+    public String getRegionId() {
+        return this.regionId;
+    }
+    public void setRegionId(final String regionId) {
+        this.regionId = regionId;
+    }
 
     public String getAddress() {
         return this.address;
@@ -71,7 +89,9 @@ public abstract class IP {
      */
     public enum Type {
         PUBLIC,
-        PRIVATE;
+        PRIVATE,
+        SLAAC,
+        LINK_LOCAL;
 
         @JsonCreator
         public static Type parse(String value) {

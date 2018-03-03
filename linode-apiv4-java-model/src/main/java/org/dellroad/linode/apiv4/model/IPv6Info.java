@@ -18,7 +18,7 @@ public class IPv6Info {
 
     private IPv6[] addresses;
     private IPv6 slaac;
-    private String linkLocal;
+    private IPv6 linkLocal;
     private IPv6Pool[] global;
 
     public IPv6[] getAddresses() {
@@ -36,10 +36,10 @@ public class IPv6Info {
     }
 
     @JsonProperty("link_local")
-    public String getLinkLocal() {
+    public IPv6 getLinkLocal() {
         return this.linkLocal;
     }
-    public void setLinkLocal(final String linkLocal) {
+    public void setLinkLocal(final IPv6 linkLocal) {
         this.linkLocal = linkLocal;
     }
 
