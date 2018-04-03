@@ -532,6 +532,18 @@ public class LinodeApiRequestSender implements InitializingBean {
     }
 
     /**
+     * Clone a Linode disk.
+     *
+     * @param linodeId Linode ID
+     * @param diskId disk ID
+     * @return new disk
+     * @throws RestClientException if an error occurs
+     */
+    public Disk cloneLinodeDisk(int linodeId, int diskId) {
+        return this.postFor(Disk.class, "", "linode/instances/{id}/disks/{did}/clone", linodeId, diskId);
+    }
+
+    /**
      * Update a Linode disk.
      *
      * @param linodeId Linode ID

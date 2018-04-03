@@ -88,10 +88,8 @@ public abstract class IP {
      * IP address type.
      */
     public enum Type {
-        PUBLIC,
-        PRIVATE,
-        SLAAC,
-        LINK_LOCAL;
+        IPV4,
+        IPV6;
 
         @JsonCreator
         public static Type parse(String value) {
