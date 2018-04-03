@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.dellroad</groupId>
         <artifactId>linode-apiv4-java</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
     <artifactId>linode-apiv4-java-spring</artifactId>
     <name>Linode APIv4 Spring Integration Classes</name>
